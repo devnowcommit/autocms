@@ -1,6 +1,6 @@
 Package.describe({
   name: 'guncebektas:autocms',
-  version: '0.0.2',
+  version: '0.0.3',
   // Brief, one-line summary of the package.
   summary: 'AutoCms is a simple solution to manage contents',
   // URL to the Git repository containing the source code for this package.
@@ -17,14 +17,24 @@ Package.onUse(function(api) {
   api.use('ecmascript');
   api.use(['templating', 'jquery'], 'client');
   
-  api.use(['kadira:flow-router@2.7.0'], 'client', {weak: false, unordered: false});
-  api.use('kadira:blaze-layout@2.2.0');
-  api.use('arillo:flow-router-helpers@0.4.6');
-  api.use(['aldeed:autoform@5.7.1','aldeed:simple-schema@1.3.3','aldeed:delete-button@1.0.0']);
+  api.use([
+    'kadira:flow-router@2.7.0',
+    'kadira:blaze-layout@2.2.0',
+    'arillo:flow-router-helpers@0.4.6'
+  ], 'client', {weak: false, unordered: false});
+  
+  api.use([
+    'aldeed:autoform@5.7.1',
+    'aldeed:simple-schema@1.3.3',
+    'aldeed:delete-button@1.0.0'
+  ], ['client','server'], {weak: false, unordered: false});
   
   // add files
-  api.addFiles('template.html', 'client');
-  api.addFiles(['helpers.js', 'events.js'], 'client');
+  api.addFiles([
+    'template.html',
+    'helpers.js', 
+    'events.js'
+  ], 'client');
 });
 
 Package.onTest(function(api) {

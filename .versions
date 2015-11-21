@@ -25,7 +25,7 @@ ecmascript@0.1.6
 ecmascript-runtime@0.2.6
 ejson@1.0.7
 geojson-utils@1.0.4
-guncebektas:autocms@0.0.2
+guncebektas:autocms@0.0.3
 html-tools@1.0.5
 htmljs@1.0.5
 id-map@1.0.4
@@ -33,7 +33,7 @@ jquery@1.11.4
 kadira:blaze-layout@2.2.0
 kadira:flow-router@2.7.0
 livedata@1.0.15
-local-test:guncebektas:autocms@0.0.2
+local-test:guncebektas:autocms@0.0.3
 logging@1.0.8
 meteor@1.1.10
 minifiers@1.1.7
