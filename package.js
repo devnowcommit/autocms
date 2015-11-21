@@ -18,6 +18,7 @@ Package.onUse(function(api) {
   api.use(['templating', 'jquery'], 'client');
   
   api.use([
+    'underscorestring:underscore.string@3.2.2',
     'kadira:flow-router@2.7.0',
     'kadira:blaze-layout@2.2.0',
     'arillo:flow-router-helpers@0.4.6'

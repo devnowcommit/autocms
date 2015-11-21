@@ -21,9 +21,10 @@ Template.cmsCollection.onCreated(function(){
   table = window[collection].table;
 
   // Set default options
+  showNavButtons = true;
+  showActionButtons = false; 
   if (typeof table.buttons != 'undefined') {
-   
-    showActionButtons = false;
+     
     if (typeof showActionButtons != 'undefined') {
       showActionButtons = table.buttons.showActionButtons;
       
@@ -35,11 +36,10 @@ Template.cmsCollection.onCreated(function(){
       }
     }
 
-    showNavButtons = true;
     if (typeof table.buttons.showNavButtons != 'undefined')
-      showNavButtons = table.buttons.showNavButtons;
+      showNavButtons = table.buttons.showNavButtons;  
   }
-
+  
   showNo = true;
   if (typeof table.showNo != 'undefined')
     showNo = table.showNo; 
