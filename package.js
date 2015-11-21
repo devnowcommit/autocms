@@ -29,7 +29,6 @@ Package.onTest(function(api) {
   api.use('ecmascript');
   api.use(['templating', 'jquery'], 'client');
   api.use('tinytest');
-  api.use('guncebektas:autotable');
 
   // add files
   api.addFiles('tests/client/test.js', 'client');
