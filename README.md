@@ -2,7 +2,7 @@
 AutoCms is a simple solution to manage contents. You can easly list your data in a table, update, delete or insert (CRUD).
 You can set relations with other collections.
 
-<h2>Dependencies<h2>
+<h2>Dependencies</h2>
 ```js
 underscorestring:underscore.string
 kadira:flow-router
