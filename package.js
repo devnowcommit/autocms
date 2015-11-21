@@ -24,6 +24,7 @@ Package.onUse(function(api) {
   ], 'client', {weak: false, unordered: false});
   
   api.use([
+    'aldeed:collection2@2.5.0',
     'aldeed:autoform@5.7.1',
     'aldeed:simple-schema@1.3.3',
     'aldeed:delete-button@1.0.0'
