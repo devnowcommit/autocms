@@ -85,7 +85,7 @@ if (Meteor.isServer) {
 localhost:3000/cms/Players/find
 ```
 
-<br/><br/><br/>
+<br/><br/>
 <h2>Customization</h2>
 ```js
 Games.table = {
@@ -105,19 +105,19 @@ Games.table = {
     edit: {
       label: '<i class="fa fa-pencil-square-o" alt="Edit"></i> Edit',
       class: 'btn btn-xs btn-default',
-      auth: function() {    // default false
+      auth: function() {
         return true; 
       }
     },  
     delete: {
       label: '<i class="fa fa-trash" alt="Delete"></i> Delete',
       class: 'btn btn-xs btn-danger',
-      auth: function() {    // default false
+      auth: function() {
         return true; 
       }
     },
-    showNavButtons: true,    // default false
-    showActionButtons: true  // default false
+    showNavButtons: true,
+    showActionButtons: true
   },
   showNo: true,  // default true
   columns: {
