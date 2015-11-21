@@ -13,7 +13,7 @@ aldeed:simple-schema
 aldeed:delete-button
 ```
 
-<h2>How to use it (player list example)</strong>
+<h2>How to use it (player list example)</h2>
 <h4>Set routes, for flow-router</h4>
 ```js
 // cmsCollections
