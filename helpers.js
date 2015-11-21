@@ -2,10 +2,8 @@
   autoCms is working nice with autoForm and has a huge need of it
   autoCms handles not only insert and update events but also can list and construct relations with other collections 
   in table and we are calling this extension as autoTable. 
-
   In conclusion, autoCms is the combination of autoForm and autoTable
-
-  @category	  cms
+  @category   cms
   @ver        0.1.0
   @authors    günce ali bektas <info@guncebektas.com>, aykut aktas <aykut@aktas.me>
   @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License

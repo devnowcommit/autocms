@@ -18,7 +18,7 @@ Package.onUse(function(api) {
   api.use(['templating', 'jquery'], 'client');
   
   api.use(['kadira:flow-router@2.7.0'], 'client', {weak: false, unordered: false});
-  api.use('aldeed:autoform');
+  api.use('aldeed:autoform@5.7.1');
   
   // add files
   api.addFiles('template.html', 'client');
