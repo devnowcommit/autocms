@@ -1,0 +1,47 @@
+<template name="cmsCollection">
+	<!-- initialize autoCms -->
+	{{#if autoCmsNavButtons }}
+		<div class="row">
+			<div class="col-md-12 text-right">
+				<div class="btn-group" role="group" aria-label="...">
+				  <a class="btn btn-default" href="{{urlFor '/cms/:collection/insert' collection=collection}}" target="_self"><i class="fa fa-plus"></i></a>
+				  <a class="btn btn-default" href="{{urlFor '/cms/:collection/find' collection=collection}}" target="_self"><i class="fa fa-list"></i></a>
+				</div>
+			</div>
+		</div>
+	{{/if}}	
+	
+	<!-- is autoCmsForm in use -->
+	{{#if autoCmsForm }}
+		<!-- if true, show autoForm -->
+		{{> quickForm collection=collection doc=data id=form_id type=form_type buttonContent=form_button}}
+
+		<!-- is removeButton on? it's true by default in update -->
+		{{#if removeButton }}
+			{{> quickRemoveButton collection=collection id=collection._id beforeRemove=beforeRemove class="btn btn-danger"}}
+		{{/if}}	
+	{{else}}
+		<!-- if false, show table -->
+		<h1>{{{table_title}}}</h1>
+		<table class="{{table_class_table}}">
+	      <thead class="{{table_class_thead}}">
+	        <tr>
+	        	{{#if autoCmsNo}}
+	          <th>No.</th>
+	          {{/if}}
+
+	          {{#each table_head}}
+						<th>{{this}}</th>
+					  {{/each}}
+
+					  {{#if autoCmsActionButtons}}
+			  		<th>Actions</th>
+			  		{{/if}}
+	        </tr>
+	      </thead>
+	      <tbody class="{{table_class_tbody}}">
+	      	{{{table_body}}}
+		  	</tbody>
+	    </table>
+	{{/if}}
+</template>
