@@ -9,7 +9,7 @@
   @ver        0.1.0
   @authors    günce ali bektas <info@guncebektas.com>, aykut aktas <aykut@aktas.me>
   @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
-  @link       http://github.com/guncebektas/lenkorm
+  @link       https://github.com/guncebektas/autocms
 */
 
 // Initialize params on create
