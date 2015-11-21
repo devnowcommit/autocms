@@ -21,6 +21,9 @@ FlowRouter.route('/cms/:collection/:function/:id', {
   }
 });
 ```
+
+<strong>An example to create a scoreboard:</strong>
+
 <h4>Set rules</h4>
 ```js
 // First of all create Mongo collections
@@ -230,5 +233,5 @@ if (Meteor.isServer) {
   });
 }
 ```
-<h4>Use this link to open the page which is listing the data, you will see add new item too</h4>
+<h4>After all open this link</h4>
 localhost:3000/cms/Games/find
