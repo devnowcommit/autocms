@@ -15,6 +15,8 @@ aldeed:delete-button
 ```
 
 <h2>How to use it</h2>
+<strong>An example to create a player list:</strong>
+
 <h4>Set routes, for flow-router</h4>
 ```js
 // cmsCollections
@@ -33,9 +35,6 @@ FlowRouter.route('/cms/:collection/:function/:id', {
   }
 });
 ```
-<hr>
-<strong>An example to create a player list:</strong>
-
 <h4>Set rules</h4>
 ```js
 //First of all create Mongo collections
@@ -86,8 +85,8 @@ if (Meteor.isServer) {
 localhost:3000/cms/Players/find
 ```
 
-<hr>
-<h2>How to use it</h2>
+<br/><br/><br/>
+<h2>Customization</h2>
 ```js
 Games.table = {
   title: 'List of all games',
