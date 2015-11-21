@@ -234,4 +234,6 @@ if (Meteor.isServer) {
 }
 ```
 <h4>After all open this link</h4>
+```
 localhost:3000/cms/Games/find
+```
