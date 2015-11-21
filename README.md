@@ -1,4 +1,4 @@
-<h1>autocms</h1>
+<h1>autocms (beta)</h1>
 AutoCms is a simple solution to manage contents. You can easly list your data in a table, update, delete or insert (CRUD).
 You can set relations with other collections.
 
