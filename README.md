@@ -34,7 +34,7 @@ FlowRouter.route('/cms/:collection/:function/:id', {
 });
 ```
 <hr>
-<strong>An example to create a list:</strong>
+<strong>An example to create a player list:</strong>
 
 <h4>Set rules</h4>
 ```js
@@ -84,4 +84,63 @@ if (Meteor.isServer) {
 <h4>After all open this link</h4>
 ```
 localhost:3000/cms/Players/find
+```
+
+<hr>
+<h2>How to use it</h2>
+```js
+Games.table = {
+  title: 'List of all games',
+  style: {
+    table: {
+      class: 'table table-hover'
+    },
+    thead: {
+      class: ''
+    },
+    tbody: {
+      class: ''
+    }
+  },
+  buttons: {
+    edit: {
+      label: '<i class="fa fa-pencil-square-o" alt="Edit"></i> Edit',
+      class: 'btn btn-xs btn-default',
+      auth: function() {    // default false
+        return true; 
+      }
+    },  
+    delete: {
+      label: '<i class="fa fa-trash" alt="Delete"></i> Delete',
+      class: 'btn btn-xs btn-danger',
+      auth: function() {    // default false
+        return true; 
+      }
+    },
+    showNavButtons: true,    // default false
+    showActionButtons: true  // default false
+  },
+  showNo: true,  // default true
+  columns: {
+    title: {
+    },
+    gamer1: {
+      relation: 'Players',
+      display: {
+        fields: {
+          0: 'name',
+          1: 'surname'
+        }, 
+        symbol: ' '
+      }
+    },
+    score1: {
+      class: function(data) {
+        if (data > 5) {
+            return 'success';
+        }
+      }
+    }
+  }
+}
 ```
