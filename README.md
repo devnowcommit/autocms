@@ -1,6 +1,5 @@
 <h1>autocms for Meteor.js (beta)</h1>
 AutoCms is a simple solution to manage contents. You can easly list your data in a table, update, delete or insert (CRUD).
-You can set relations with other collections.
 
 <h2>Dependencies</h2>
 ```js
@@ -14,9 +13,7 @@ aldeed:simple-schema
 aldeed:delete-button
 ```
 
-<h2>How to use it</h2>
-<strong>An example to create a player list:</strong>
-
+<h2>How to use it (player list example)</strong>
 <h4>Set routes, for flow-router</h4>
 ```js
 // cmsCollections
@@ -80,9 +77,10 @@ if (Meteor.isServer) {
   });
 }
 ```
-<h4>After all open this link</h4>
+<h4>After all open these links</h4>
 ```
 localhost:3000/cms/Players/find
+localhost:3000/cms/Players/insert
 ```
 
 <br/><br/>
