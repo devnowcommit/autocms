@@ -20,7 +20,7 @@ Package.onUse(function(api) {
   api.use(['kadira:flow-router@2.7.0'], 'client', {weak: false, unordered: false});
   api.use('kadira:blaze-layout@2.2.0');
   api.use('arillo:flow-router-helpers@0.4.6');
-  api.use('aldeed:autoform@5.7.1');
+  api.use(['aldeed:autoform@5.7.1','aldeed:simple-schema@1.3.3','aldeed:delete-button@1.0.0']);
   
   // add files
   api.addFiles('template.html', 'client');
