@@ -21,7 +21,7 @@ FlowRouter.route('/cms/:collection/:function/:id', {
   }
 });
 ```
-
+<hr>
 <strong>An example to create a scoreboard:</strong>
 
 <h4>Set rules</h4>
