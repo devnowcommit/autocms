@@ -22,7 +22,7 @@ Template.cmsCollection.onCreated(function(){
 
   // Set default options
   showNavButtons = true;
-  showActionButtons = false; 
+  showActionButtons = true; 
   if (typeof table.buttons != 'undefined') {
      
     if (typeof showActionButtons != 'undefined') {
@@ -284,6 +284,9 @@ Template.cmsCollection.helpers({
       }
       // Edit button
       function button_edit() {
+        if (typeof table.buttons == 'undefined')
+          return '<a href="/cms/'+collection+'/find-one/'+data[i]._id+'" class="edit" target="_self">Edit</a>';
+
         try{
           // Set '' if not defined
           if (!table.buttons.edit.class)
@@ -304,6 +307,9 @@ Template.cmsCollection.helpers({
       }
       // Delete button
       function button_delete() {
+        if (typeof table.buttons == 'undefined')
+          return '<a href="javascript:void(0);" class="remove" data-id="'+data[i]._id+'">Delete</a>';
+
         try{
           // Set '' if not defined
           if (!table.buttons.delete.class)
@@ -320,7 +326,7 @@ Template.cmsCollection.helpers({
         catch(e){
           //console.log(e); //Log the error
         }
-        return '<a href="javascript:void(0);" class="remove"  data-id="'+data[i]._id+'">Delete</a>'; 
+        return '<a href="javascript:void(0);" class="remove" data-id="'+data[i]._id+'">Delete</a>'; 
       }
       // Last td and close tr
       if (showActionButtons)
