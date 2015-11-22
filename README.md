@@ -4,18 +4,6 @@ AutoCms is a simple solution to manage contents. You can easly list your data in
 meteor add guncebektas:autocms
 ```
 
-<h2>Dependencies</h2>
-```js
-underscorestring:underscore.string
-kadira:flow-router
-kadira:blaze-layout           
-arillo:flow-router-helpers
-aldeed:collection2           
-aldeed:autoform
-aldeed:simple-schema
-aldeed:delete-button
-```
-
 <h2>How to use it (player list example)</h2>
 <h4>Set routes, for flow-router</h4>
 ```js
