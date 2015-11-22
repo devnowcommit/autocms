@@ -45,6 +45,7 @@ Package.onUse(function(api) {
   // add files
   api.addFiles([
     'template.html',
+    'methods.js',
     'helpers.js', 
     'events.js'
   ], 'client');
