@@ -43,6 +43,9 @@ Template.cmsCollection.onCreated(function(){
   showNo = true;
   if (typeof table.showNo != 'undefined')
     showNo = table.showNo; 
+
+  // default width for images
+  width = '40';           
 });
 
 // Set template helpers
@@ -159,33 +162,33 @@ Template.cmsCollection.helpers({
     return window[collection].table.title;
   },
   'table_class_table': function () {
-    if (typeof table.style != 'undefined') {
-      if (typeof table.style.table != 'undefined') {
-        if (typeof table.style.table.class != 'undefined')
-          return table.style.table.class; 
-        else
-          return '';
-      }
+    try{
+      if (typeof table.style.table.class != 'undefined')
+        return table.style.table.class; 
+    }
+    catch(e){
+      //console.log(e); //Log the error
+      return '';
     }
   },
   'table_class_thead': function () {
-    if (typeof table.style != 'undefined') {
-      if (typeof table.style.thead != 'undefined') {
-        if (typeof table.style.thead.class != 'undefined')
-          return table.style.thead.class; 
-        else
-          return '';
-      }
+    try{
+      if (typeof table.style.thead.class != 'undefined')
+        return table.style.thead.class; 
+    }
+    catch(e){
+      //console.log(e); //Log the error
+      return '';
     }
   },
   'table_class_tbody': function () {
-    if (typeof table.style != 'undefined') {
-      if (typeof table.style.tbody != 'undefined') {
-        if (typeof table.style.tbody.class != 'undefined')
-          return table.style.tbody.class; 
-        else
-          return '';
-      }
+    try{
+      if (typeof table.style.tbody.class != 'undefined')
+        return table.style.tbody.class; 
+    }
+    catch(e){
+      //console.log(e); //Log the error
+      return '';
     }
   },
   // return only column names from collection.table rule
@@ -246,7 +249,20 @@ Template.cmsCollection.helpers({
             // There might be a display rule, check it
             var v = '';
             for (f in table.columns[item].display.fields) {
-              v += value[table.columns[item].display.fields[f]]+table.columns[item].display.symbol;
+              
+              if (typeof table.columns[item].display.fields[f].type != 'undefined' && table.columns[item].display.fields[f].type == 'image') {
+                
+                if (typeof value[table.columns[item].display.fields[f].data] != 'undefined') {
+                  
+                  if (typeof table.columns[item].display.fields[f].width != 'undefined')
+                    width = table.columns[item].display.fields[f].width;
+
+                  v += '<img src="'+location.origin+'/cfs/files/images/'+value[table.columns[item].display.fields[f].data]+'" width="'+width+'"/>'+table.columns[item].display.symbol;
+                }
+              } else {
+                v += value[table.columns[item].display.fields[f]]+table.columns[item].display.symbol;
+              }
+
             }
             value = v;
             
@@ -264,7 +280,6 @@ Template.cmsCollection.helpers({
           if (value.length > 0) {
             
             // Set default width
-            width = '40';
             if (typeof table.columns[item].width != 'undefined')
               width = table.columns[item].width;
             
@@ -290,59 +305,6 @@ Template.cmsCollection.helpers({
         
       });
 
-      // Appand edit and delete buttons for each row into last td
-      function button_label(button, text){
-        if (!button)
-          return text;
-
-        return button;
-      }
-      // Edit button
-      function button_edit() {
-        if (typeof table.buttons == 'undefined')
-          return '<a href="/cms/'+collection+'/find-one/'+data[i]._id+'" class="edit" target="_self">Edit</a>';
-
-        try{
-          // Set '' if not defined
-          if (!table.buttons.edit.class)
-            table.buttons.edit.class = '';
-          if (!table.buttons.edit.label)
-            table.buttons.edit.label = '';
-          
-          if (table.buttons.edit.auth()) {
-            return '<a href="/cms/'+collection+'/find-one/'+data[i]._id+'" class="edit '+table.buttons.edit.class+'" target="_self">'+ button_label(table.buttons.edit.label, 'Edit') +'</a>';
-          } else {
-            return '';
-          }
-        }
-        catch(e){
-          //console.log(e); //Log the error
-        }
-        return '<a href="/cms/'+collection+'/find-one/'+data[i]._id+'" class="edit" target="_self">Edit</a>'; 
-      }
-      // Delete button
-      function button_delete() {
-        if (typeof table.buttons == 'undefined')
-          return '<a href="javascript:void(0);" class="remove" data-id="'+data[i]._id+'">Delete</a>';
-
-        try{
-          // Set '' if not defined
-          if (!table.buttons.delete.class)
-            table.buttons.delete.class = '';
-          if (!table.buttons.delete.label)
-            table.buttons.delete.label = '';
-
-          if (table.buttons.delete.auth()) {
-            return '<a href="javascript:void(0);" class="remove '+table.buttons.delete.class+'" data-id="'+data[i]._id+'">'+ button_label(table.buttons.delete.label, 'Delete') +'</a>';
-          } else {
-            return '';
-          }  
-        }
-        catch(e){
-          //console.log(e); //Log the error
-        }
-        return '<a href="javascript:void(0);" class="remove" data-id="'+data[i]._id+'">Delete</a>'; 
-      }
       // Last td and close tr
       if (showActionButtons)
         r += '<td>'+ button_edit() +' '+ button_delete() +'</td></tr>';
