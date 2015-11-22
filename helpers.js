@@ -259,9 +259,24 @@ Template.cmsCollection.helpers({
           value = ''; 
         }
         
+        // Change value by type, for now only images
+        if (typeof table.columns[item].type != 'undefined' && table.columns[item].type == 'image') {
+          if (value.length > 0) {
+            
+            // Set default width
+            width = '40';
+            if (typeof table.columns[item].width != 'undefined')
+              width = table.columns[item].width;
+            
+            value = '<img src="'+location.origin+'/cfs/files/images/'+value+'" width="'+width+'"/>';
+          }
+        }
+        
+
+        // Set class of td
         if (typeof table.columns[item].class != 'undefined' && !isNaN(parseFloat(value)) && isFinite(value)) {
           td_class = table.columns[item].class(value);
-          
+        
           if (!td_class)
             r += '<td>'+value+'</td>'; 
           else 
