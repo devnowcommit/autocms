@@ -125,7 +125,7 @@ Games.table = {
     title: {
     },
     gamer1: {
-      relation: 'Players',
+      relation: 'Players', // Another collection
       display: {
         fields: {
           0: 'name',
