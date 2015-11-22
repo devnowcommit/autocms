@@ -116,8 +116,13 @@ Games.table = {
       relation: 'Players', // Another collection
       display: {
         fields: {
-          0: 'name',
-          1: 'surname'
+          0: {
+            data: 'picture',
+            type: 'image',
+            //width: 40
+          },
+          1: 'name',
+          2: 'surname'
         }, 
         symbol: ' '
       }
