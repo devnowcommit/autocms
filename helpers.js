@@ -20,8 +20,36 @@ Template.cmsCollection.onCreated(function(){
 
   table = window[collection].table;
 
-  // Set default options
+  // Set default options for Navigation Buttons
   showNavButtons = true;
+  // navButtonInsert
+  try {
+    navButtonInsertClass = table.buttons.navButtonInsert.class;
+  }
+  catch(e) {
+    navButtonInsertClass = '';
+  }
+  try {
+    navButtonInsertLabel = table.buttons.navButtonInsert.label;
+  }
+  catch(e) {
+    navButtonInsertLabel = 'Insert';
+  }
+  // navButtonList
+  try {
+    navButtonListClass = table.buttons.navButtonList.class;
+  }
+  catch(e) {
+    navButtonListClass = '';
+  }
+  try {
+    navButtonListLabel = table.buttons.navButtonList.label;
+  }
+  catch(e) {
+    navButtonListLabel = 'List';
+  }
+  
+  // Set default options for Action buttons which are in the last td of every tr
   showActionButtons = true; 
   if (typeof table.buttons != 'undefined') {
      
@@ -71,6 +99,12 @@ Template.cmsCollection.helpers({
   },
   'autoCmsNavButtons': function() {
     return showNavButtons;
+  },
+  'autoCmsNavButtonInsert': function () {
+    return '<a class="'+navButtonInsertClass+'" href="'+location.origin+'/cms/'+collection+'/insert" target="_self">'+navButtonInsertLabel+'</a>';
+  },
+  'autoCmsNavButtonList': function () {
+    return '<a class="'+navButtonListClass+'" href="'+location.origin+'/cms/'+collection+'/find" target="_self">'+navButtonListLabel+'</a>';
   },
   'autoCmsActionButtons': function() {
     return showActionButtons;
