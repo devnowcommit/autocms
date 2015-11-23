@@ -23,7 +23,7 @@ Package.onUse(function(api) {
     'aldeed:simple-schema@1.3.3',
     'aldeed:delete-button@1.0.0',
     'cfs:standard-packages@0.5.3',
-    'cfs:gridfs@0.0.27',
+    'cfs:gridfs@=0.0.27',
     'yogiben:autoform-file@0.3.0',
     'mpowaga:autoform-summernote@0.4.2'
   ]);
@@ -45,7 +45,7 @@ Package.onUse(function(api) {
     'aldeed:simple-schema@1.3.3',
     'aldeed:delete-button@1.0.0',
     'cfs:standard-packages@0.5.3',
-    'cfs:gridfs@0.0.27',
+    'cfs:gridfs@=0.0.27',
     'yogiben:autoform-file@0.3.0',
     'mpowaga:autoform-summernote@0.4.2'
   ], ['client','server'], {weak: false, unordered: false});
