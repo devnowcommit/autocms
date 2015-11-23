@@ -77,10 +77,114 @@ localhost:3000/cms/Players/insert
 <br/><br/>
 <h2>An Example which covers all options</h2>
 <ol>
-  <li>Create collection</li>
+  <li>Create collections</li>
   <li>Set rules for autoForm</li>
   <li>Set rules for autoCms</li>
 </ol>
+<p>Players</p>
+```js
+//First of all create Mongo collections
+Players = new Mongo.Collection('players');
+// Attach schema for autoForm
+Players.attachSchema(new SimpleSchema({
+  name:
+  {
+    type: String,
+    label: "Name",
+    max: 100
+  },
+  surname:
+  {
+    type: String,
+    label: "Surname",
+    max: 100
+  },
+  about: {
+    type: String,
+    label: "About",
+    autoform: {
+      afFieldInput: {
+        type: 'summernote',
+        class: 'editor', // optional
+        settings: {
+          height: 200
+        }
+      }
+    },
+    optional: true
+  },
+  picture: {
+    type: String,
+    label: 'Profile Picture',
+    autoform: {
+      afFieldInput: {
+        type: 'fileUpload',
+        collection: 'Images',
+        accept: 'image/*',
+        label: 'Choose a file',
+        previewTemplate: 'filePreview',
+        selectFileBtnTemplate: 'fileButtonSelect',
+        removeFileBtnTemplate: 'fileButtonRemove',
+        onBeforeInsert: function(fileObj) {
+
+        },
+        onAfterInsert: function(err, fileObj) {
+        }
+      }
+    },
+    optional: true
+  }
+}));
+// Define table for autoCms
+Players.table = {
+  title: 'List of all players',
+  style: {
+    table: {
+      class: 'table table-hover'
+    }
+  },
+  columns: {
+    name: {
+
+    },
+    surname: {
+
+    }
+  }
+}
+
+if (Meteor.isServer) {
+  Players.allow({
+    insert: function () {
+      return true;
+    },
+    update: function () {
+      return true;
+    },
+    remove: function () {
+      return true;
+    }
+  });
+}
+```
+<p>Images</p>
+```js
+Images = new FS.Collection("images", {
+  stores: [new FS.Store.GridFS("images", {})]
+});
+Images.allow({
+  insert: function(userId, doc) {
+    return true;
+  },
+  update: function(userId, doc, fieldNames, modifier) {
+    return true;
+  },
+  download: function(userId) {
+    return true;
+  }
+});
+```
+<p>Games</p>
 ```js
 // First of all create Mongo collections
 Games = new Mongo.Collection('games');
@@ -135,46 +239,6 @@ Games.attachSchema(new SimpleSchema({
     label: "Score 2",
     defaultValue: 0
   },
-  gamer3:
-  {
-    type: String,
-    label: "Gamer 3",
-    autoform: {
-      type: "select2",
-      options: function () {
-        return Players.find().map(function (p) {
-            return {label: p.name+' '+p.surname, value: p._id};
-        });
-      }
-    },
-    optional: true
-  },
-  score3:
-  {
-    type: Number,
-    label: "Score 3",
-    defaultValue: 0
-  },
-  gamer4:
-  {
-    type: String,
-    label: "Gamer 4",
-    autoform: {
-      type: "select2",
-      options: function () {
-        return Players.find().map(function (p) {
-            return {label: p.name+' '+p.surname, value: p._id};
-        });
-      }
-    },
-    optional: true
-  },
-  score4:
-  {
-    type: Number,
-    label: "Score 4",
-    defaultValue: 0
-  },
   // hide createdBy column
   createdBy: {
     type: String,
@@ -183,12 +247,11 @@ Games.attachSchema(new SimpleSchema({
         label: false
     },
     autoValue: function () { 
-    	return Meteor.userId() 
+      return Meteor.userId() 
     }
   }
 }));
-
-// Determine columnnames and their relations with other collections to display in table
+// Define table for autoCms
 Games.table = {
   title: 'List of all games',
   style: {
@@ -218,6 +281,14 @@ Games.table = {
       }
     },
     showNavButtons: true,    // default true
+    navButtonInsert: {
+      label: '<i class="fa fa-plus"></i>',
+      class: 'btn btn-default'
+    },
+    navButtonList: {
+      label: '<i class="fa fa-list"></i>',
+      class: 'btn btn-default'
+    },
     showActionButtons: true  // default true
   },
   showNo: true,  // default true
@@ -255,26 +326,6 @@ Games.table = {
             return 'success';
         }
       }
-    },
-    gamer3: {
-      relation: 'Players',
-      display: {
-        fields: {
-          0: 'name',
-          1: 'surname'
-        }, 
-        symbol: ' '
-      }
-    },
-    gamer4: {
-      relation: 'Players',
-      display: {
-        fields: {
-          0: 'name',
-          1: 'surname'
-        }, 
-        symbol: ' '
-      }
     }
   }
 }
@@ -295,4 +346,9 @@ if (Meteor.isServer) {
 }
 ```
 <h2>The result will be like that</h2>
-<img src="http://guncebektas.com/autocms_0.0.10_result.jpg">
+<p>Players table</p>
+<img src="http://guncebektas.com/autocms_0.1.0_result_players_table.jpg">
+<img src="http://guncebektas.com/autocms_0.1.0_result_players_form.jpg">
+<p>Games table</p>
+<img src="http://guncebektas.com/autocms_0.1.0_result_games_table.jpg">
+<img src="http://guncebektas.com/autocms_0.1.0_result_games_form.jpg">
