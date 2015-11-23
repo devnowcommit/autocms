@@ -3,7 +3,8 @@ AutoCms is a simple solution to manage contents. You can easly list your data in
 ```js
 meteor add guncebektas:autocms
 ```
-<iframe width="420" height="315" src="https://www.youtube.com/embed/uo1ju2qzL90" frameborder="0" allowfullscreen></iframe>
+<a href="https://youtu.be/uo1ju2qzL90">Watch this video to see the capabilities of autocms</a>
+
 <h2>How to use it (player list example)</h2>
 <h4>Set routes, for flow-router</h4>
 ```js
