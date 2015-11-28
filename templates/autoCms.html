@@ -1,4 +1,4 @@
-<template name="cmsCollection">
+<template name="autoCms">
 	<!-- initialize autoCms -->
 	{{#if autoCmsNavButtons }}
 		<div class="row">
@@ -14,34 +14,64 @@
 	<!-- is autoCmsForm in use -->
 	{{#if autoCmsForm }}
 		<!-- if true, show autoForm -->
-		{{> quickForm collection=collection doc=data id=form_id type=form_type buttonContent=form_button}}
+		{{> quickForm collection=collection doc=data id=formId type=formType buttonContent=formButton}}
 
 		<!-- is removeButton on? it's true by default in update -->
 		{{#if removeButton }}
 			{{> quickRemoveButton collection=collection id=collection._id beforeRemove=beforeRemove class="btn btn-danger"}}
 		{{/if}}	
+	
 	{{else}}
+		
 		<!-- if false, show table -->
-		<h1>{{{table_title}}}</h1>
-		<table class="{{table_class_table}}">
-	      <thead class="{{table_class_thead}}">
+		{{#if title}}
+		<h1>{{title}}</h1>
+		{{/if}}
+		
+		{{#if wrapperType}}
+			<table class="{{wrapperClass}}">
+	      <thead>
 	        <tr>
+	        	<!--
 	        	{{#if autoCmsNo}}
 	          <th>No.</th>
 	          {{/if}}
-
-	          {{#each table_head}}
+						-->
+	          {{#each tableHead}}
 						<th>{{this}}</th>
 					  {{/each}}
 
+					  <!--
 					  {{#if autoCmsActionButtons}}
 			  		<th>Actions</th>
 			  		{{/if}}
+			  		-->
 	        </tr>
 	      </thead>
-	      <tbody class="{{table_class_tbody}}">
-	      	{{{table_body}}}
-		  	</tbody>
-	    </table>
+	      <tbody>
+
+	      	{{#each allData}}
+	      	<tr>
+	      		{{#each this.data}}
+		      	<td class="{{allClass ../class @index}}">{{{ this }}}</td>
+		      	{{/each}}
+					</tr>
+	      	{{/each}}
+
+	      </tbody>
+	  	</table>
+	  {{else}}
+		  <ul class="{{wrapperClass}}">
+
+		  	{{#each allData}}
+		    	<li>
+		    		{{#each this.data}} 
+		    		<div class="{{allClass ../class @index}}">{{{ this }}}</div> 
+		    		{{/each}}
+		    	</li>
+	      {{/each}}
+
+		  </ul>
+	  {{/if}}
 	{{/if}}
 </template>

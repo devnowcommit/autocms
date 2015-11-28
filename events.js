@@ -1,4 +1,4 @@
-Template.cmsCollection.events({
+Template.autoCms.events({
   // before remove action for autoTable
   'click .remove' : function() {
   	if (confirm('Are you sure to delete?')) {

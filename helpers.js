@@ -1,90 +1,85 @@
-/** 
-  autoCms is working nice with autoForm and has a huge need of it
-  autoCms handles not only insert and update events but also can list and construct relations with other collections 
-  in table and we are calling this extension as autoTable. 
-  In conclusion, autoCms is the combination of autoForm and autoTable
-  @category   cms
-  @ver        0.1.0
-  @authors    günce ali bektas <info@guncebektas.com>, aykut aktas <aykut@aktas.me>
-  @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
-  @link       https://github.com/guncebektas/autocms
-*/
-
-// Initialize params on create
-Template.cmsCollection.onCreated(function(){
+Template.autoCms.onCreated(function(){
+  // global variables & configs for autoCms
   collection = FlowRouter.getParam("collection");
+  
   func = FlowRouter.getParam("function");
   
-  if (FlowRouter.getParam("id"))
-    id = FlowRouter.getParam("id");
+  id = FlowRouter.getParam("id");
 
-  table = window[collection].table;
+  if (!_.isUndefined(rules = window[collection].autoCms))
+    rules = window[collection].autoCms;
+  else
+    rules = window[collection].autoOne;
 
   // Set default options for Navigation Buttons
   showNavButtons = true;
   // navButtonInsert
   try {
-    navButtonInsertClass = table.buttons.navButtonInsert.class;
-  }
-  catch(e) {
+    navButtonInsertClass = rules.buttons.navButtonInsert.class;
+  } catch(e) {
     navButtonInsertClass = '';
   }
   try {
-    navButtonInsertLabel = table.buttons.navButtonInsert.label;
-  }
-  catch(e) {
+    navButtonInsertLabel = rules.buttons.navButtonInsert.label;
+  } catch(e) {
     navButtonInsertLabel = 'Insert';
   }
   // navButtonList
   try {
-    navButtonListClass = table.buttons.navButtonList.class;
-  }
-  catch(e) {
+    navButtonListClass = rules.buttons.navButtonList.class;
+  } catch(e) {
     navButtonListClass = '';
   }
   try {
-    navButtonListLabel = table.buttons.navButtonList.label;
-  }
-  catch(e) {
+    navButtonListLabel = rules.buttons.navButtonList.label;
+  } catch(e) {
     navButtonListLabel = 'List';
   }
   
+  // dataType
+  dataType = 'table'
+  if (!_.isUndefined(dataType))
+    dataType = rules.type;
+
   // Set default options for Action buttons which are in the last td of every tr
   showActionButtons = true; 
-  if (typeof table.buttons != 'undefined') {
+  if (!_.isUndefined(rules.buttons)) {
      
-    if (typeof showActionButtons != 'undefined') {
-      showActionButtons = table.buttons.showActionButtons;
+    if (!_.isUndefined(showActionButtons)) {
+      showActionButtons = rules.buttons.showActionButtons;
       
-      if (typeof table.buttons.edit.auth() != undefined && typeof table.buttons.delete.auth() != undefined) {
-        if (table.buttons.edit.auth() == true && table.buttons.delete.auth() == true)
+      if (typeof rules.buttons.edit.auth() != undefined && typeof rules.buttons.delete.auth() != undefined) {
+        if (rules.buttons.edit.auth() == true && rules.buttons.delete.auth() == true)
           showActionButtons = true;
-        else if (table.buttons.edit.auth() == false && table.buttons.delete.auth() == false)
+        else if (rules.buttons.edit.auth() == false && rules.buttons.delete.auth() == false)
           showActionButtons = false;   
       }
     }
 
-    if (typeof table.buttons.showNavButtons != 'undefined')
-      showNavButtons = table.buttons.showNavButtons;  
+    if (!_.isUndefined(rules.buttons.showNavButtons))
+      showNavButtons = rules.buttons.showNavButtons;  
   }
   
-  showNo = true;
-  if (typeof table.showNo != 'undefined')
-    showNo = table.showNo; 
+  // showNo
+  showNo = true; 
+  if (!_.isUndefined(rules.showNo))
+    showNo = rules.showNo;
 
   // default width for images
-  width = '40';           
+  width = '40';
 });
-
-// Set template helpers
-Template.cmsCollection.helpers({
+/**
+  Defines how autoCms & autoForm will work and returns data 
+  into template 
+*/
+Template.autoCms.helpers({
   // is autoCmsForm will be in use for insert/update, if not return false to list collection
   'autoCmsForm': function() {
     switch(func) {
-  	  case 'find':
+  	  case 'list':
   	    return false;
   	    break;
-  	  case 'find-one':
+  	  case 'item':
   	    return true;
   	    break;
   	  case 'update':
@@ -104,7 +99,7 @@ Template.cmsCollection.helpers({
     return '<a class="'+navButtonInsertClass+'" href="'+location.origin+'/cms/'+collection+'/insert" target="_self">'+navButtonInsertLabel+'</a>';
   },
   'autoCmsNavButtonList': function () {
-    return '<a class="'+navButtonListClass+'" href="'+location.origin+'/cms/'+collection+'/find" target="_self">'+navButtonListLabel+'</a>';
+    return '<a class="'+navButtonListClass+'" href="'+location.origin+'/cms/'+collection+'/list" target="_self">'+navButtonListLabel+'</a>';
   },
   'autoCmsActionButtons': function() {
     return showActionButtons;
@@ -119,10 +114,10 @@ Template.cmsCollection.helpers({
   // fetch data and serve it as wanted
   'data': function() {
   	switch(func) {
-  	  case 'find':
-  	    return window[collection].find();
+  	  case 'list':
+  	    return true;
   	    break;
-  	  case 'find-one':
+  	  case 'item':
   	    return window[collection].findOne(id);
   	    break;
   	  case 'update':
@@ -135,13 +130,13 @@ Template.cmsCollection.helpers({
   	    return false;
   	}
   },
-  // return form_id for autoForm
-  'form_id': function () {
+  // return formId for autoForm
+  'formId': function () {
   	switch(func) {
-  	  case 'find':
+  	  case 'list':
   	    return true
   	    break;
-  	  case 'find-one':
+  	  case 'item':
   	    return 'edit'+FlowRouter.getParam("collection")+'Form';
   	    break;
   	  case 'update':
@@ -154,13 +149,13 @@ Template.cmsCollection.helpers({
   	    return false;
   	}
   },
-  // return form_type for autoForm
-  'form_type': function() {
+  // return formType for autoForm
+  'formType': function() {
   	switch(func) {
-  	  case 'find':
+  	  case 'list':
   	    return true
   	    break;
-  	  case 'find-one':
+  	  case 'item':
   	    return 'update';
   	    break;
   	  case 'update':
@@ -174,12 +169,12 @@ Template.cmsCollection.helpers({
   	}
   },
   // return the text of button for autoForm
-  'form_button': function() {
+  'formButton': function() {
   	switch(func) {
-  	  case 'find':
+  	  case 'list':
   	    return true
   	    break;
-  	  case 'find-one':
+  	  case 'item':
   	    return 'Update';
   	    break;
   	  case 'update':
@@ -192,171 +187,76 @@ Template.cmsCollection.helpers({
   	    return false;
     }	
   },
-  'table_title': function () {
-    return window[collection].table.title;
+  // wrapper type defines, how to display data set
+  'wrapperType': function () {
+    if (!_.isUndefined(rules.wrapper.type))
+      contentType = rules.wrapper.type;
+
+    if (contentType == 'table')
+      return true;
+    else
+      return false;
   },
-  'table_class_table': function () {
+  // wrapper element for data
+  'wrapperClass': function () {
     try{
-      if (typeof table.style.table.class != 'undefined')
-        return table.style.table.class; 
-    }
-    catch(e){
-      //console.log(e); //Log the error
+      return rules.wrapper.class; 
+    } catch(e) {
       return '';
     }
   },
-  'table_class_thead': function () {
-    try{
-      if (typeof table.style.thead.class != 'undefined')
-        return table.style.thead.class; 
-    }
-    catch(e){
-      //console.log(e); //Log the error
-      return '';
-    }
-  },
-  'table_class_tbody': function () {
-    try{
-      if (typeof table.style.tbody.class != 'undefined')
-        return table.style.tbody.class; 
-    }
-    catch(e){
-      //console.log(e); //Log the error
-      return '';
-    }
+  // title which will be displayed in the body of the page
+  'title': function () {
+    return rules.title;
   },
   // return only column names from collection.table rule
-  'table_head': function () {
-  	var keys = [];
-    for (var key in table.columns) {
+  'tableHead': function () {
+  	// gather column names and push them into keys
+    var keys = [];
+    for (var key in rules.columns) {
         keys.push(key);
     }
-
+    
     var result = [];
-
+    // foreach keys format key and push them into result
     keys.forEach(function (item, index) {
       result.push(s(item).capitalize().value());
     });
-    
+
+    // push other fields, which is defined in the rule into result
+    if (showNo) {
+      result.unshift('No');
+    }
+    if (showActionButtons) {
+      result.push('Actions');
+    }
+    // return result
   	return result;
   },
-  // return column datas as described in collection.table with their relations
-  'table_body': function () {
-  	data = window[collection].find().fetch();
-    var keys = [];
-    for (var key in table.columns) {
-        keys.push(key);
+  // allClass
+  'allClass': function (c, index) {
+    if (!_.isUndefined(c)) {
+      var res = c.toString().split(",");
+      return res[index];
+    } else {
+      return '';
     }
 
-  	var r;
-  	var value;
-	   
-    // For each data in collection 
-    for (i=0; i<data.length; i++) {
-      
-      if (showNo) {
-        // Start with numbering each row
-        no = i+1;
-
-        // Open tr and place row no into first td
-    		r += '<tr><td>'+ no +'</td>';
-      } else {
-        r += '<tr>';
-      }
-
-
-  		//console.log(table.title);   // Title value of autoTable
-      //console.log(table.columns); // Columns for collection
-
-      // For each columns setted for collection
-      keys.forEach(function (item, index) {
-        prop = data[i][item];
-
-        // If prop isset, check for relation
-        if (prop) {
-
-          // If relation isset, find data from related collection
-          if (typeof table.columns[item].relation != 'undefined') {
-            // Find the value from relatinal collection
-            value = window[table.columns[item].relation].findOne(prop);
-            
-            // There might be a display rule, check it
-            var v = '';
-            for (f in table.columns[item].display.fields) {
-              
-              if (typeof table.columns[item].display.fields[f].type != 'undefined' && table.columns[item].display.fields[f].type == 'image') {
-                
-                if (typeof value[table.columns[item].display.fields[f].data] != 'undefined') {
-                  
-                  if (typeof table.columns[item].display.fields[f].width != 'undefined')
-                    width = table.columns[item].display.fields[f].width;
-
-                  v += '<img src="'+location.origin+'/cfs/files/images/'+value[table.columns[item].display.fields[f].data]+'" width="'+width+'"/>'+table.columns[item].display.symbol;
-                }
-              } else {
-                v += value[table.columns[item].display.fields[f]]+table.columns[item].display.symbol;
-              }
-
-            }
-            value = v;
-            
-          // If there isn't any relation with a collection show data
-          } else {
-            value = prop;
-          }
-        // If prop is undefined set value as ''
-        } else {
-          value = ''; 
-        }
-        
-        // Change value by type, for now only images
-        if (typeof table.columns[item].type != 'undefined' && table.columns[item].type == 'image') {
-          if (value.length > 0) {
-            
-            // Set default width
-            if (typeof table.columns[item].width != 'undefined')
-              width = table.columns[item].width;
-            
-            value = '<img src="'+location.origin+'/cfs/files/images/'+value+'" width="'+width+'"/>';
-          }
-        }
-        
-
-        // Set class of td
-        if (typeof table.columns[item].class != 'undefined' && !isNaN(parseFloat(value)) && isFinite(value)) {
-          td_class = table.columns[item].class(value);
-        
-          if (!td_class)
-            r += '<td>'+value+'</td>'; 
-          else 
-            r += '<td class="'+td_class+'">'+value+'</td>'; 
-
-        } else {
-          r += '<td>'+value+'</td>';    
-        }
-        
-        // console.log('Value:'+ value);  //Log row data
-        
-      });
-
-      // Last td and close tr
-      if (showActionButtons)
-        r += '<td>'+ button_edit() +' '+ button_delete() +'</td></tr>';
-      else
-        r += '</tr>';
-    }
-    return r;
   },
+  'allData': function() {
+    return autoCmsObject.formatRowData();
+  },
+  // condition for remove button in autoform
   'removeButton' : function () {
     switch(func) {
-      case 'find-one':
+      case 'item':
         return true;
         break;
       default:
       return false;
     }
   },
-  // before remove action for autoForm
+  // ask again before remove action in autoForm
   'beforeRemove' : function () {
     return function () {
       var doc = window[collection].findOne(id);
