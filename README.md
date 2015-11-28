@@ -91,7 +91,7 @@ localhost:3000/cms/Players/insert
 <h4>The result will be like that</h4>
 <img src="http://guncebektas.com/autocms_1.0.0_result_players_table.jpg">
 
-<h2>Another example which covers more example</h2>
+<h2>Another example which covers more</h2>
 ```js
 // First of all create Mongo collections
 Games = new Mongo.Collection('games');
