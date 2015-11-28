@@ -281,5 +281,5 @@ if (Meteor.isServer) {
 localhost:3000/cms/Games/list
 localhost:3000/cms/Games/insert
 ```
-<h4>The result will be like that</h4>
+<h4>The result will be like that if you add bootstrap</h4>
 <img src="http://guncebektas.com/autocms_1.0.0_result_games_table.jpg">
