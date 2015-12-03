@@ -3,6 +3,8 @@ A simple solution to manage contents. You can easly list your data in a table, u
 ```js
 meteor add guncebektas:autocms
 ```
+<a href="https://www.youtube.com/embed/uo1ju2qzL90">Click here to watch what you can do with </a>
+
 <h2>How to</h2>
 <h4>Routes</h4>
 ```js
@@ -154,7 +156,7 @@ Games.attachSchema(new SimpleSchema({
         label: false
     },
     autoValue: function () { 
-    	return Meteor.userId() 
+      return Meteor.userId() 
     }
   }
 }));
