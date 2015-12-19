@@ -64,9 +64,7 @@ Template.autoCms.onCreated(function(){
   showNo = true; 
   if (!_.isUndefined(rules.showNo))
     showNo = rules.showNo;
-
-  // default width for images
-  width = '40';
+  
 });
 /**
   Defines how autoCms & autoForm will work and returns data 
