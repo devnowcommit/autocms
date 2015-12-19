@@ -3,7 +3,7 @@ A simple solution to manage contents. You can easly list your data in a table, u
 ```js
 meteor add guncebektas:autocms
 ```
-<a href="https://www.youtube.com/embed/uo1ju2qzL90">Click here to watch what you can do with </a>
+<a href="https://www.youtube.com/embed/uo1ju2qzL90">Click here to watch what you can do with the package</a>
 
 <h2>How to</h2>
 <h4>Routes</h4>
@@ -95,6 +95,7 @@ localhost:3000/cms/Players/insert
 
 <h2>Another example which covers more</h2>
 ```js
+// First of all create Mongo collections
 // First of all create Mongo collections
 Games = new Mongo.Collection('games');
 // Attach schema into collection
@@ -197,20 +198,9 @@ Games.autoCms = {
   columns: {
     title: {
     },
-    gamer1: {
-      relation: 'Players',
-      display: {
-        fields: {
-          0: {
-            data: 'picture',
-            type: 'image',
-            //width: 40
-          },
-          1: 'name',
-          2: 'surname'
-        }, 
-        symbol: ' '
-      }
+    gamer1: function(data){
+      result = Players.findOne(data);
+      return '<img src="'+location.origin+'/cfs/files/images/'+result.picture+'" width="50"> '+result.name+' '+result.surname;      
     },
     score1: {
       class: function(data) {
@@ -229,20 +219,9 @@ Games.autoCms = {
         }
       }
     },
-    gamer2: {
-      relation: 'Players',
-      display: {
-        fields: {
-          0: {
-            data: 'picture',
-            type: 'image',
-            //width: 40
-          },
-          1: 'name',
-          2: 'surname'
-        }, 
-        symbol: ' '
-      }
+    gamer2: function(data){
+      result = Players.findOne(data);
+      return '<img src="'+location.origin+'/cfs/files/images/'+result.picture+'" width="50"> '+result.name+' '+result.surname;      
     },
     score2: {
       class: function(data) {
