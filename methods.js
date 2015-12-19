@@ -48,30 +48,8 @@ autoCmsObject = function(){
         if (prop) {
 
           // If relation isset, find data from related collection
-          if (!_.isUndefined(rules.columns[item].relation)) {
-            // Find the value from relatinal collection
-            value = window[rules.columns[item].relation].findOne(prop);
-            // clear value of v for new data
-            var v = '';
-            
-            // There might be a display rule, check it
-            for (f in rules.columns[item].display.fields) {
-              
-      
-              if (!_.isUndefined(rules.columns[item].display.fields[f].type) && rules.columns[item].display.fields[f].type == 'image') {
-                
-                if (!_.isUndefined(value[rules.columns[item].display.fields[f].data])) {
-                  
-                  if (!_.isUndefined(rules.columns[item].display.fields[f].width))
-                    width = rules.columns[item].display.fields[f].width;
-
-                  v += '<img src="'+location.origin+'/cfs/files/images/'+value[rules.columns[item].display.fields[f].data]+'" width="'+width+'"/>'+rules.columns[item].display.symbol;
-                }
-              } else {
-                v += value[rules.columns[item].display.fields[f]]+rules.columns[item].display.symbol;
-              }
-            }
-            value = v;          
+          if (_.isFunction(rules.columns[item])) {
+            value = rules.columns[item](prop);          
           // If there isn't any relation with a collection show data
           } else {
             value = prop;
