@@ -82,7 +82,7 @@ autoCmsObject = function(){
         // add to end
         name.push('buttons');
         // create edit and delete buttons
-        tempData.push(buttonEdit(data[i]._id) +' '+ buttonDelete(data[i]._id));
+        tempData.push(buttonExtra(data[i]._id) +' '+ buttonEdit(data[i]._id) +' '+ buttonDelete(data[i]._id));
         // add an empty class for last element
         tempDataClass[tempData.length - 1] = '';
       }
@@ -91,6 +91,7 @@ autoCmsObject = function(){
       objAll = {
         data: tempData,
         class: tempDataClass,
+        extra: buttonExtra(),
         edit: buttonEdit(),
         delete: buttonDelete()
       }
@@ -168,11 +169,47 @@ autoCmsObject = function(){
     }
     return '<a href="javascript:void(0);" class="remove" data-id="'+data+'">Delete</a>'; 
   }
+  // Extra button
+  function buttonExtra(data) {
+    try {
+      if (_.isUndefined(rules.buttons.extra))
+        return '';
+    }
+    catch(e) {
+      return '';
+    }
+
+    try{
+      // Set '' if not defined
+      if (!rules.buttons.extra.class)
+        rules.buttons.extra.class = '';
+      if (!rules.buttons.extra.label)
+        rules.buttons.extra.label = '';
+
+      if (rules.buttons.extra.auth()) {
+
+        if (!_.isUndefined(rules.buttons.extra.href()))
+          link = rules.buttons.extra.href(data);
+        else 
+          link = 'javascript:void(0);';
+
+        return '<a href="'+link+'" class="extra '+rules.buttons.extra.class+'" data-id="'+data+'">'+ buttonLabel(rules.buttons.extra.label, 'Extra') +'</a>';
+      } else {
+        return '';
+      }
+    }
+    catch(e){
+      //console.log(e); //Log the error
+    }
+
+    return '<a href="javascript:void(0);" class="extra" data-id="'+data+'">Extra</a>';
+  }
 
   return{
     formatRowData: formatRowData,
     setClassForFiels: setClassForFiels,
     buttonEdit: buttonEdit,
-    buttonDelete: buttonDelete
+    buttonDelete: buttonDelete,
+    buttonExtra: buttonExtra
   }
 }();
