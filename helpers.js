@@ -248,7 +248,9 @@ Template.autoCms.helpers({
   'removeButton' : function () {
     switch(func) {
       case 'item':
-        return true;
+        if (typeof rules.buttons.delete.auth() != undefined)
+          if (rules.buttons.delete.auth() == true)
+            return true;
         break;
       default:
       return false;
