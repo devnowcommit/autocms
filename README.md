@@ -96,7 +96,6 @@ localhost:3000/cms/Players/insert
 <h2>Another example which covers more</h2>
 ```js
 // First of all create Mongo collections
-// First of all create Mongo collections
 Games = new Mongo.Collection('games');
 // Attach schema into collection
 Games.attachSchema(new SimpleSchema({
@@ -169,18 +168,28 @@ Games.autoCms = {
   },
   title: 'All games',
   buttons: {
+    extra: {
+      label: '<i class="fa fa-eye" alt="Extra"></i> Extra',
+      class: 'btn btn-xs btn-success',
+      auth: function() {    // default true
+        return true; 
+      },
+      href: function(data) {
+        return location.origin+'/link/'+data;
+      }
+    },
     edit: {
       label: '<i class="fa fa-pencil-square-o" alt="Edit"></i> Edit',
       class: 'btn btn-xs btn-default',
-      auth: function() {    // default false
+      auth: function() {    // default true
         return true; 
       }
     },  
     delete: {
       label: '<i class="fa fa-trash" alt="Delete"></i> Delete',
       class: 'btn btn-xs btn-danger',
-      auth: function() {    // default false
-        return true; 
+      auth: function() {    // default true
+        return false; 
       }
     },
     showNavButtons: true,    // default true
