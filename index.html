@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>autoCms by guncebektas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">autoCms</h1>
+      <h2 class="project-tagline">autoCms is a simple solution to manage contents</h2>
+      <a href="https://github.com/guncebektas/autocms" class="btn">View on GitHub</a>
+      <a href="https://github.com/guncebektas/autocms/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/guncebektas/autocms/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h3>
+<a id="what-is-autocms" class="anchor" href="#what-is-autocms" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is autoCms?</h3>
+
+<p>AutoCms is a simple solution to manage every kinds of contents. You can create a meteor project just with JSON files. </p>
+
+<h3>
+<a id="no-dependencies--for-front-end" class="anchor" href="#no-dependencies--for-front-end" aria-hidden="true"><span class="octicon octicon-link"></span></a>No dependencies  for front-end</h3>
+
+<p>You can use whatever you want for front-end. I picked bootstrap to show some features of autoCms for now. However you can easly adept ionic etc... </p>
+
+<h3>
+<a id="some-features-and-an-example" class="anchor" href="#some-features-and-an-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Some features and an example</h3>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">//First of all create Mongo collections</span>
+blogs <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Mongo.Collection</span>(<span class="pl-s"><span class="pl-pds">'</span>blogs<span class="pl-pds">'</span></span>);
+<span class="pl-c">// Attach schema for autoForm</span>
+<span class="pl-smi">blogs</span>.<span class="pl-en">attachSchema</span>(<span class="pl-k">new</span> <span class="pl-en">SimpleSchema</span>({
+  title<span class="pl-k">:</span> {
+    type<span class="pl-k">:</span> <span class="pl-c1">String</span>,
+    label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Title<span class="pl-pds">"</span></span>,
+    max<span class="pl-k">:</span> <span class="pl-c1">40</span>
+  },
+  description<span class="pl-k">:</span> {
+    type<span class="pl-k">:</span> <span class="pl-c1">String</span>,
+    label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Description<span class="pl-pds">"</span></span>,
+    max<span class="pl-k">:</span> <span class="pl-c1">160</span>
+  },
+  content<span class="pl-k">:</span> {
+    type<span class="pl-k">:</span> <span class="pl-c1">String</span>,
+    label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Content<span class="pl-pds">"</span></span>,
+    autoform<span class="pl-k">:</span> {
+      afFieldInput<span class="pl-k">:</span> {
+        type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>summernote<span class="pl-pds">'</span></span>,
+        class<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>editor<span class="pl-pds">'</span></span>, <span class="pl-c">// optional</span>
+        settings<span class="pl-k">:</span> {
+          height<span class="pl-k">:</span> <span class="pl-c1">200</span>
+        }
+      }
+    },
+    optional<span class="pl-k">:</span> <span class="pl-c1">true</span>
+  },
+  picture<span class="pl-k">:</span> {
+    type<span class="pl-k">:</span> <span class="pl-c1">String</span>,
+    label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Picture<span class="pl-pds">'</span></span>,
+    autoform<span class="pl-k">:</span> {
+      afFieldInput<span class="pl-k">:</span> {
+        type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>fileUpload<span class="pl-pds">'</span></span>,
+        collection<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Images<span class="pl-pds">'</span></span>,
+        accept<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>image/*<span class="pl-pds">'</span></span>,
+        label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Choose a file<span class="pl-pds">'</span></span>,
+        previewTemplate<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>filePreview<span class="pl-pds">'</span></span>,
+        selectFileBtnTemplate<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>fileButtonSelect<span class="pl-pds">'</span></span>,
+        removeFileBtnTemplate<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>fileButtonRemove<span class="pl-pds">'</span></span>,
+        <span class="pl-en">onBeforeInsert</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">fileObj</span>) {
+
+        },
+        <span class="pl-en">onAfterInsert</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">err</span>, <span class="pl-smi">fileObj</span>) {
+        }
+      }
+    },
+    optional<span class="pl-k">:</span> <span class="pl-c1">true</span>
+  },
+  category<span class="pl-k">:</span> {
+    type<span class="pl-k">:</span> <span class="pl-c1">String</span>,
+    label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Category<span class="pl-pds">"</span></span>,
+    type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>select2<span class="pl-pds">"</span></span>,
+    autoform<span class="pl-k">:</span> {
+      <span class="pl-en">options</span><span class="pl-k">:</span> <span class="pl-k">function</span> () {
+        <span class="pl-k">return</span> <span class="pl-smi">blogcategories</span>.<span class="pl-c1">find</span>().<span class="pl-en">map</span>(<span class="pl-k">function</span> (<span class="pl-smi">p</span>) {
+            <span class="pl-k">if</span> (<span class="pl-k">!</span><span class="pl-smi">_</span>.<span class="pl-en">isUndefined</span>(<span class="pl-smi">p</span>.<span class="pl-c1">description</span>))
+              description <span class="pl-k">=</span> <span class="pl-smi">p</span>.<span class="pl-c1">description</span>;
+            <span class="pl-k">else</span>
+              description <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>;
+
+            <span class="pl-k">return</span> {label<span class="pl-k">:</span> <span class="pl-smi">p</span>.<span class="pl-c1">title</span><span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span><span class="pl-k">+</span>description, value<span class="pl-k">:</span> <span class="pl-smi">p</span>.<span class="pl-smi">_id</span>};
+        });
+      }
+    }
+  },
+  <span class="pl-c">// hide createdBy column</span>
+  createdBy<span class="pl-k">:</span> {
+    type<span class="pl-k">:</span> <span class="pl-c1">String</span>,
+    autoform<span class="pl-k">:</span> {
+        type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>,
+        label<span class="pl-k">:</span> <span class="pl-c1">false</span>
+    },
+    <span class="pl-en">autoValue</span><span class="pl-k">:</span> <span class="pl-k">function</span> () { 
+      <span class="pl-k">return</span> <span class="pl-smi">Meteor</span>.<span class="pl-en">userId</span>() 
+    }
+  },
+  createdAt<span class="pl-k">:</span> {
+    type<span class="pl-k">:</span> <span class="pl-c1">Number</span>,
+    autoform<span class="pl-k">:</span> {
+        type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>,
+        label<span class="pl-k">:</span> <span class="pl-c1">false</span>
+    },
+    <span class="pl-en">autoValue</span><span class="pl-k">:</span> <span class="pl-k">function</span> () { 
+      <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-en">Date</span>().<span class="pl-c1">getTime</span>();
+    }
+  }
+}));
+<span class="pl-c">// Define rules for autoCms</span>
+<span class="pl-smi">blogs</span>.<span class="pl-smi">autoCms</span> <span class="pl-k">=</span> {
+  wrapper<span class="pl-k">:</span> {
+    type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>table<span class="pl-pds">'</span></span>,
+    class<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>table table-hover<span class="pl-pds">'</span></span>
+  },
+  title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Blogs<span class="pl-pds">'</span></span>,
+  buttons<span class="pl-k">:</span> {
+    extra<span class="pl-k">:</span> {
+      label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;i class="fa fa-eye" alt="Show"&gt;&lt;/i&gt; Show<span class="pl-pds">'</span></span>,
+      class<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>btn btn-xs btn-success<span class="pl-pds">'</span></span>,
+      <span class="pl-en">auth</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {    <span class="pl-c">// default true</span>
+        <span class="pl-k">return</span> <span class="pl-c1">true</span>; 
+      },
+      <span class="pl-en">href</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">data</span>) {
+        <span class="pl-k">return</span> <span class="pl-smi">location</span>.<span class="pl-smi">origin</span><span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">'</span>/blog/<span class="pl-pds">'</span></span><span class="pl-k">+</span>data;
+      }
+    },
+    edit<span class="pl-k">:</span> {
+      label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;i class="fa fa-pencil-square-o" alt="Edit"&gt;&lt;/i&gt; Edit<span class="pl-pds">'</span></span>,
+      class<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>btn btn-xs btn-default<span class="pl-pds">'</span></span>,
+      <span class="pl-en">auth</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {    <span class="pl-c">// default false</span>
+        <span class="pl-k">return</span> <span class="pl-c1">true</span>; 
+      }
+    },  
+    delete<span class="pl-k">:</span> {
+      label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;i class="fa fa-trash" alt="Delete"&gt;&lt;/i&gt; Delete<span class="pl-pds">'</span></span>,
+      class<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>btn btn-xs btn-danger<span class="pl-pds">'</span></span>,
+      <span class="pl-en">auth</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {    <span class="pl-c">// default false</span>
+        <span class="pl-k">return</span> <span class="pl-c1">true</span>; 
+      }
+    },
+    showNavButtons<span class="pl-k">:</span> <span class="pl-c1">true</span>,    <span class="pl-c">// default true</span>
+    navButtonInsert<span class="pl-k">:</span> {
+      label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;i class="fa fa-plus"&gt;&lt;/i&gt;<span class="pl-pds">'</span></span>,
+      class<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>btn btn-default<span class="pl-pds">'</span></span>
+    },
+    navButtonList<span class="pl-k">:</span> {
+      label<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;i class="fa fa-list"&gt;&lt;/i&gt;<span class="pl-pds">'</span></span>,
+      class<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>btn btn-default<span class="pl-pds">'</span></span>
+    },
+    showActionButtons<span class="pl-k">:</span> <span class="pl-c1">true</span>  <span class="pl-c">// default true</span>
+  },
+  showNo<span class="pl-k">:</span> <span class="pl-c1">true</span>,  <span class="pl-c">// default true</span>
+  columns<span class="pl-k">:</span> {
+    picture<span class="pl-k">:</span> {
+      type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>image<span class="pl-pds">'</span></span>,
+      width<span class="pl-k">:</span> <span class="pl-c1">60</span>
+    },
+    title<span class="pl-k">:</span> {
+
+    },
+    description<span class="pl-k">:</span> {
+
+    }
+  }
+}
+
+<span class="pl-k">if</span> (<span class="pl-smi">Meteor</span>.<span class="pl-smi">isServer</span>) {
+  <span class="pl-smi">blogs</span>.<span class="pl-en">allow</span>({
+    <span class="pl-en">insert</span><span class="pl-k">:</span> <span class="pl-k">function</span> () {
+      <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+    },
+    <span class="pl-en">update</span><span class="pl-k">:</span> <span class="pl-k">function</span> () {
+      <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+    },
+    <span class="pl-en">remove</span><span class="pl-k">:</span> <span class="pl-k">function</span> () {
+      <span class="pl-k">return</span> <span class="pl-c1">true</span>;
+    }
+  });
+}</pre></div>
+
+<h3>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+<p>Gunce Bektas (<a href="https://github.com/guncebektas" class="user-mention">@guncebektas</a>) and Aykut Aktas (<a href="https://github.com/aykutaktas" class="user-mention">@aykutaktas</a>) founded autoCms.</p>
+
+<h3>
+<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+<p>Having trouble with autoCms? Create an issue or mail me <a href="mailto:info@guncebektas.com">info@guncebektas.com</a></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/guncebektas/autocms">autoCms</a> is maintained by <a href="https://github.com/guncebektas">guncebektas</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
