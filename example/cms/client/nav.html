@@ -1,0 +1,11 @@
+<template name="cmsNav">
+{{#if currentUser}}
+	<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">CMS <i class="fa fa-caret-down"></i></a>
+    	<ul class="dropdown-menu">
+    		{{#each items}}
+        	<li><a href="{{this.url}}" target="{{this.target}}">{{this.text}}</a></li>
+				{{/each}}
+    	</ul>
+	</li>
+{{/if}}
+</template>

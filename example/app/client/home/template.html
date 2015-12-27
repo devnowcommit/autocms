@@ -1,0 +1,35 @@
+<template name="home">
+	<div align="center">
+		<div class="col-md-12">
+			<h1>This app is ready to start.</h1>
+			{{> homeSlides}}
+		</div>
+		<div class="row">
+			{{> homePortfolios}}
+		</div>
+		<div class="row">
+			{{> homeBlogs}}
+		</div>
+	</div>
+</template>
+
+<template name="homeSlides">
+	<h2>Slides</h2>
+	{{#each slides}}
+		{{title}}
+	{{/each}}
+</template>
+
+<template name="homePortfolios">
+	<h2>Our Portfolio</h2>
+	{{#each portfolios}}
+		{{ title}}
+	{{/each}}
+</template>
+
+<template name="homeBlogs">
+	<h2>From Blog</h2>
+	{{#each blogs}}
+		{{ title}}
+	{{/each}}
+</template>

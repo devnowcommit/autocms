@@ -1,0 +1,10 @@
+<template name="appNav">
+	
+	{{#each items}}
+  	<li><a href="{{this.url}}" target="{{this.target}}">{{this.text}}</a></li>
+	{{/each}}
+  
+  {{#if isInRole 'admin' 'default-group'}}
+    {{> cmsNav}}
+  {{/if}}
+</template>

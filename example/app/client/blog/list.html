@@ -1,0 +1,20 @@
+<template name="blog">
+	<h1>Blogs</h1>
+	{{#each items }}
+		<article>
+			<img src="{{picture }}" width="200">
+			<h2>{{title }}</h2>
+			<p>{{description }}</p>
+			<p><strong>Author:</strong>{{createdBy }}</p> 
+			<a href="/blog/{{_id}}">Read more</a>
+		</article>
+	{{/each }}	
+	{{>blogCategories }}
+</template>
+<template name="blogCategories">
+<ul>
+{{#each categories }}
+	<li>{{title }}</li>
+{{/each }}	
+</ul>
+</template>

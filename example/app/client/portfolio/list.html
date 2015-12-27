@@ -1,0 +1,21 @@
+<template name="portfolios">
+	<h1>Portfolios</h1>
+	{{>portfolioCategories }}
+
+	{{#each items }}
+		<article>
+			<img src="{{ image1 }}" width="100">
+			<img src="{{ image2 }}" width="100">
+			<img src="{{ image3 }}" width="100">
+			<h2>{{ title }}</h2>
+			<p>{{ description }}</p>
+		</article>
+	{{/each }}	
+</template>
+<template name="portfolioCategories">
+	<ul>
+	{{#each categories }}
+		<li>{{ title }}</li>
+	{{/each }}	
+	</ul>
+</template>

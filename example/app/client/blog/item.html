@@ -1,0 +1,31 @@
+<template name="blogItem">
+	{{#with item }}
+		<img src="{{picture }}" width="200">
+		
+		<h1>{{ title }}</h1>
+		<h3>{{ description }}</h3>
+		<div>{{{ content }}}</div>
+		<p><strong>{{ createdBy }}</strong></p>
+	{{/with }}
+	{{>blogItemComments }}
+	{{>blogItemCategories }}
+</template>
+<template name="blogItemCategories">
+	<ul>
+		{{#each categories }}
+			<li>{{ title }}</li>
+		{{/each }}
+	</ul>
+</template>
+<template name="blogItemComments">
+	<h3>Write your comment</h3>
+	<form class="new-comment">
+		<textarea name="comment"></textarea>
+		<input type="submit" value="Send">
+	</form>
+	<ul>
+		{{#each comments }}
+			<li>{{ createdBy }} <small>{{ createdAt }}</small><p>{{ comment }}</p></li>
+		{{/each }}
+	</ul>
+</template>
