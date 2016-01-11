@@ -1,3 +1,10 @@
+/* When Created */
+Template.blog.onCreated(function() {
+  seo.set({
+    title: 'It\'s my blog'
+  });
+});
+/* Helpers */
 Template.blog.helpers({
 	'items' : function() {
 	  return blogs.find();
@@ -15,7 +22,12 @@ Template.blog.helpers({
 	  return blogcategories.findOne(this.category);
 	},
 	'createdBy': function () {
-		return Meteor.users.findOne(this.createdBy).profile.name;
+		author = profiles.find({userId: this.createdBy},{limit:1}).fetch()[0];
+		
+		if (!_.isUndefined(author))
+			return author.profile.name+' '+author.profile.surname;
+		else
+			return 'Unknown author';
 	},
 }); 
 Template.blogCategories.helpers({

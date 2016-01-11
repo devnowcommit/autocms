@@ -1,4 +1,50 @@
-FlowRouter.route('/', {
+// Public routes
+var publicFlowRouter; 
+publicFlowRouter  = FlowRouter.group({});
+
+// Private routes
+var privateFlowRouter;
+privateFlowRouter = FlowRouter.group({
+  triggersEnter: [
+    function() {
+      
+      var route;
+
+      if (!(Meteor.loggingIn() || Meteor.userId())) {
+
+        route = FlowRouter.current();
+
+        if (route.route.name !== 'home') {
+          Session.set('redirectAfterLogin', route.path);
+        }
+
+        return FlowRouter.go('home');
+      }
+    }
+  ]
+});
+
+// Private routes extended for admin
+var adminPrivateFlowRouter;
+adminPrivateFlowRouter = privateFlowRouter.group({
+  triggersEnter: [ 
+    function() {
+      // If user is not authenticated redirect to homepage
+      console.log(Meteor.userId());
+      console.log(Roles.userIsInRole(Meteor.userId(), 'admin', 'default-group'));
+      if (Roles.userIsInRole(Meteor.userId(), 'admin', 'default-group')) {
+        console.log('Authenticated user');   
+      } else {
+        console.log('403 Access Denied');
+        //return FlowRouter.go('home');
+      }
+    }
+  ]
+});
+
+// Define routes
+publicFlowRouter.route('/', {
+  name: 'home',
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
@@ -6,7 +52,8 @@ FlowRouter.route('/', {
     });
   }
 });
-FlowRouter.route('/our-portfolio', {
+publicFlowRouter.route('/our-portfolio', {
+  name: 'our-portfolio',
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
@@ -14,7 +61,8 @@ FlowRouter.route('/our-portfolio', {
     });
   }
 });
-FlowRouter.route('/blog', {
+publicFlowRouter.route('/blog', {
+  name: 'blog',
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
@@ -22,7 +70,8 @@ FlowRouter.route('/blog', {
     });
   }
 });
-FlowRouter.route('/blog/:id', {
+publicFlowRouter.route('/blog/:id', {
+  name: 'blog-item',
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
@@ -30,7 +79,17 @@ FlowRouter.route('/blog/:id', {
     });
   }
 });
-FlowRouter.route('/about-us', {
+publicFlowRouter.route('/page/:id', {
+  name: 'page-item',
+  action: function() {
+    BlazeLayout.render("main", {
+      nav: 'appNav', 
+      content: "pageItem"
+    });
+  }
+});
+publicFlowRouter.route('/about-us', {
+  name: 'about-us',
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
@@ -39,19 +98,23 @@ FlowRouter.route('/about-us', {
   }
 });
 // cmsCollections
-FlowRouter.route('/cms/:collection/:function', {
+adminPrivateFlowRouter.route('/cms/:collection/:function', {
+  name: 'admin',
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
-      content: 'autoCms'
+      content: '',
+      contentCms: 'autoCms'
     });
   }
 });
-FlowRouter.route('/cms/:collection/:function/:id', {
+adminPrivateFlowRouter.route('/cms/:collection/:function/:id', {
+  name: 'admin-cms',
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
-      content: "autoCms"
+      content: '',
+      contentCms: 'autoCms'
     });
   }
 });

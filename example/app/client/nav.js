@@ -1,37 +1,29 @@
-appNavItems = {
-	prefix: '/',
-	items: [{
-		type: 'internal',
-		href: 'blog',
-		target: '_self',
-		text: 'Blog'
-	},
-	{
-		type: 'internal',
-		href: 'our-portfolio',
-		target: '_self',
-		text: 'Our Portfolio'
-	},
-	{
-		type: 'internal',
-		href: 'about-us',
-		target: '_self',
-		text: 'About us'
-	}]
-}
-
 Template.appNav.helpers({  
 	'items': function() {
-		//console.log(appNavItems.items.length);
+		var items = navs.find({prefix: {$exists: false}}).fetch();
+		
+		var itemValues = [];
+		var itemValues = $.map(items, function(el) { return el; })
+		
+		for (i=0; i<itemValues.length; i++) {
+			if (itemValues[i].type != 'external') {
+				
+				if (!_.isUndefined(itemValues[i].prefix)) {
+					if (itemValues[i].prefix.length > 0)
+						itemValues[i].prefix = '/' + itemValues[i].prefix + '/';
+					else
+						itemValues[i].prefix = '/';
+				}	else {
+					itemValues[i].prefix = '/';
+				}
 
-		for(var i = 0; i < appNavItems.items.length; i++){
-			// Set full url
-			if (appNavItems.items[i].type != 'external')
-				appNavItems.items[i].url = appNavItems.prefix + appNavItems.items[i].href;
-			else
-				appNavItems.items[i].url = appNavItems.items[i].href;
-		}
+				itemValues[i].url = location.origin + itemValues[i].prefix + itemValues[i].href;
 
-		return appNavItems.items;
+			} else {
+				itemValues[i].url = itemValues[i].href;
+			}
+    }
+
+		return itemValues;
 	}
 });

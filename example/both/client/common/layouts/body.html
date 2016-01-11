@@ -24,6 +24,11 @@
     <!-- {{> yield}} -->
     {{> Template.dynamic template=content}}
 
+    {{#if isInRole 'admin' 'default-group'}}
+      {{> Template.dynamic template=contentCms}}
+    {{/if}}
+
+
     
     <!-- 
     <p>

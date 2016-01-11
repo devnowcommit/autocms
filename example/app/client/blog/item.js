@@ -1,3 +1,10 @@
+/* When Created */
+Template.blogItem.onCreated(function() {
+  blog = blogs.findOne(FlowRouter.getParam("id"));
+  seo.set({
+    title: blog.title
+  });
+});
 /* Helpers */
 Template.blogItem.helpers({
 	'item' : function() {
@@ -6,8 +13,22 @@ Template.blogItem.helpers({
 	'picture': function () {
 		return location.origin+'/cfs/files/images/'+ this.picture;
 	},
+	'file': function () {
+		if (!_.isUndefined(this.file))
+			return '<p><strong>File: </strong><a href="'+ location.origin+'/cfs/files/files/'+ this.file +'">Download</a></p>';
+		else
+			return false;
+	},
+	'category': function () {
+		return blogcategories.findOne(this.category).title;
+	},
 	'createdBy': function () {
-		return Meteor.users.findOne(this.createdBy).profile.name;
+		author = profiles.find({userId: this.createdBy},{limit:1}).fetch()[0];
+		
+		if (!_.isUndefined(author))
+			return author.profile.name+' '+author.profile.surname;
+		else
+			return 'Unknown author';
 	},
 }); 
 Template.blogItemCategories.helpers({
@@ -20,13 +41,18 @@ Template.blogItemCategories.helpers({
 });
 Template.blogItemComments.helpers({
 	'comments': function() {
-		return comments.find({blog: FlowRouter.getParam("id")}, {sort: {createdAt: -1}});
+		return comments.find({blog: FlowRouter.getParam("id")}, {sort: {createdAt: -1}, limit: 3});
 	},
 	'comment': function() {
 		return this.comment;
 	},
 	'createdBy': function() {
-		return Meteor.users.findOne(this.createdBy).profile.name;
+		author = profiles.find({userId: this.createdBy},{limit:1}).fetch()[0];
+		
+		if (!_.isUndefined(author))
+			return author.profile.name+' '+author.profile.surname;
+		else
+			return 'Unknown author';
 	},
 	'createdAt': function() {
 		return formatDate('d.m.Y', new Date(this.createdAt));

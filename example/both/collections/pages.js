@@ -1,24 +1,51 @@
 //First of all create Mongo collections
-comments = new Mongo.Collection('comments');
+pages = new Mongo.Collection('pages');
 // Attach schema for autoForm
-comments.attachSchema(new SimpleSchema({
-  comment:
-  {
+pages.attachSchema(new SimpleSchema({
+  title: {
     type: String,
-    label: "Comment",
-    max: 160
+    label: "Title",
+    max: 80
   },
-  blog: {
+  description: {
     type: String,
-    label: "Blog",
-    type: "select2",
+    label: "Description",
+    max: 260
+  },
+  content: {
+    type: String,
+    label: "Content",
     autoform: {
-      options: function () {
-        return blogs.find().map(function (p) {
-          return {label: p.title, value: p._id};
-        });
+      afFieldInput: {
+        type: 'summernote',
+        class: 'editor', // optional
+        settings: {
+          height: 200
+        }
       }
-    }
+    },
+    optional: true
+  },
+  picture: {
+    type: String,
+    label: 'Picture',
+    autoform: {
+      afFieldInput: {
+        type: 'fileUpload',
+        collection: 'Images',
+        accept: 'image/*',
+        label: 'Choose a file',
+        previewTemplate: 'filePreview',
+        selectFileBtnTemplate: 'fileButtonSelect',
+        removeFileBtnTemplate: 'fileButtonRemove',
+        onBeforeInsert: function(fileObj) {
+
+        },
+        onAfterInsert: function(err, fileObj) {
+        }
+      }
+    },
+    optional: true
   },
   // hide createdBy column
   createdBy: {
@@ -43,13 +70,23 @@ comments.attachSchema(new SimpleSchema({
   }
 }));
 // Define rules for autoCms
-comments.autoCms = {
+pages.autoCms = {
   wrapper: {
     type: 'table',
     class: 'table table-hover'
   },
-  title: 'Comments',
+  title: 'Pages',
   buttons: {
+    extra: {
+      label: '<i class="fa fa-eye" alt="Show"></i> Show',
+      class: 'btn btn-xs btn-success',
+      auth: function() {    // default true
+        return true; 
+      },
+      href: function(data) {
+        return location.origin+'/page/'+data;
+      }
+    },
     edit: {
       label: '<i class="fa fa-pencil-square-o" alt="Edit"></i> Edit',
       class: 'btn btn-xs btn-default',
@@ -77,34 +114,21 @@ comments.autoCms = {
   },
   showNo: true,  // default true
   columns: {
-    comment: {
+    picture: {
+      type: 'image',
+      width: 60
+    },
+    title: {
 
     },
-    createdBy: function(data) {
-      author = profiles.find({userId: data},{limit:1}).fetch()[0];
-    
-      if (!_.isUndefined(author))
-        return '<a href="'+location.origin+'/cms/profiles/item/'+data+'" title="Click here to edit profile of the user" target="_self">'+ author.profile.name+' '+author.profile.surname +'</a>';
-      else
-        return 'Unknown author';
-    },
-    createdAt: function(data) {
-      time = new Date(data);
-      d = time.getDate();
-      m = time.getMonth() + 1;
-      y = time.getFullYear();
+    description: {
 
-      return d+'.'+m+'.'+y;
-    },
-    blog: function(data){
-      blog = blogs.findOne(data);
-      return '<a href="'+location.origin+'/cms/blogs/item/'+data+'" title="Click here to edit blog" target="_self">'+ blog.title +'</a>';
     }
   }
 }
 
 if (Meteor.isServer) {
-  comments.allow({
+  pages.allow({
     insert: function () {
       return true;
     },

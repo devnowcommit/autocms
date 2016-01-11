@@ -1,0 +1,13 @@
+Meteor.subscribe("blogCategories");
+Meteor.subscribe("blogs");
+Meteor.subscribe("comments");
+Meteor.subscribe("files");
+Meteor.subscribe("images");
+Meteor.subscribe("navs");
+Meteor.subscribe("pages");
+Meteor.subscribe("portfolioCategories");
+Meteor.subscribe("portfolios");
+Meteor.subscribe("profiles");
+Meteor.subscribe('roles');
+Meteor.subscribe("settings");
+Meteor.subscribe("slides");

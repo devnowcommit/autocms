@@ -1,18 +1,61 @@
+// Turn on the debug
+SimpleSchema.debug = true;
+
 //First of all create Mongo collections
 settings = new Mongo.Collection('settings');
 // Attach schema for autoForm
 settings.attachSchema(new SimpleSchema({
-  title:
-  {
+  title: {
     type: String,
     label: "Title",
     max: 40
   },
-  description:
-  {
+  description: {
     type: String,
     label: "Description",
     max: 160
+  },
+  favicon: {
+    type: String,
+    label: 'Favicon',
+    autoform: {
+      afFieldInput: {
+        type: 'fileUpload',
+        collection: 'Images',
+        accept: 'image/*',
+        label: 'Choose a file',
+        previewTemplate: 'filePreview',
+        selectFileBtnTemplate: 'fileButtonSelect',
+        removeFileBtnTemplate: 'fileButtonRemove',
+        onBeforeInsert: function(fileObj) {
+
+        },
+        onAfterInsert: function(err, fileObj) {
+        }
+      }
+    },
+    optional: true
+  },
+  logo: {
+    type: String,
+    label: 'Logo',
+    autoform: {
+      afFieldInput: {
+        type: 'fileUpload',
+        collection: 'Images',
+        accept: 'image/*',
+        label: 'Choose a file',
+        previewTemplate: 'filePreview',
+        selectFileBtnTemplate: 'fileButtonSelect',
+        removeFileBtnTemplate: 'fileButtonRemove',
+        onBeforeInsert: function(fileObj) {
+
+        },
+        onAfterInsert: function(err, fileObj) {
+        }
+      }
+    },
+    optional: true
   },
   createdBy: {
     type: String,
@@ -63,6 +106,12 @@ settings.autoCms = {
     },
     description: function(data){
       return '<strong>Description:</strong> '+ data;
+    },
+    favicon: function(data){
+      return '<strong>Favicon:</strong> <img src="'+ location.origin +'/cfs/files/images/'+ data +'" width="24">';
+    },
+    logo: function(data){
+      return '<strong>Logo:</strong> <img src="'+ location.origin +'/cfs/files/images/'+ data +'" width="200">';
     }
   }
 }

@@ -47,6 +47,27 @@ blogs.attachSchema(new SimpleSchema({
     },
     optional: true
   },
+  file: {
+    type: String,
+    label: 'File',
+    autoform: {
+      afFieldInput: {
+        type: 'fileUpload',
+        collection: 'Files',
+        //accept: 'image/*',
+        label: 'Choose a file',
+        //previewTemplate: 'filePreview',
+        selectFileBtnTemplate: 'fileButtonSelect',
+        removeFileBtnTemplate: 'fileButtonRemove',
+        onBeforeInsert: function(fileObj) {
+
+        },
+        onAfterInsert: function(err, fileObj) {
+        }
+      }
+    },
+    optional: true
+  },
   category: {
     type: String,
     label: "Category",
