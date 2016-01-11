@@ -3,7 +3,8 @@ A simple solution to manage contents. You can easly list your data in a table, u
 ```js
 meteor add guncebektas:autocms
 ```
-<a href="https://www.youtube.com/embed/uo1ju2qzL90">Click here to watch what you can do with the package</a>
+<p><a href="https://www.youtube.com/embed/uo1ju2qzL90">Click here to watch what you can do with the package</a></p>
+<p><a href="http://menka-beta2.meteor.com/">A live example of a blog with authentication and seo options</a></p>
 
 <h2>How to</h2>
 <h4>Routes</h4>
