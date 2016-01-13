@@ -7,8 +7,8 @@ profiles.attachSchema(new SimpleSchema({
     type: "select2",
     autoform: {
       options: function () {
+        console.log(Meteor.users.find());
         return Meteor.users.find().map(function (u) {
-          //console.log(users);
           return {label: u.profile.email, value: u._id};
         });
       }
@@ -162,10 +162,15 @@ profiles.autoCms = {
       //return Meteor.users.findOne(data).emails[0].address;
     },
     profile: function(data){
-      return '<img src="'+ location.origin +'/cfs/files/images/'+ data.picture +'" width="24"> '+data.name+' '+data.surname;
+      var picture = '';
+
+      if (!_.isUndefined(data.picture))
+        picture = '<img src="'+ location.origin +'/cfs/files/images/'+ data.picture +'" width="24">';
+
+      return picture+' '+data.name+' '+data.surname;
     },
     type: {
-
+      
     }
   }
 }

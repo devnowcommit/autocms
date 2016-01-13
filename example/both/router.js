@@ -30,8 +30,6 @@ adminPrivateFlowRouter = privateFlowRouter.group({
   triggersEnter: [ 
     function() {
       // If user is not authenticated redirect to homepage
-      console.log(Meteor.userId());
-      console.log(Roles.userIsInRole(Meteor.userId(), 'admin', 'default-group'));
       if (Roles.userIsInRole(Meteor.userId(), 'admin', 'default-group')) {
         console.log('Authenticated user');   
       } else {

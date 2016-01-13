@@ -11,3 +11,4 @@ Meteor.subscribe("profiles");
 Meteor.subscribe('roles');
 Meteor.subscribe("settings");
 Meteor.subscribe("slides");
+Meteor.subscribe("userList");

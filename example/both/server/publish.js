@@ -28,13 +28,18 @@ Meteor.publish('portfolios', function(){
 Meteor.publish('profiles', function(){
 	return profiles.find()
 });
+/*
 Meteor.publish('roles', function(){
 	return roles.find()
 });
+*/
 Meteor.publish('settings', function(){
 	return settings.find()
 });
 Meteor.publish('slides', function(){
 	return slides.find()
+});
+Meteor.publish('userList', function (){ 
+  return Meteor.users.find();
 });
 
