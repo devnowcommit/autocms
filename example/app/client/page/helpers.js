@@ -1,12 +1,19 @@
 /* When Created */
 Template.pageItem.onCreated(function() {
-  page = pages.findOne(FlowRouter.getParam("id"));
-  console.log(page);
-  /*
-  seo.set({
-    title: page.title
+  var self = this;
+
+  self.autorun(function () {
+    self.subscribe("pages", function(){
+      Tracker.autorun(function(){
+        var page = pages.findOne(FlowRouter.getParam("id"));
+        
+        seo.set({
+			    title: page.title
+			  });
+
+      });
+    });
   });
-	*/
 });
 
 /* Helpers */

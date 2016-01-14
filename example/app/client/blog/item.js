@@ -1,14 +1,25 @@
 /* When Created */
 Template.blogItem.onCreated(function() {
-  blog = blogs.findOne(FlowRouter.getParam("id"));
-  seo.set({
-    title: blog.title
+  var self = this;
+
+  self.autorun(function () {
+    self.subscribe("blogs", function(){
+      Tracker.autorun(function(){
+        var blog = blogs.findOne(FlowRouter.getParam("id"));
+        
+        seo.set({
+			    title: blog.title
+			  });
+
+      });
+    });
   });
 });
+
 /* Helpers */
 Template.blogItem.helpers({
 	'item' : function() {
-	  return blogs.findOne(FlowRouter.getParam("id"));
+		return blogs.findOne(FlowRouter.getParam("id"));
 	},
 	'picture': function () {
 		return location.origin+'/cfs/files/images/'+ this.picture;
