@@ -56,7 +56,7 @@ settings.attachSchema(new SimpleSchema({
       }
     },
     optional: true
-  },
+  }/*,
   createdBy: {
     type: String,
     autoform: {
@@ -64,9 +64,9 @@ settings.attachSchema(new SimpleSchema({
         label: false
     },
     autoValue: function () { 
-      return Meteor.userId() 
+      return Meteor.userId(); 
     }
-  }
+  }*/
 }));
 // Define rules for autoCms
 settings.autoCms = {
