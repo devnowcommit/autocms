@@ -28,8 +28,9 @@ comments.attachSchema(new SimpleSchema({
         label: false
     },
     autoValue: function () { 
-      return Meteor.userId() 
-    }
+      return this.userId;
+    },
+    optional: true
   },
   createdAt: {
     type: Number,

@@ -11,7 +11,8 @@ Meteor.startup(function () {
         "title" : "CMS for Meteor.js",
         "description" : "Menka is a tiny but powerful CMS",
         "logo" : "gyg",
-        "favicon" : "mmoıkj"
+        "favicon" : "mmoıkj",
+        "createdBy" : "",
       });
     //}
   }

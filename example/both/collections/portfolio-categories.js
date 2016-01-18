@@ -23,8 +23,9 @@ portfoliocategories.attachSchema(new SimpleSchema({
         label: false
     },
     autoValue: function () { 
-      return Meteor.userId() 
-    }
+      return this.userId; 
+    },
+    optional: true
   }
 }));
 // Define rules for autoCms

@@ -1,7 +1,6 @@
 <template name="home">
 	<div align="center">
-		<div class="col-md-12">
-			<h1>This app is ready to start.</h1>
+		<div class="row">
 			{{> homeSlides}}
 		</div>
 		<div class="row">
@@ -11,9 +10,39 @@
 			{{> homeBlogs}}
 		</div>
 	</div>
-	<h1>Use these</h1>
-	<p>admin@admin.com | password</p>
-	<p>user@user.com | pasword</p>
+
+	<div class="col-md-12 jumbotron">
+		<h3>This app is designed to show features of autoCms.</h3>
+		<p>An opensource and a free solution for your Meteor project</p>
+		<ul>
+			<li>First of all, autoCms is a simple but powerful tool which can manage every kind of contents. In this example,
+				<ul>
+					<li>You will see the beta version of autoCms</li>
+					<li>You will be able to manage navigation bar</li>
+					<li>You can create extra pages, blog posts, portfolio items, slides</li>
+					<li>You can manage comments for each blog post</li> 
+					<li>autoCms doesn't have a dependancy over any front-end. Thus, the example seems ugly :)</li>
+				</ul>
+			</li>
+			<li>Secondly it's a good example of a scoffolding</li>
+			<li>Maintaining and Scaling won't be a problem with autoCms</li>
+		</ul>
+		<h3>Installation</h3>
+		<ul>
+			<li>Create your project with "meteor create" command</li>
+			<li>Delete everything in your project</li>
+			<li>Download content in the example folder <a href="https://github.com/guncebektas/autocms">click here</a></li>
+			<li>Start your project with "meteor" command</li>
+			<li>Everything will be installed on startup</li>
+			<li>Create an accout
+				<ul>
+					<li>First user will have all privilages of the admin account</li>
+					<li>In this example, I used "admin@admin.com" as email and "password" for the password of admin</li>
+					<li>You can use whatever you want for your own project</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
 </template>
 
 <template name="homeSlides">

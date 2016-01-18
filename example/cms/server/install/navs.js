@@ -60,6 +60,13 @@ Meteor.startup(function () {
       {
         "prefix" : "cms",
         "type" : "internal",
+        "href" : "slides/list",
+        "target" : "_self",
+        "text" : "Slides"
+      },
+      {
+        "prefix" : "cms",
+        "type" : "internal",
         "href" : "portfoliocategories/list",
         "target" : "_self",
         "text" : "Portfolio Categories"
@@ -86,6 +93,15 @@ Meteor.startup(function () {
         "target" : "_self",
         "text" : "Our Portfolio"
       }
+      ,
+      {
+        "prefix" : "",
+        "type" : "internal",
+        "href" : "page/GKYA7q5C9H5u9sgGM",
+        "target" : "_self",
+        "text" : "About us"
+      }
+      
     ];
 
     for(var i = 0; i < data.length; i++){
