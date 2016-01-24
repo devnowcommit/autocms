@@ -1,6 +1,7 @@
 autoCmsObject = function(){
 
   function formatRowData() {
+
     // fetch data from collection
     var data = window[collection].find().fetch();
 
@@ -48,17 +49,22 @@ autoCmsObject = function(){
         if (prop) {
 
           // If relation isset, find data from related collection
-          if (_.isFunction(rules.columns[item])) {
-            value = rules.columns[item](prop);          
+          if (_.isFunction(rules.columns[item].data)) {
+            value = rules.columns[item].data(prop);          
           // If there isn't any relation with a collection show data
           } else {
             value = prop;
           }
-        // If prop is undefined set value as ''
+        // If prop is undefined
         } else {
-          value = ''; 
-        }
-        
+          // Set empty value, if value is undefined
+          if (_.isUndefined(rules.columns[item].value))
+            value = '';
+          // Otherwise set the id
+          else
+            value =  data[i]._id;
+        }     
+
         // Change value by type, for now only images
         if (!_.isUndefined(rules.columns[item].type) && rules.columns[item].type == 'image') {
           if (value.length > 0) {
@@ -100,6 +106,7 @@ autoCmsObject = function(){
 
     //console.log(objOne);
     //console.log(rowData);
+
     return rowData;
   }
 
@@ -201,7 +208,6 @@ autoCmsObject = function(){
     catch(e){
       //console.log(e); //Log the error
     }
-
     return '<a href="javascript:void(0);" class="extra" data-id="'+data+'">Extra</a>';
   }
 

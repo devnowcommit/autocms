@@ -1,5 +1,4 @@
 <template name="autoCms">
-	<!-- initialize autoCms -->
 	{{#if autoCmsNavButtons }}
 		<div class="row">
 			<div class="col-md-12 text-right">
@@ -13,6 +12,10 @@
 	
 	<!-- is autoCmsForm in use -->
 	{{#if autoCmsForm }}
+
+		<!-- autoForm hooks onSuccess / onError -->
+		{{> flashMessages}}
+
 		<!-- if true, show autoForm -->
 		{{> quickForm collection=collection doc=data id=formId type=formType buttonContent=formButton}}
 
@@ -28,25 +31,19 @@
 		<h1>{{title}}</h1>
 		{{/if}}
 		
+		<!-- Default message -->
+		{{> flashMessages}}
+		
 		{{#if wrapperType}}
-			<table class="{{wrapperClass}}">
+			<table id="auto-cms-datatable" class="{{wrapperClass}} table table-striped dt-responsive nowrap" cellspacing="0" width="100%">
 	      <thead>
 	        <tr>
-	        	<!--
-	        	{{#if autoCmsNo}}
-	          <th>No.</th>
-	          {{/if}}
-						-->
+	        	
 	          {{#each tableHead}}
 						<th>{{this}}</th>
 					  {{/each}}
 
-					  <!--
-					  {{#if autoCmsActionButtons}}
-			  		<th>Actions</th>
-			  		{{/if}}
-			  		-->
-	        </tr>
+					</tr>
 	      </thead>
 	      <tbody>
 

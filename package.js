@@ -10,7 +10,7 @@
 */
 Package.describe({
   name: 'guncebektas:autocms',
-  version: '1.0.3',
+  version: '1.0.5',
   // Brief, one-line summary of the package.
   summary: 'AutoCms is a simple solution to manage contents',
   // URL to the Git repository containing the source code for this package.
@@ -34,9 +34,11 @@ Package.onUse(function(api) {
     'aldeed:simple-schema@1.3.3',
     'aldeed:delete-button@1.0.0',
     'cfs:standard-packages@0.5.3',
+    'cfs:filesystem@=0.1.2',
     'cfs:gridfs@=0.0.27',
-    'yogiben:autoform-file@0.3.0',
-    'mpowaga:autoform-summernote@0.4.2'
+    'yogiben:autoform-file@0.4.2',
+    'mpowaga:autoform-summernote@0.4.2',
+    'mrt:flash-messages@1.0.1'
   ]);
 
   // set dependencies
@@ -46,7 +48,8 @@ Package.onUse(function(api) {
   api.use([
     'kadira:flow-router@2.7.0',
     'kadira:blaze-layout@2.2.0',
-    'arillo:flow-router-helpers@0.4.6'
+    'arillo:flow-router-helpers@0.4.6',
+    'mrt:flash-messages@1.0.1'
   ], 'client', {weak: false, unordered: false});
   
   api.use([
@@ -57,8 +60,9 @@ Package.onUse(function(api) {
     'aldeed:simple-schema@1.3.3',
     'aldeed:delete-button@1.0.0',
     'cfs:standard-packages@0.5.3',
+    'cfs:filesystem@=0.1.2',
     'cfs:gridfs@=0.0.27',
-    'yogiben:autoform-file@0.3.0',
+    'yogiben:autoform-file@0.4.2',
     'mpowaga:autoform-summernote@0.4.2'
   ], ['client','server'], {weak: false, unordered: false});
   
@@ -66,11 +70,19 @@ Package.onUse(function(api) {
 
   // add files
   api.addFiles([
+    // html files
     'templates/fileUploadSystem.html',
     'templates/autoCms.html',
+    // plugins 
+    //'plugins/datatables/datatables.css',
+    //'plugins/datatables/jquery.dataTables.min.js',
+    //'plugins/datatables/dataTables.responsive.min.js',
+    //'plugins/datatables/dataTables.bootstrap.min.js',
+    // core files
     'methods.js',
     'helpers.js', 
-    'events.js'
+    'events.js',
+    'hooks.js'
   ], 'client');
 });
 

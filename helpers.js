@@ -1,16 +1,21 @@
 Template.autoCms.onCreated(function(){
   // global variables & configs for autoCms
-  collection = FlowRouter.getParam("collection");
-  
-  func = FlowRouter.getParam("function");
-  
-  id = FlowRouter.getParam("id");
+  //Tracker.autorun(function(){
+    collection = FlowRouter.getParam("collection");
+    func = FlowRouter.getParam("function");
+    id = FlowRouter.getParam("id");
 
-  if (!_.isUndefined(rules = window[collection].autoCms))
+    //console.log(collection);
+  //});
+  
+  // Define rule sets
+  if (!_.isUndefined(window[collection].autoCms)) {
     rules = window[collection].autoCms;
-  else
+  } else {
     rules = window[collection].autoOne;
-
+  }
+  //console.log(rules);
+  
   // Set default options for Navigation Buttons
   showNavButtons = true;
   // navButtonInsert
@@ -37,10 +42,11 @@ Template.autoCms.onCreated(function(){
   }
   
   // dataType
-  dataType = 'table'
-  if (!_.isUndefined(dataType))
+  if (_.isUndefined(dataType))
+    dataType = 'table'
+  else
     dataType = rules.type;
-
+  
   // Set default options for Action buttons which are in the last td of every tr
   showActionButtons = true; 
   if (!_.isUndefined(rules.buttons)) {
@@ -64,7 +70,15 @@ Template.autoCms.onCreated(function(){
   showNo = true; 
   if (!_.isUndefined(rules.showNo))
     showNo = rules.showNo;
-  
+
+  // Set a message to the top
+  FlashMessages.clear();
+    
+  if (!_.isUndefined(rules.message)) {
+    if (!_.isUndefined(rules.message.list) && func == 'list') {
+      FlashMessages.sendInfo(rules.message.list, { autoHide: false });
+    }
+  }
 });
 /**
   Defines how autoCms & autoForm will work and returns data 
@@ -218,6 +232,9 @@ Template.autoCms.helpers({
     var result = [];
     // foreach keys format key and push them into result
     keys.forEach(function (item, index) {
+      if (!_.isUndefined(rules.columns[item].label))
+        item = rules.columns[item].label;
+
       result.push(s(item).capitalize().value());
     });
 
@@ -242,6 +259,7 @@ Template.autoCms.helpers({
 
   },
   'allData': function() {
+    //$('#auto-cms-datatable').DataTable();
     return autoCmsObject.formatRowData();
   },
   // condition for remove button in autoform
