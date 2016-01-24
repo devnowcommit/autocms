@@ -1,6 +1,6 @@
 // Public routes
 var publicFlowRouter; 
-publicFlowRouter  = FlowRouter.group({});
+publicFlowRouter  = FlowRouter.group();
 
 // Private routes
 var privateFlowRouter;
