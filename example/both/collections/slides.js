@@ -12,7 +12,8 @@ slides.attachSchema(new SimpleSchema({
   {
     type: String,
     label: "Description",
-    max: 160
+    max: 160,
+    optional: true
   },
   link:
   {
@@ -31,15 +32,14 @@ slides.attachSchema(new SimpleSchema({
         accept: 'image/*',
         label: 'Choose a file',
         previewTemplate: 'filePreview',
-        selectFileBtnTemplate: 'fileButtonSelect',
-        removeFileBtnTemplate: 'fileButtonRemove',
         onBeforeInsert: function(fileObj) {
 
         },
         onAfterInsert: function(err, fileObj) {
         }
       }
-    }
+    },
+    optional: true
   },
   // hide createdBy column
   createdBy: {
@@ -49,8 +49,9 @@ slides.attachSchema(new SimpleSchema({
         label: false
     },
     autoValue: function () { 
-      return Meteor.userId() 
-    }
+      return this.userId;
+    },
+    optional: true
   }
 }));
 // Define rules for autoCms

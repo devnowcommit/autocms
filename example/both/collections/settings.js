@@ -25,8 +25,6 @@ settings.attachSchema(new SimpleSchema({
         accept: 'image/*',
         label: 'Choose a file',
         previewTemplate: 'filePreview',
-        selectFileBtnTemplate: 'fileButtonSelect',
-        removeFileBtnTemplate: 'fileButtonRemove',
         onBeforeInsert: function(fileObj) {
 
         },
@@ -46,8 +44,6 @@ settings.attachSchema(new SimpleSchema({
         accept: 'image/*',
         label: 'Choose a file',
         previewTemplate: 'filePreview',
-        selectFileBtnTemplate: 'fileButtonSelect',
-        removeFileBtnTemplate: 'fileButtonRemove',
         onBeforeInsert: function(fileObj) {
 
         },
@@ -102,17 +98,29 @@ settings.autoCms = {
   },
   showNo: false,  // default true
   columns: {
-    title: function(data){
-      return '<strong>Title:</strong> '+ data;
+    title: {
+      label: 'Title',
+      data: function(data){
+        return '<strong>Title:</strong> '+ data;
+      }
     },
-    description: function(data){
-      return '<strong>Description:</strong> '+ data;
+    description:  {
+      label: 'Description',
+      data: function(data){
+        return '<strong>Description:</strong> '+ data;
+      }
     },
-    favicon: function(data){
-      return '<strong>Favicon:</strong> <img src="'+ location.origin +'/cfs/files/images/'+ data +'" width="24">';
+    favicon:  {
+      label: 'Favicon',
+      data: function(data){
+        return '<strong>Favicon:</strong> <img src="'+ location.origin +'/cfs/files/images/'+ data +'" width="24">';
+      }
     },
-    logo: function(data){
-      return '<strong>Logo:</strong> <img src="'+ location.origin +'/cfs/files/images/'+ data +'" width="200">';
+    logo:  {
+      label: 'Logo',
+      data: function(data){
+        return '<strong>Logo:</strong> <img src="'+ location.origin +'/cfs/files/images/'+ data +'" width="200">';
+      }
     }
   }
 }

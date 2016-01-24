@@ -51,8 +51,9 @@ navs.attachSchema(new SimpleSchema({
   {
     type: String,
     label: "Target",
+    //placeholder: "To prevent refreshes in rendering leave it empty. You may use _self for items in CMS",
     max: 20,
-    defaultValue: "_self",
+    //defaultValue: "_self",
     optional: true
   },
   text:
@@ -70,6 +71,11 @@ navs.autoCms = {
     class: 'table table-hover'
   },
   title: 'Navigations',
+  message: {
+    list: 'You can add navigation items into nav-bar.',
+    //success: 'Success: Everything is completed.',
+    //error: 'Error: Something went wrong, please try again.',
+  },
   buttons: {
     edit: {
       label: '<i class="fa fa-pencil-square-o" alt="Edit"></i> Edit',
@@ -99,7 +105,10 @@ navs.autoCms = {
   showNo: true,  // default true
   columns: {
     prefix: {
-
+      label: "Prefix of item",
+      data: function(data) {
+        return data;
+      }
     },
     type: {
 
@@ -111,8 +120,13 @@ navs.autoCms = {
 
     },
     text: {
-
-    }
+      
+    }/*,
+    extra: {
+      value: function(id) {
+        return id;
+      }
+    }*/
   }
 }
 

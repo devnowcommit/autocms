@@ -30,8 +30,6 @@ portfolios.attachSchema(new SimpleSchema({
         accept: 'image/*',
         label: 'Choose a file',
         previewTemplate: 'filePreview',
-        selectFileBtnTemplate: 'fileButtonSelect',
-        removeFileBtnTemplate: 'fileButtonRemove',
         onBeforeInsert: function(fileObj) {
 
         },
@@ -51,8 +49,6 @@ portfolios.attachSchema(new SimpleSchema({
         accept: 'image/*',
         label: 'Choose a file',
         previewTemplate: 'filePreview',
-        selectFileBtnTemplate: 'fileButtonSelect',
-        removeFileBtnTemplate: 'fileButtonRemove',
         onBeforeInsert: function(fileObj) {
 
         },
@@ -72,8 +68,6 @@ portfolios.attachSchema(new SimpleSchema({
         accept: 'image/*',
         label: 'Choose a file',
         previewTemplate: 'filePreview',
-        selectFileBtnTemplate: 'fileButtonSelect',
-        removeFileBtnTemplate: 'fileButtonRemove',
         onBeforeInsert: function(fileObj) {
 
         },

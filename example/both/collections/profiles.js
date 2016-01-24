@@ -50,8 +50,6 @@ profiles.attachSchema(new SimpleSchema({
         accept: 'image/*',
         label: 'Choose a file',
         previewTemplate: 'filePreview',
-        selectFileBtnTemplate: 'fileButtonSelect',
-        removeFileBtnTemplate: 'fileButtonRemove',
         onBeforeInsert: function(fileObj) {
 
         },
@@ -159,15 +157,17 @@ profiles.autoCms = {
   columns: {
     userId: function(data){
       return data;
-      //return Meteor.users.findOne(data).emails[0].address;
     },
-    profile: function(data){
-      var picture = '';
+    profile: {
+      label: "User",
+      data: function(data){
+        var picture = '';
 
-      if (!_.isUndefined(data.picture))
-        picture = '<img src="'+ location.origin +'/cfs/files/images/'+ data.picture +'" width="24">';
+        if (!_.isUndefined(data.picture))
+          picture = '<img src="'+ location.origin +'/cfs/files/images/'+ data.picture +'" width="24">';
 
-      return picture+' '+data.name+' '+data.surname;
+        return picture+' '+data.name+' '+data.surname;
+      }
     },
     type: {
       

@@ -34,10 +34,10 @@ blogs.attachSchema(new SimpleSchema({
         type: 'fileUpload',
         collection: 'Images',
         accept: 'image/*',
-        label: 'Choose a file',
+        label: 'Choose a piture',
         previewTemplate: 'filePreview',
-        selectFileBtnTemplate: 'fileButtonSelect',
-        removeFileBtnTemplate: 'fileButtonRemove',
+        //selectFileBtnTemplate: 'fileButtonSelect',
+        //removeFileBtnTemplate: 'fileButtonRemove',
         onBeforeInsert: function(fileObj) {
 
         },
@@ -56,9 +56,6 @@ blogs.attachSchema(new SimpleSchema({
         collection: 'Files',
         //accept: 'image/*',
         label: 'Choose a file',
-        //previewTemplate: 'filePreview',
-        selectFileBtnTemplate: 'fileButtonSelect',
-        removeFileBtnTemplate: 'fileButtonRemove',
         onBeforeInsert: function(fileObj) {
 
         },
@@ -115,6 +112,11 @@ blogs.autoCms = {
     class: 'table table-hover'
   },
   title: 'Blogs',
+  message: {
+    list: 'Default message which will be at the very top. You can use html tags <a href="http://github.com/guncebektas">click here</a>',
+    success: 'Success: Everything is completed.',
+    error: 'Error: Something went wrong, please try again.',
+  },
   buttons: {
     extra: {
       label: '<i class="fa fa-eye" alt="Show"></i> Show',
