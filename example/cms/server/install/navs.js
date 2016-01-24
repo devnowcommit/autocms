@@ -11,7 +11,7 @@ Meteor.startup(function () {
       {
         "prefix" : "cms",
         "type" : "internal",
-        "href" : "settings/list",
+        "href" : "settings/item/M3Mv2K9YkzbsY9fbE",
         "target" : "_self",
         "text" : "Settings"
       },
@@ -83,14 +83,14 @@ Meteor.startup(function () {
         "prefix" : "",
         "type" : "internal",
         "href" : "blog",
-        "target" : "_self",
+        "target" : "",
         "text" : "Blog"
       },
       {
         "prefix" : "",
         "type" : "internal",
         "href" : "our-portfolio",
-        "target" : "_self",
+        "target" : "",
         "text" : "Our Portfolio"
       }
       ,
@@ -98,7 +98,7 @@ Meteor.startup(function () {
         "prefix" : "",
         "type" : "internal",
         "href" : "page/GKYA7q5C9H5u9sgGM",
-        "target" : "_self",
+        "target" : "",
         "text" : "About us"
       }
       
