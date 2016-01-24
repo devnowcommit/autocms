@@ -8,6 +8,7 @@ Meteor.startup(function () {
   
     //for(var i = 0; i < data.length; i++){
       settings.insert({
+        "_id" : "M3Mv2K9YkzbsY9fbE",
         "title" : "CMS for Meteor.js",
         "description" : "Menka is a tiny but powerful CMS",
         "logo" : "gyg",
