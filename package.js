@@ -10,7 +10,7 @@
 */
 Package.describe({
   name: 'guncebektas:autocms',
-  version: '1.0.5',
+  version: '1.0.6',
   // Brief, one-line summary of the package.
   summary: 'AutoCms is a simple solution to manage contents',
   // URL to the Git repository containing the source code for this package.
