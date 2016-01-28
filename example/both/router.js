@@ -73,7 +73,8 @@ publicFlowRouter.route('/blog/:id', {
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
-      content: "blogItem"
+      content: "blogItem",
+      contentEdit: "blogEdit"
     });
   }
 });
@@ -82,7 +83,8 @@ publicFlowRouter.route('/page/:id', {
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
-      content: "pageItem"
+      content: "pageItem",
+      contentEdit: "pageEdit"
     });
   }
 });

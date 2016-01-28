@@ -99,7 +99,7 @@ Meteor.startup(function () {
         "type" : "internal",
         "href" : "page/GKYA7q5C9H5u9sgGM",
         "target" : "",
-        "text" : "About us"
+        "text" : "About Us"
       }
       
     ];

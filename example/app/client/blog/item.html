@@ -1,4 +1,8 @@
 <template name="blogItem">
+	{{#if isInRole 'admin' 'default-group'}}
+    {{> Template.dynamic template=contentEdit}}
+  {{/if}}
+
 	{{#with item }}
 		<img src="{{picture }}" width="200">
 		
@@ -30,5 +34,13 @@
 		{{#each comments }}
 			<li>{{ createdBy }} <small>{{ createdAt }}</small><p>{{ comment }}</p></li>
 		{{/each }}
+	</ul>
+</template>
+<template name="blogEdit">
+	<ul id="cms-item-edit">
+		<li><a href="{{ host}}/cms/blogs/insert" class="btn btn-success"><i class="fa fa-plus"></i> New</a></li>
+		<li><a href="{{ host}}/cms/blogs/list" class="btn btn-info"><i class="fa fa-list"></i> List</a></li>
+		<li><a href="{{ host}}/cms/blogs/item/{{ item}}" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</a></li>
+		<li><a id="cms-item-delete" class="btn btn-danger" data-id="{{ item }}"><i class="fa fa-trash"></i> Delete</a></li>
 	</ul>
 </template>

@@ -91,3 +91,36 @@ Template.blogItemComments.events({
     event.target.comment.value = "";
   }
 });
+/* Edit button */
+Template.blogEdit.helpers({
+	'host' : function() {
+		return location.origin;
+	},
+	'item' : function() {
+		return FlowRouter.getParam("id");
+	}
+});
+Template.blogEdit.events({
+	"click #cms-item-delete": function (event) {
+		// Prevent default browser form submit
+    event.preventDefault();
+
+    swal(
+  		{
+				title: "Are you sure?",
+				text: "You will not be able to recover this action",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: '#DD6B55',
+				confirmButtonText: 'Yes, delete it!',
+				closeOnConfirm: false
+			},
+			function(){
+				blogs.remove($(event.target).data('id'));
+				//comments.remove({ blog : $(event.target).data('id') });
+				swal("Deleted!", "The item has beed deleted!", "success");
+				FlowRouter.go('blog');
+			}
+		);
+	}
+});
