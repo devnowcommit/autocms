@@ -1,16 +1,21 @@
 <template name="portfolios">
-	<h1>Portfolios</h1>
-	{{>portfolioCategories }}
-
-	{{#each items }}
-		<article>
-			<img src="{{ image1 }}" width="100">
-			<img src="{{ image2 }}" width="100">
-			<img src="{{ image3 }}" width="100">
-			<h2>{{ title }}</h2>
-			<p>{{ description }}</p>
-		</article>
-	{{/each }}	
+	<div class="container">
+		<h1>Portfolios</h1>
+	  <div class="col-md-3">
+			{{>portfolioCategories }}
+		</div>
+		<div class="col-md-9">
+			{{#each items }}
+				<article class="col-md-4">
+					<img src="{{ image1 }}" width="100">
+					<img src="{{ image2 }}" width="100">
+					<img src="{{ image3 }}" width="100">
+					<h2>{{ title }}</h2>
+					<p>{{ description }}</p>
+				</article>
+			{{/each }}	
+		</div>
+	</div>
 </template>
 <template name="portfolioCategories">
 	<ul>

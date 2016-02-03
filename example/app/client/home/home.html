@@ -1,0 +1,104 @@
+<template name="home">
+	{{> homeSlides}}
+	<div class="container">
+
+
+		<div align="center">
+			<div class="row">
+				{{> homePortfolios}}
+			</div>
+			<div class="row">
+				{{> homeBlogs}}
+			</div>
+		</div>
+
+
+		<div class="col-md-12 jumbotron">
+			<h3>This app is designed to show features of autoCms.</h3>
+			<p>An opensource and a free solution for your Meteor project</p>
+			<ul>
+				<li>First of all, autoCms is a simple but powerful tool which can manage every kind of contents. In this example,
+					<ul>
+						<li>You will see the beta version of autoCms</li>
+						<li>You will be able to manage navigation bar</li>
+						<li>You can create extra pages, blog posts, portfolio items, slides</li>
+						<li>You can manage comments for each blog post</li> 
+						<li>autoCms doesn't have a dependancy over any front-end. Thus, the example seems ugly :)</li>
+					</ul>
+				</li>
+				<li>Secondly it's a good example of a scoffolding</li>
+				<li>Maintaining and Scaling won't be a problem with autoCms</li>
+			</ul>
+			<h3>Installation</h3>
+			<ul>
+				<li>Create your project with "meteor create" command</li>
+				<li>Delete everything in your project</li>
+				<li>Download content in the example folder <a href="https://github.com/guncebektas/autocms">click here</a></li>
+				<li>Start your project with "meteor" command</li>
+				<li>Everything will be installed on startup</li>
+				<li>Create an accout
+					<ul>
+						<li>First user will have all privilages of the admin account</li>
+						<li>In this example, I used "admin@admin.com" as email and "password" for the password of admin</li>
+						<li>You can use whatever you want for your own project</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+
+	</div>
+</template>
+
+<template name="homeSlides">
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	  <!-- Indicators -->
+	  <ol class="carousel-indicators">
+	    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	    <li data-target="#myCarousel" data-slide-to="1"></li>
+	  </ol>
+	  <div class="carousel-inner">
+	  	{{#each items }}
+	  		<div class="item">
+				  <img src="{{ image }}" alt="{{ title }}" class="img-responsive">
+		      <div class="container">
+		        <div class="carousel-caption">
+		          <h2>{{ title }}</h2>
+		          <p class="hidden-xs">{{{ description }}}</p>
+		          {{#if link}}
+		          <p class="hidden-xs"><a class="btn btn-lg btn-primary" href="{{ link }}" role="button">Learn more</a></p>
+		          {{/if}}
+		        </div>
+		      </div>
+		    </div>
+			{{/each}}
+	  </div>
+	  <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+	  <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+	</div><!-- /.carousel -->
+</template>
+
+<template name="homePortfolios">
+	<h2>Our Portfolio</h2>
+	{{#each items }}
+	  <div class="col-md-4 text-center">
+	    <a href="/our-portfolio">
+	      <img src="{{ image1 }}" alt="" class="img-responsive">
+	      <h4>{{ title }}</h4>
+	      <p>{{ description }}</p>
+	    </a>
+	  </div>		
+	{{/each}}
+</template>
+
+<template name="homeBlogs">
+	{{#each items}}
+	  <div class="col-md-6 text-center">
+	    <a href="/blog/{{_id }}">
+	      <img src="{{ picture }}" alt="" class="img-responsive">
+	      <h4>{{ title }}</h4>
+	      <p>{{ description }}</p>
+	    </a>
+	  </div>		
+	{{/each}}
+</template>

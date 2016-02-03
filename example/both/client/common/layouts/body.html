@@ -20,12 +20,13 @@
   </nav>
 
 
-  <div class="container">
     <!-- {{> yield}} -->
     {{> Template.dynamic template=content}}
 
     {{#if isInRole 'admin' 'default-group'}}
+      <div class="container auto-cms">
       {{> Template.dynamic template=contentCms}}
+      </div>
     {{/if}}
 
 
@@ -46,7 +47,7 @@
     {{> autoOne collection="Players" id="3FE2DmocH38Y3WhLB" field="delete"}}
     </p> 
     -->    
-  </div>
+  
 
   <footer>
     <nav class="navbar navbar-default navbar-fixed-bottom">

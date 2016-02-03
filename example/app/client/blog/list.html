@@ -1,15 +1,22 @@
 <template name="blog">
-	<h1>Blogs</h1>
-	{{#each items }}
-		<article>
-			<img src="{{picture }}" width="200">
-			<h2>{{title }}</h2>
-			<p>{{description }}</p>
-			<p><strong>Author: </strong>{{createdBy }}</p> 
-			<a href="/blog/{{_id }}">Read more</a>
-		</article>
-	{{/each }}	
-	{{>blogCategories }}
+	<div class="container">
+		<h1>Blogs</h1>
+		<div class="col-md-3">
+			{{>blogCategories }}
+		</div>
+		<div class="col-md-9">
+			{{#each items }}
+				<article col-md-12>
+					<img src="{{picture }}" class="img-responsive">
+					<h2>{{title }}</h2>
+					<p>{{description }}</p>
+					<p><strong>Author: </strong>{{createdBy }}</p> 
+					<a href="/blog/{{_id }}">Read more</a>
+				</article>
+				<hr>
+			{{/each }}	
+		</div>
+	</div>
 </template>
 <template name="blogCategories">
 <ul>

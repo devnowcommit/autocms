@@ -15,6 +15,21 @@ settings.attachSchema(new SimpleSchema({
     label: "Description",
     max: 160
   },
+  email: {
+    type: String,
+    label: "E-mail",
+    max: 160
+  },
+  address: {
+    type: String,
+    label: "Address",
+    max: 260
+  },
+  phone: {
+    type: String,
+    label: "Phone",
+    max: 160
+  },
   favicon: {
     type: String,
     label: 'Favicon',
@@ -109,6 +124,15 @@ settings.autoCms = {
       data: function(data){
         return '<strong>Description:</strong> '+ data;
       }
+    },
+    email: {
+      label: "E-mail",
+    },
+    address: {
+      label: "Address",
+    },
+    phone: {
+      label: "Phone",
     },
     favicon:  {
       label: 'Favicon',

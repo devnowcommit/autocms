@@ -2,13 +2,28 @@
 	{{#if isInRole 'admin' 'default-group'}}
     {{> Template.dynamic template=contentEdit}}
   {{/if}}
-	{{#with item }}
-		<img src="{{picture }}" width="200">
-		
-		<h1>{{ title }}</h1>
-		<h3>{{ description }}</h3>
-		<div>{{{ content }}}</div>
-	{{/with }}
+
+  <div class="container">
+  	<div class="col-md-9">
+		{{#with item }}
+			<img src="{{picture }}" class="img-responsive">
+			
+			<h1>{{ title }}</h1>
+			<h3>{{ description }}</h3>
+			<div>{{{ content }}}</div>
+		{{/with }}
+		</div>
+		<div class="col-md-3">
+			{{>pageList}}
+		</div>
+	</div>
+</template>
+<template name="pageList">
+	<ul>
+	{{#each items }}
+		<li><a href="/page/{{_id}}">{{ title }}</a></li>
+	{{/each }}	
+	</ul>
 </template>
 <template name="pageEdit">
 	<ul id="cms-item-edit">

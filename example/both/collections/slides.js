@@ -22,7 +22,7 @@ slides.attachSchema(new SimpleSchema({
     max: 160,
     optional: true
   },
-  image1: {
+  image: {
     type: String,
     label: 'Image',
     autoform: {
@@ -98,7 +98,7 @@ slides.autoCms = {
     link: {
 
     },
-    image1: {
+    image: {
       type: 'image',
       width: 60
     }

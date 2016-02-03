@@ -25,6 +25,11 @@ Template.pageItem.helpers({
 		return location.origin+'/cfs/files/images/'+ this.picture;
 	}
 }); 
+Template.pageList.helpers({
+  'items' : function() {
+    return pages.find();
+  }
+});
 /* Edit button */
 Template.pageEdit.helpers({
   'host' : function() {
@@ -53,7 +58,7 @@ Template.pageEdit.events({
         pages.remove($(event.target).data('id'));
         
         swal("Deleted!", "The item has beed deleted!", "success");
-        FlowRouter.go('blog');
+        FlowRouter.go('home');
       }
     );
   }

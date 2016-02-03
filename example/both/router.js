@@ -97,6 +97,15 @@ publicFlowRouter.route('/about-us', {
     });
   }
 });
+publicFlowRouter.route('/contact', {
+  name: 'contact',
+  action: function() {
+    BlazeLayout.render("main", {
+      nav: 'appNav', 
+      content: "contact"
+    });
+  }
+});
 // cmsCollections
 adminPrivateFlowRouter.route('/cms/:collection/:function', {
   name: 'admin',
