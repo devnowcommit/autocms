@@ -256,11 +256,32 @@ Template.autoCms.helpers({
     } else {
       return '';
     }
-
   },
   'allData': function() {
-    //$('#auto-cms-datatable').DataTable();
     return autoCmsObject.formatRowData();
+  },
+  'allDataId': function (c, index) {
+    if (!_.isUndefined(c)) {
+      var res = c.toString().split(",");
+      return res[index];
+    } else {
+      return '';
+    }
+  },
+  'allDataColumn': function (c, index) {
+    if (!_.isUndefined(c)) {
+      var res = c.toString().split(",");
+      return res[index];
+    } else {
+      return '';
+    }
+  },
+  'allDataEditable': function (c, index) {
+    if (!_.isUndefined(c)) {
+      var res = c.toString().split(",");
+      if (res[index] === "true")
+        return true;
+    }
   },
   // condition for remove button in autoform
   'removeButton' : function () {

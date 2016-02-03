@@ -28,7 +28,9 @@ autoCmsObject = function(){
       // tempData
       var tempData = [];
       var tempDataClass = [];
-            
+      var tempDataId = [];
+      var tempDataEditable = [];
+
       // first step
       if (showNo) {
         // Start with numbering each data
@@ -39,6 +41,9 @@ autoCmsObject = function(){
         tempData.push(no);
         // add an empty class for first element
         tempDataClass[tempData.length - 1] = '';
+
+        tempDataId.push(data[i]._id);
+        tempDataEditable.push(false);
       }
 
       // for each columns setted for collection
@@ -77,6 +82,15 @@ autoCmsObject = function(){
           }
         }      
 
+        tempDataId.push(data[i]._id);
+        
+        /* Is this field editable */
+        if(!_.isUndefined(rules.columns[item].edit) && (rules.columns[item].edit === true)) {
+          tempDataEditable.push(true);
+        } else {
+          tempDataEditable.push(false);
+        }
+        
         // data is formated, push it! 
         tempData.push(value);  
         tempDataClass[tempData.length - 1] = setClassForFiels(rules.columns[item].class, value);       
@@ -91,11 +105,17 @@ autoCmsObject = function(){
         tempData.push(buttonExtra(data[i]._id) +' '+ buttonEdit(data[i]._id) +' '+ buttonDelete(data[i]._id));
         // add an empty class for last element
         tempDataClass[tempData.length - 1] = '';
+
+        tempDataId.push(data[i]._id);
+        tempDataEditable.push(false);
       }
 
       // set a complete object and create the result, push it!
       objAll = {
         data: tempData,
+        dataId: tempDataId,
+        dataColumn: name,
+        dataEditable: tempDataEditable,
         class: tempDataClass,
         extra: buttonExtra(),
         edit: buttonEdit(),
@@ -104,7 +124,7 @@ autoCmsObject = function(){
       rowData.push(objAll);
     }
 
-    //console.log(objOne);
+    //console.log(objAll);
     //console.log(rowData);
 
     return rowData;

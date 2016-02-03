@@ -10,7 +10,7 @@
 */
 Package.describe({
   name: 'guncebektas:autocms',
-  version: '1.0.6',
+  version: '1.1.0',
   // Brief, one-line summary of the package.
   summary: 'AutoCms is a simple solution to manage contents',
   // URL to the Git repository containing the source code for this package.
@@ -25,19 +25,19 @@ Package.onUse(function(api) {
 
   api.imply([
     'underscorestring:underscore.string@3.2.2',
-    'kadira:flow-router@2.7.0',
-    'kadira:blaze-layout@2.2.0',
+    'kadira:flow-router@2.10.0',
+    'kadira:blaze-layout@2.3.0',
     'arillo:flow-router-helpers@0.4.6',
     'aldeed:template-extension@4.0.0',
-    'aldeed:collection2@2.5.0',
-    'aldeed:autoform@5.7.1',
-    'aldeed:simple-schema@1.3.3',
-    'aldeed:delete-button@1.0.0',
-    'cfs:standard-packages@0.5.3',
+    'aldeed:collection2@2.8.0',
+    'aldeed:autoform@5.8.1',
+    'aldeed:simple-schema@1.5.3',
+    'aldeed:delete-button@2.0.0',
+    'cfs:standard-packages@0.5.9',
     'cfs:filesystem@=0.1.2',
-    'cfs:gridfs@=0.0.27',
+    'cfs:gridfs@=0.0.33',
     'yogiben:autoform-file@0.4.2',
-    'mpowaga:autoform-summernote@0.4.2',
+    'mpowaga:autoform-summernote@0.4.3',
     'mrt:flash-messages@1.0.1'
   ]);
 
@@ -46,8 +46,8 @@ Package.onUse(function(api) {
   api.use(['templating', 'jquery'], 'client');
   
   api.use([
-    'kadira:flow-router@2.7.0',
-    'kadira:blaze-layout@2.2.0',
+    'kadira:flow-router@2.10.0',
+    'kadira:blaze-layout@2.3.0',
     'arillo:flow-router-helpers@0.4.6',
     'mrt:flash-messages@1.0.1'
   ], 'client', {weak: false, unordered: false});
@@ -55,15 +55,15 @@ Package.onUse(function(api) {
   api.use([
     'underscorestring:underscore.string@3.2.2',
     'aldeed:template-extension@4.0.0',
-    'aldeed:collection2@2.5.0',
-    'aldeed:autoform@5.7.1',
-    'aldeed:simple-schema@1.3.3',
-    'aldeed:delete-button@1.0.0',
-    'cfs:standard-packages@0.5.3',
+    'aldeed:collection2@2.8.0',
+    'aldeed:autoform@5.8.1',
+    'aldeed:simple-schema@1.5.3',
+    'aldeed:delete-button@2.0.0',
+    'cfs:standard-packages@0.5.9',
     'cfs:filesystem@=0.1.2',
-    'cfs:gridfs@=0.0.27',
+    'cfs:gridfs@=0.0.33',
     'yogiben:autoform-file@0.4.2',
-    'mpowaga:autoform-summernote@0.4.2'
+    'mpowaga:autoform-summernote@0.4.3'
   ], ['client','server'], {weak: false, unordered: false});
   
   //api.export('autoCms');
@@ -78,6 +78,8 @@ Package.onUse(function(api) {
     //'plugins/datatables/jquery.dataTables.min.js',
     //'plugins/datatables/dataTables.responsive.min.js',
     //'plugins/datatables/dataTables.bootstrap.min.js',
+    'plugins/sweetalert/sweetalert.css',
+    'plugins/sweetalert/sweetalert.min.js',
     // core files
     'methods.js',
     'helpers.js', 

@@ -50,7 +50,12 @@
 	      	{{#each allData}}
 	      	<tr>
 	      		{{#each this.data}}
-		      	<td class="{{allClass ../class @index}}">{{{ this }}}</td>
+	      			{{#if allDataEditable ../dataEditable @index}}
+	      				<td class="{{allClass ../class @index}}"><input type="text" class="editable" data-column="{{allDataColumn ../dataColumn @index}}" data-id="{{allDataId ../dataId @index}}" value="{{ this }}"></td>
+	      			{{else}}
+								<td class="{{allClass ../class @index}}">{{{ this }}}</td>
+	      			{{/if}}
+	      			
 		      	{{/each}}
 					</tr>
 	      	{{/each}}
