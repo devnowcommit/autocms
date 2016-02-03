@@ -7,11 +7,6 @@ blogs.attachSchema(new SimpleSchema({
     label: "Title",
     max: 40
   },
-  title2: {
-    type: String,
-    label: "Title",
-    max: 40
-  },
   description: {
     type: String,
     label: "Description",

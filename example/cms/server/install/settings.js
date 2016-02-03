@@ -13,11 +13,10 @@ Meteor.startup(function () {
         "description" : "Menka is a tiny but powerful CMS",
         "email" : "admin@menka.com",
         "phone" : "+905222224444",
-        "address": "",
+        "address": "1234 Street Name, City Name, Istanbul",
         "logo" : "gyg",
         "favicon" : "mmoıkj",
-        "createdBy" : "",
-        
+        "createdBy" : "",     
       });
     //}
   }    
