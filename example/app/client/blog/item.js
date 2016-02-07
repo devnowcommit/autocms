@@ -4,14 +4,14 @@ Template.blogItem.onCreated(function() {
 
   self.autorun(function () {
     self.subscribe("blogs", function(){
-      Tracker.autorun(function(){
+      //Tracker.autorun(function(){
         var blog = blogs.findOne(FlowRouter.getParam("id"));
         
         seo.set({
 			    title: blog.title
 			  });
 
-      });
+      //});
     });
   });
 });

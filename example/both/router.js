@@ -50,15 +50,6 @@ publicFlowRouter.route('/', {
     });
   }
 });
-publicFlowRouter.route('/our-portfolio', {
-  name: 'our-portfolio',
-  action: function() {
-    BlazeLayout.render("main", {
-      nav: 'appNav', 
-      content: "portfolios"
-    });
-  }
-});
 publicFlowRouter.route('/blog', {
   name: 'blog',
   action: function() {
@@ -75,6 +66,34 @@ publicFlowRouter.route('/blog/:id', {
       nav: 'appNav', 
       content: "blogItem",
       contentEdit: "blogEdit"
+    });
+  }
+});
+publicFlowRouter.route('/our-portfolio', {
+  name: 'our-portfolio',
+  action: function() {
+    BlazeLayout.render("main", {
+      nav: 'appNav', 
+      content: "portfolios"
+    });
+  }
+});
+publicFlowRouter.route('/product', {
+  name: 'products',
+  action: function() {
+    BlazeLayout.render("main", {
+      nav: 'appNav', 
+      content: "product"
+    });
+  }
+});
+publicFlowRouter.route('/product/:id', {
+  name: 'products',
+  action: function() {
+    BlazeLayout.render("main", {
+      nav: 'appNav', 
+      content: "productsItem",
+      contentEdit: "productsEdit"
     });
   }
 });

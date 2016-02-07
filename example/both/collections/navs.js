@@ -62,6 +62,15 @@ navs.attachSchema(new SimpleSchema({
     label: "Text",
     max: 30,
     optional: true
+  },
+  sort:
+  {
+    type: Number,
+    autoform: {
+        type: "hidden",
+        label: false
+    },
+    optional: true
   }
 }));
 // Define rules for autoCms
@@ -117,11 +126,15 @@ navs.autoCms = {
 
     },
     target: {
-
+      edit: true
     },
     text: {
       
-    }/*,
+    },
+    sort: {
+      edit: true
+    }
+    /*,
     extra: {
       value: function(id) {
         return id;

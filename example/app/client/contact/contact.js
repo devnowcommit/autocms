@@ -1,3 +1,8 @@
+Template.blog.onCreated(function() {
+  seo.set({
+    title: 'Contact us'
+  });
+});
 /* Helpers */
 Template.contact.helpers({
 	'item' : function() {

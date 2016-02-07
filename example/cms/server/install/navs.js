@@ -12,71 +12,85 @@ Meteor.startup(function () {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "settings/item/M3Mv2K9YkzbsY9fbE",
-        "target" : "_self",
+        "target" : "",
         "text" : "Settings"
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "navs/list",
-        "target" : "_self",
+        "target" : "",
         "text" : "Navigations"
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "profiles/list",
-        "target" : "_self",
+        "target" : "",
         "text" : "User Profiles"
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "pages/list",
-        "target" : "_self",
+        "target" : "",
         "text" : "Pages"
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "blogcategories/list",
-        "target" : "_self",
+        "target" : "",
         "text" : "Blog Categories"
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "blogs/list",
-        "target" : "_self",
+        "target" : "",
         "text" : "Blogs"
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "comments/list",
-        "target" : "_self",
+        "target" : "",
         "text" : "Comments"
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "slides/list",
-        "target" : "_self",
+        "target" : "",
         "text" : "Slides"
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "portfoliocategories/list",
-        "target" : "_self",
+        "target" : "",
         "text" : "Portfolio Categories"
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "portfolios/list",
-        "target" : "_self",
+        "target" : "",
         "text" : "Portfolios"
+      },
+      {
+        "prefix" : "cms",
+        "type" : "internal",
+        "href" : "productcategories/list",
+        "target" : "",
+        "text" : "Product Categories"
+      },
+      {
+        "prefix" : "cms",
+        "type" : "internal",
+        "href" : "products/list",
+        "target" : "",
+        "text" : "Products"
       },
       // APP
       {
@@ -92,8 +106,14 @@ Meteor.startup(function () {
         "href" : "our-portfolio",
         "target" : "",
         "text" : "Our Portfolio"
-      }
-      ,
+      },
+      {
+        "prefix" : "",
+        "type" : "internal",
+        "href" : "products",
+        "target" : "",
+        "text" : "Products"
+      },
       {
         "prefix" : "",
         "type" : "internal",

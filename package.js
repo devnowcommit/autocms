@@ -10,7 +10,7 @@
 */
 Package.describe({
   name: 'guncebektas:autocms',
-  version: '1.1.0',
+  version: '1.1.1',
   // Brief, one-line summary of the package.
   summary: 'AutoCms is a simple solution to manage contents',
   // URL to the Git repository containing the source code for this package.
@@ -74,12 +74,18 @@ Package.onUse(function(api) {
     'templates/fileUploadSystem.html',
     'templates/autoCms.html',
     // plugins 
-    //'plugins/datatables/datatables.css',
-    //'plugins/datatables/jquery.dataTables.min.js',
-    //'plugins/datatables/dataTables.responsive.min.js',
-    //'plugins/datatables/dataTables.bootstrap.min.js',
     'plugins/sweetalert/sweetalert.css',
     'plugins/sweetalert/sweetalert.min.js',
+
+
+    //'plugins/datatables/jquery-ui.js',
+    //'plugins/datatables/datatables.css',
+    //'plugins/datatables/jquery.dataTables.min.js',
+    //'plugins/datatables/jquery.dataTables.rowReordering.js',
+    //'plugins/datatables/dataTables.responsive.min.js',
+    //'plugins/datatables/dataTables.bootstrap.min.js',
+
+
     // core files
     'methods.js',
     'helpers.js', 

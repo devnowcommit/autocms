@@ -2,11 +2,14 @@ autoCmsObject = function(){
 
   function formatRowData() {
 
+    // gather rules
+    rules = window[Session.get('autocms-collection')].autoCms;
+    
     // fetch data from collection
-    var data = window[collection].find().fetch();
-
+    var data = window[Session.get('autocms-collection')].find({}, {sort: {sort: -1}}).fetch();
+    
     var keys = [];
-    for (var key in rules.columns) {
+    for (var key in Session.get('autocms-rules').columns) {
         keys.push(key);
     }
     
@@ -49,17 +52,16 @@ autoCmsObject = function(){
       // for each columns setted for collection
       keys.forEach(function (item, index) {
         var prop = data[i][item];
-
-        // If prop isset, check for relation
+        
         if (prop) {
-
           // If relation isset, find data from related collection
           if (_.isFunction(rules.columns[item].data)) {
-            value = rules.columns[item].data(prop);          
+            value = rules.columns[item].data(prop);  
           // If there isn't any relation with a collection show data
           } else {
             value = prop;
           }
+
         // If prop is undefined
         } else {
           // Set empty value, if value is undefined
@@ -81,7 +83,6 @@ autoCmsObject = function(){
             value = '<img src="'+location.origin+'/cfs/files/images/'+value+'" width="'+width+'"/>';
           }
         }      
-
         tempDataId.push(data[i]._id);
         
         /* Is this field editable */
@@ -98,7 +99,7 @@ autoCmsObject = function(){
       // end of foreach
       
       // last step 
-      if (showActionButtons) {
+      if (Session.get('autocms-show-action-buttons')) {
         // add to end
         name.push('buttons');
         // create edit and delete buttons
@@ -152,18 +153,9 @@ autoCmsObject = function(){
   }
   // Edit button
   function buttonEdit(data) {
-    if (_.isUndefined(rules.buttons))
-      return '<a href="/cms/'+collection+'/item/'+data+'" class="edit" target="_self">Edit</a>';
-
     try{
-      // Set '' if not defined
-      if (!rules.buttons.edit.class)
-        rules.buttons.edit.class = '';
-      if (!rules.buttons.edit.label)
-        rules.buttons.edit.label = '';
-      
-      if (rules.buttons.edit.auth()) {
-        return '<a href="/cms/'+collection+'/item/'+data+'" class="edit '+rules.buttons.edit.class+'" target="_self">'+ buttonLabel(rules.buttons.edit.label, 'Edit') +'</a>';
+      if (Session.get('autocms-buttons-edit-auth')) {
+        return '<a href="/cms/'+Session.get('autocms-collection')+'/item/'+data+'" class="edit '+Session.get('autocms-buttons-edit-class')+'">'+ buttonLabel(Session.get('autocms-buttons-edit-label'), 'Edit') +'</a>';
       } else {
         return '';
       }
@@ -171,22 +163,13 @@ autoCmsObject = function(){
     catch(e){
       //console.log(e); //Log the error
     }
-    return '<a href="/cms/'+collection+'/item/'+data+'" class="edit" target="_self">Edit</a>'; 
+    return '<a href="/cms/'+Session.get('autocms-collection')+'/item/'+data+'" class="edit '+Session.get('autocms-buttons-edit-class')+'">Edit</a>'; 
   }
   // Delete button
   function buttonDelete(data) {
-    if (_.isUndefined(rules.buttons))
-      return '<a href="javascript:void(0);" class="remove" data-id="'+data+'">Delete</a>';
-
     try{
-      // Set '' if not defined
-      if (!rules.buttons.delete.class)
-        rules.buttons.delete.class = '';
-      if (!rules.buttons.delete.label)
-        rules.buttons.delete.label = '';
-
-      if (rules.buttons.delete.auth()) {
-        return '<a href="javascript:void(0);" class="remove '+rules.buttons.delete.class+'" data-id="'+data+'">'+ buttonLabel(rules.buttons.delete.label, 'Delete') +'</a>';
+      if (Session.get('autocms-buttons-delete-auth')) {
+        return '<a href="javascript:void(0);" class="remove '+Session.get('autocms-buttons-delete-class')+'" data-id="'+data+'">'+ buttonLabel(Session.get('autocms-buttons-delete-label'), 'Delete') +'</a>';
       } else {
         return '';
       }  
@@ -197,30 +180,15 @@ autoCmsObject = function(){
     return '<a href="javascript:void(0);" class="remove" data-id="'+data+'">Delete</a>'; 
   }
   // Extra button
-  function buttonExtra(data) {
-    try {
-      if (_.isUndefined(rules.buttons.extra))
-        return '';
-    }
-    catch(e) {
-      return '';
-    }
-
+  function buttonExtra(data) {    
     try{
-      // Set '' if not defined
-      if (!rules.buttons.extra.class)
-        rules.buttons.extra.class = '';
-      if (!rules.buttons.extra.label)
-        rules.buttons.extra.label = '';
-
-      if (rules.buttons.extra.auth()) {
-
-        if (!_.isUndefined(rules.buttons.extra.href()))
+      if (Session.get('autocms-buttons-extra-auth')) {
+        if (Session.get('autocms-buttons-extra-href'))
           link = rules.buttons.extra.href(data);
         else 
           link = 'javascript:void(0);';
-
-        return '<a href="'+link+'" class="extra '+rules.buttons.extra.class+'" data-id="'+data+'">'+ buttonLabel(rules.buttons.extra.label, 'Extra') +'</a>';
+        
+        return '<a href="'+link+'" class="extra '+Session.get('autocms-buttons-extra-class')+'" data-id="'+data+'">'+ buttonLabel(Session.get('autocms-buttons-extra-label'), 'Extra') +'</a>';
       } else {
         return '';
       }
@@ -228,6 +196,7 @@ autoCmsObject = function(){
     catch(e){
       //console.log(e); //Log the error
     }
+
     return '<a href="javascript:void(0);" class="extra" data-id="'+data+'">Extra</a>';
   }
 

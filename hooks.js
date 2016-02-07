@@ -18,4 +18,4 @@ var autoFormHooksObject = {
   
 };
 
-//AutoForm.addHooks(null, autoFormHooksObject);
+AutoForm.addHooks(null, autoFormHooksObject);

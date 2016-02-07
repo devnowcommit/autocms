@@ -1,6 +1,6 @@
 Template.appNav.helpers({  
 	'items': function() {
-		var items = navs.find({prefix: {$exists: false}}).fetch();
+		var items = navs.find({prefix: {$exists: false}}, {sort: {sort: -1}}).fetch();
 		
 		var itemValues = [];
 		var itemValues = $.map(items, function(el) { return el; })

@@ -1,7 +1,7 @@
 //First of all create Mongo collections
-blogs = new Mongo.Collection('blogs');
+products = new Mongo.Collection('products');
 // Attach schema for autoForm
-blogs.attachSchema(new SimpleSchema({
+products.attachSchema(new SimpleSchema({
   title: {
     type: String,
     label: "Title",
@@ -10,6 +10,11 @@ blogs.attachSchema(new SimpleSchema({
   description: {
     type: String,
     label: "Description",
+    max: 160
+  },
+  description: {
+    type: Number,
+    label: "Price",
     max: 160
   },
   content: {
@@ -47,31 +52,13 @@ blogs.attachSchema(new SimpleSchema({
     },
     optional: true
   },
-  file: {
-    type: String,
-    label: 'File',
-    autoform: {
-      afFieldInput: {
-        type: 'fileUpload',
-        collection: 'Files',
-        //accept: 'image/*',
-        label: 'Choose a file',
-        onBeforeInsert: function(fileObj) {
-
-        },
-        onAfterInsert: function(err, fileObj) {
-        }
-      }
-    },
-    optional: true
-  },
   category: {
     type: String,
     label: "Category",
     type: "select2",
     autoform: {
       options: function () {
-        return blogcategories.find().map(function (p) {
+        return productcategories.find().map(function (p) {
             if (!_.isUndefined(p.description))
               description = p.description;
             else
@@ -106,12 +93,12 @@ blogs.attachSchema(new SimpleSchema({
   }
 }));
 // Define rules for autoCms
-blogs.autoCms = {
+products.autoCms = {
   wrapper: {
     type: 'table',
     class: 'table table-hover'
   },
-  title: 'Blogs',
+  title: 'Products',
   message: {
     list: 'Default message which will be at the very top. You can use html tags <a href="http://github.com/guncebektas">click here</a>',
     success: 'Success: Everything is completed.',
@@ -125,7 +112,7 @@ blogs.autoCms = {
         return true; 
       },
       href: function(data) {
-        return location.origin +'/blog/'+ data;
+        return location.origin+'/product/'+data;
       }
     },
     edit: {
@@ -164,12 +151,15 @@ blogs.autoCms = {
     },
     description: {
 
+    },
+    price: {
+      edit: true
     }
   }
 }
 
 if (Meteor.isServer) {
-  blogs.allow({
+  products.allow({
     insert: function () {
       return true;
     },

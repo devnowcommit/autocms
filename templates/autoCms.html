@@ -12,7 +12,10 @@
 	
 	<!-- is autoCmsForm in use -->
 	{{#if autoCmsForm }}
-
+		{{#if title}}
+		<h1>{{title}}</h1>
+		{{/if}}
+		
 		<!-- autoForm hooks onSuccess / onError -->
 		{{> flashMessages}}
 
@@ -53,7 +56,7 @@
 	      			{{#if allDataEditable ../dataEditable @index}}
 	      				<td class="{{allClass ../class @index}}"><input type="text" class="editable" data-column="{{allDataColumn ../dataColumn @index}}" data-id="{{allDataId ../dataId @index}}" value="{{ this }}"></td>
 	      			{{else}}
-								<td class="{{allClass ../class @index}}">{{{ this }}}</td>
+								<td class="{{allClass ../class @index}}" data-column="{{allDataColumn ../dataColumn @index}}" data-id="{{allDataId ../dataId @index}}">{{{ this }}}</td>
 	      			{{/if}}
 	      			
 		      	{{/each}}

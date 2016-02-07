@@ -155,9 +155,6 @@ profiles.autoCms = {
   },
   showNo: true,  // default true
   columns: {
-    userId: function(data){
-      return data;
-    },
     profile: {
       label: "User",
       data: function(data){

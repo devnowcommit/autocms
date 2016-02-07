@@ -4,14 +4,14 @@ Template.pageItem.onCreated(function() {
 
   self.autorun(function () {
     self.subscribe("pages", function(){
-      Tracker.autorun(function(){
+      //Tracker.autorun(function(){
         var page = pages.findOne(FlowRouter.getParam("id"));
         
         seo.set({
 			    title: page.title
 			  });
 
-      });
+      //});
     });
   });
 });

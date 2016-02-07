@@ -1,3 +1,9 @@
+/* When Created */
+Template.portfolios.onCreated(function() {
+  seo.set({
+    title: 'Our portfolio'
+  });
+});
 Template.portfolios.helpers({
 	'items' : function() {
 	  return portfolios.find();

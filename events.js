@@ -1,11 +1,11 @@
 Template.autoCms.events({
   // before remove action for autoTable
-  'click .remove' : function(event) {
+  'click .remove': function(event) {
   	swal(
   		{
-				title: "Are you sure?",
-				text: "You will not be able to recover this action",
-				type: "warning",
+				title: 'Are you sure?',
+				text: 'You will not be able to recover this action',
+				type: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#DD6B55',
 				confirmButtonText: 'Yes, delete it!',

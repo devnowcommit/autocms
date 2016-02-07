@@ -2,7 +2,7 @@ Template.cmsNav.helpers({
 	'items': function() {
 
 		var prefix = "cms";
-		var items = navs.find({prefix: prefix}).fetch();
+		var items = navs.find({prefix: prefix}, {sort: {sort: -1}}).fetch();
 		
 		var itemValues = [];
 		var itemValues = $.map(items, function(el) { return el; })

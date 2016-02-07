@@ -118,7 +118,7 @@ pages.autoCms = {
       width: 60
     },
     title: {
-      edit: true
+    
     },
     description: {
 
