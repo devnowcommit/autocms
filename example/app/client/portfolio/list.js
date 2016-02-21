@@ -27,7 +27,7 @@ Template.portfolios.helpers({
 		return location.origin+'/cfs/files/images/'+ this.image3;
 	},
 	'category': function () {
-	  return blogcategories.findOne(this.category);
+	  return this.category;
 	},
 	'createdBy': function () {
 		return Meteor.users.findOne(this.createdBy).profile.name;
@@ -35,9 +35,23 @@ Template.portfolios.helpers({
 }); 
 Template.portfolioCategories.helpers({
 	'categories' : function() {
-	  return blogcategories.find({}, {sort: {date: -1, name: 1} });
+	  return portfoliocategories.find({}, {sort: {date: -1, name: 1} });
 	},
 	'title': function () {
 	  return this.title;
 	},
-}); 
+});
+Template.portfolioCategories.events({
+	'click a': function(event) {
+		event.preventDefault();
+
+		if ($(event.target).data('category') == 'all') {
+			$('article').show();
+			$('*[data-category="all"').addClass('hidden');
+		} else {
+			$('article').hide();
+			$('.'+$(event.target).data('category')).show();
+			$('*[data-category="all"').removeClass('hidden');
+		}
+	}
+});

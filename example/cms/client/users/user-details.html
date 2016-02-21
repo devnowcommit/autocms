@@ -1,0 +1,32 @@
+<template name="userDetailsCms">
+	<div class="col-md-3">
+		{{>userProfileCms}}
+	</div>
+	<div class="col-md-9">
+		{{>userBlogsCms}}
+		{{>userCommentsCms}}
+	</div>
+</template>
+<template name="userProfileCms">
+	{{#with item}}
+		{{#with profile}}
+			<img src="{{picture}}">
+			<h3>{{name}} {{surname}}</h3>
+			<p>{{about}}</p>
+		{{/with}}
+	{{/with}}
+</template>
+
+<template name="userBlogsCms">
+	<h4>Blogs</h4>
+	{{#each items}}
+		<p>{{title}} <a href="{{edit}}">Edit</a></p>
+	{{/each}}
+</template>
+
+<template name="userCommentsCms">
+	<h4>Comments</h4>
+	{{#each items}}
+		<p>{{comment}} {{#with blog}} <a href="{{origin}}/cms/blogs/item/{{_id}}">{{title}}</a> {{/with}}<a href="{{edit}}">Edit</a></p>
+	{{/each}}
+</template>

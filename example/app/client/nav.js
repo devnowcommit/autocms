@@ -27,3 +27,9 @@ Template.appNav.helpers({
 		return itemValues;
 	}
 });
+Template.appNav.events({
+	'click li a': function(event) {
+		$('ul.nav.navbar-nav li').removeClass('active');
+		$(event.target).parent().addClass('active');
+	}
+})

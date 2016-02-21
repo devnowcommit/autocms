@@ -5,32 +5,22 @@ SimpleSchema.debug = true;
 settings = new Mongo.Collection('settings');
 // Attach schema for autoForm
 settings.attachSchema(new SimpleSchema({
-  title: {
+  'meta.sitename': {
+    type: String,
+    label: "Name of App",
+    max: 40
+  },
+  'meta.title': {
     type: String,
     label: "Title",
     max: 40
   },
-  description: {
+  'meta.description': {
     type: String,
     label: "Description",
     max: 160
   },
-  email: {
-    type: String,
-    label: "E-mail",
-    max: 160
-  },
-  address: {
-    type: String,
-    label: "Address",
-    max: 260
-  },
-  phone: {
-    type: String,
-    label: "Phone",
-    max: 160
-  },
-  favicon: {
+  'meta.favicon': {
     type: String,
     label: 'Favicon',
     autoform: {
@@ -49,7 +39,7 @@ settings.attachSchema(new SimpleSchema({
     },
     optional: true
   },
-  logo: {
+  'meta.logo': {
     type: String,
     label: 'Logo',
     autoform: {
@@ -68,7 +58,92 @@ settings.attachSchema(new SimpleSchema({
     },
     optional: true
   },
-  createdBy: {
+  'footer.logo': {
+    type: String,
+    label: 'Logo',
+    autoform: {
+      afFieldInput: {
+        type: 'fileUpload',
+        collection: 'Images',
+        accept: 'image/*',
+        label: 'Choose a file',
+        previewTemplate: 'filePreview',
+        onBeforeInsert: function(fileObj) {
+
+        },
+        onAfterInsert: function(err, fileObj) {
+        }
+      }
+    },
+    optional: true
+  },
+  'footer.column1.$.field': {
+    type: String,
+    label: "Field",
+    max: 160,
+    optional: true
+  },
+  'footer.column1.$.link': {
+    type: String,
+    label: "Link",
+    max: 160,
+    optional: true
+  },
+  'footer.column2.$.field': {
+    type: String,
+    label: "Field",
+    max: 160,
+    optional: true
+  },
+  'footer.column2.$.link': {
+    type: String,
+    label: "Link",
+    max: 160,
+    optional: true
+  },
+  'contact.email': {
+    type: String,
+    label: "E-mail",
+    max: 160,
+    optional: true
+  },
+  'contact.address': {
+    type: String,
+    label: "Address",
+    max: 260,
+    optional: true
+  },
+  'contact.phone.$.number': {
+    type: String,
+    label: "Number",
+    max: 160,
+    optional: true
+  },
+  'contact.fax.$.number': {
+    type: String,
+    label: "Number",
+    max: 160,
+    optional: true
+  },
+  'contact.hours.weekdays': {
+    type: String,
+    label: "Monday - Friday",
+    max: 100,
+    optional: true
+  },
+  'contact.hours.saturday': {
+    type: String,
+    label: "Saturday",
+    max: 100,
+    optional: true
+  },
+  'contact.hours.sunday': {
+    type: String,
+    label: "Sunday",
+    max: 100,
+    optional: true
+  },
+  'createdBy': {
     type: String,
     autoform: {
         type: "hidden",

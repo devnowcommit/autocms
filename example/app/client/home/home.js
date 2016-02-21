@@ -47,4 +47,7 @@ Template.homeBlogs.helpers({
 	'picture': function () {
 		return location.origin+'/cfs/files/images/'+ this.picture;
 	},
+	'slug': function () {
+	  return slug(this.title);
+	}
 });

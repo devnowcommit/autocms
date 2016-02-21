@@ -40,19 +40,55 @@ Template.blogItem.helpers({
 			return author.profile.name+' '+author.profile.surname;
 		else
 			return 'Unknown author';
-	},
+	}
 }); 
-Template.blogItemCategories.helpers({
-	'categories' : function() {
-	  return blogcategories.find({}, {sort: {name: 1} })
+
+Template.blogItemLike.helpers({ 
+	'likeAmount': function () {
+		item = blogs.findOne(FlowRouter.getParam("id"));
+		return item.like;
 	},
-	'title': function () {
-	  return this.title;
+	'isLiked': function() {
+		return bloglikes.find({ blog: FlowRouter.getParam("id"), user: Meteor.userId(), like: 1 }).count();
+	}
+});
+Template.blogItemLike.events({
+	'click .like-up': function (event) {
+		console.log('like');
+		
+		isLiked = bloglikes.find({ blog: FlowRouter.getParam("id"), user: Meteor.userId(), like: 0 }).fetch();
+		if (!_.isUndefined(isLiked)) {
+			bloglikes.insert({blog: FlowRouter.getParam("id"), user: Meteor.userId(), like: 1});
+		} else {
+			bloglikes.update(isLiked[0]._id, {$set: {like: 1} });
+		}	
+	
+		// admin boost
+		if (Roles.userIsInRole(Meteor.userId(), 'admin', 'default-group'))
+			blogs.update(FlowRouter.getParam("id"), {$inc: {like: 15}} );
+		else
+			blogs.update(FlowRouter.getParam("id"), {$inc: {like: 1}} );
+		
+	},
+	'click .like-down': function (event) {
+		console.log('dislike');
+		
+		isLiked = bloglikes.find({ blog: FlowRouter.getParam("id"), user: Meteor.userId(), like: 1 }).fetch();
+		bloglikes.update(isLiked[0]._id, {$set: {like: 0} });
+
+		// admin boost
+		if (Roles.userIsInRole(Meteor.userId(), 'admin', 'default-group'))
+			blogs.update(FlowRouter.getParam("id"), {$inc: {like: -15}} );
+		else
+			blogs.update(FlowRouter.getParam("id"), {$inc: {like: -1}} );	
 	},
 });
+
+var subscriptionComments = Meteor.subscribeWithPagination('comments', 2);
+
 Template.blogItemComments.helpers({
 	'comments': function() {
-		return comments.find({blog: FlowRouter.getParam("id")}, {sort: {createdAt: -1}, limit: 3});
+		return comments.sorted(subscriptionComments.loaded(), FlowRouter.getParam("id"));
 	},
 	'comment': function() {
 		return this.comment;
@@ -67,11 +103,17 @@ Template.blogItemComments.helpers({
 	},
 	'createdAt': function() {
 		return formatDate('d.m.Y', new Date(this.createdAt));
-	}
+	},	
+	'loading': function() {
+    return !subscriptionComments.ready();
+  },
+  'hasMore': function() {
+    return comments.sorted(subscriptionComments.loaded(), FlowRouter.getParam("id")).count() == subscriptionComments.limit();
+  }
 });
 /* Events */
 Template.blogItemComments.events({
-  "submit .new-comment": function (event) {
+  'submit .new-comment': function (event) {
     // Prevent default browser form submit
     event.preventDefault();
 
@@ -89,6 +131,16 @@ Template.blogItemComments.events({
 
     // Clear form
     event.target.comment.value = "";
+  },
+  'click .load-more': function (event) {
+    event.preventDefault();
+
+    subscriptionComments.loadNextPage();
+  },
+  'click .hide-more': function (event) {
+    event.preventDefault();
+
+    subscriptionComments.reset();
   }
 });
 /* Edit button */

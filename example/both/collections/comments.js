@@ -1,5 +1,10 @@
 //First of all create Mongo collections
 comments = new Mongo.Collection('comments');
+
+comments.sorted = function(limit, blogId) {
+  return comments.find({blog: blogId}, {sort: {createdAt: -1}, limit: limit});
+};
+
 // Attach schema for autoForm
 comments.attachSchema(new SimpleSchema({
   comment:

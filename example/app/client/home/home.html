@@ -80,21 +80,21 @@
 
 <template name="homePortfolios">
 	<h2>Our Portfolio</h2>
+	<a href="/our-portfolio">
 	{{#each items }}
 	  <div class="col-md-4 text-center">
-	    <a href="/our-portfolio">
 	      <img src="{{ image1 }}" alt="" class="img-responsive">
 	      <h4>{{ title }}</h4>
 	      <p>{{ description }}</p>
-	    </a>
 	  </div>		
 	{{/each}}
+	</a>
 </template>
 
 <template name="homeBlogs">
 	{{#each items}}
 	  <div class="col-md-6 text-center">
-	    <a href="/blog/{{_id }}">
+	    <a href="/blog/{{_id }}/{{ slug }}">
 	      <img src="{{ picture }}" alt="" class="img-responsive">
 	      <h4>{{ title }}</h4>
 	      <p>{{ description }}</p>

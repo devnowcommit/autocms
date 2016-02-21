@@ -37,7 +37,10 @@ tomwasd:flow-router-seo
 
 #aldeed:http
 
-#msavin:mongol
+msavin:mongol
 #chriswessels:slideout
-#conceptmate:backup
 #chroma:reactive-summernote
+
+easy:search
+percolate:paginated-subscription
+#conceptmate:backup

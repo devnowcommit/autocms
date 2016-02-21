@@ -8,7 +8,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/"><i class="fa fa-list"></i> Logo</a>
+          {{#with settings}}
+            {{#with meta}}
+              <a class="navbar-brand" href="/"><img src="/cfs/files/images/{{logo}}" class="pull-left"> {{sitename}}</a>
+            {{/with}}
+          {{/with}}
       </div>
       <div class="collapse navbar-collapse" id="navigationbar">
         <ul class="nav navbar-nav navbar-right">
@@ -50,10 +54,53 @@
   
 
   <footer>
+    {{> Template.dynamic template=footer}}
     <nav class="navbar navbar-default navbar-fixed-bottom">
       <div class="container">
+        <p class="pull-left">Free to use</p>
         <p class="pull-right">Developed with <a href="//meteor.com">Meteor.js</a> & <a href="//getbootstrap.com">Bootstrap</a> by <a href="//guncebektas.com">Gunce Bektas</a></p>
       </div>
     </nav>
   </footer>
+</template>
+
+<template name="appFooter">
+  <div class="footer container">
+    <div class="col-md-2">
+      {{#with settings }}
+        {{#with footer }}
+            <a class="navbar-brand" href="/"><img src="/cfs/files/images/{{logo}}" class="img-responsive"></a>
+        {{/with }}
+      {{/with }}
+    </div>
+    <div class="col-md-3">
+      <ul class="list-unstyled">
+        {{#with settings }}
+          {{#with footer}}
+            {{#each column1}}
+              <li><a href="{{ link }}">{{ field }}</a></li>
+            {{/each}}
+          {{/with }}
+        {{/with }}
+      </ul>
+    </div>
+    <div class="col-md-3">
+      <ul class="list-unstyled">
+        {{#with settings }}
+          {{#with footer}}
+            {{#each column2}}
+              <li><a href="{{ link }}">{{ field }}</a></li>
+            {{/each}}
+          {{/with }}
+        {{/with }}
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <h3>Newsletter</h3>
+      <div class="input-group" role="group" aria-label="...">
+        <input type="text" class="form-control" placeholder="Write your email">
+        <span class="input-group-addon subscribe">Subscribe</span>
+      </div>
+    </div>
+  </div>
 </template>

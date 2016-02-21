@@ -128,6 +128,16 @@ profiles.autoCms = {
   },
   title: 'User Profiles',
   buttons: {
+    extra: {
+      label: '<i class="fa fa-eye" alt="Show"></i> Show',
+      class: 'btn btn-xs btn-success',
+      auth: function() {    // default true
+        return true; 
+      },
+      href: function(data) {
+        return location.origin+'/cms/user-details/'+data;
+      }
+    },
     edit: {
       label: '<i class="fa fa-pencil-square-o" alt="Edit"></i> Edit',
       class: 'btn btn-xs btn-default',

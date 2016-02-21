@@ -46,7 +46,8 @@ publicFlowRouter.route('/', {
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
-      content: "home"
+      content: "home",
+      footer: "appFooter"
     });
   }
 });
@@ -55,17 +56,29 @@ publicFlowRouter.route('/blog', {
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
-      content: "blog"
+      content: "blog",
+      footer: "appFooter"
     });
   }
 });
-publicFlowRouter.route('/blog/:id', {
+publicFlowRouter.route('/blog-category/:id/:text', {
+  name: 'blogByCategory',
+  action: function() {
+    BlazeLayout.render("main", {
+      nav: 'appNav', 
+      content: "blogByCategory",
+      footer: "appFooter"
+    });
+  }
+});
+publicFlowRouter.route('/blog/:id/:text', {
   name: 'blog-item',
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
       content: "blogItem",
-      contentEdit: "blogEdit"
+      contentEdit: "blogEdit",
+      footer: "appFooter"
     });
   }
 });
@@ -74,7 +87,8 @@ publicFlowRouter.route('/our-portfolio', {
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
-      content: "portfolios"
+      content: "portfolios",
+      footer: "appFooter"
     });
   }
 });
@@ -83,7 +97,8 @@ publicFlowRouter.route('/product', {
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
-      content: "product"
+      content: "product",
+      footer: "appFooter"
     });
   }
 });
@@ -93,17 +108,19 @@ publicFlowRouter.route('/product/:id', {
     BlazeLayout.render("main", {
       nav: 'appNav', 
       content: "productsItem",
-      contentEdit: "productsEdit"
+      contentEdit: "productsEdit",
+      footer: "appFooter"
     });
   }
 });
-publicFlowRouter.route('/page/:id', {
+publicFlowRouter.route('/page/:id/:text', {
   name: 'page-item',
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
       content: "pageItem",
-      contentEdit: "pageEdit"
+      contentEdit: "pageEdit",
+      footer: "appFooter"
     });
   }
 });
@@ -112,7 +129,8 @@ publicFlowRouter.route('/about-us', {
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
-      content: "aboutUs"
+      content: "aboutUs",
+      footer: "appFooter"
     });
   }
 });
@@ -121,11 +139,33 @@ publicFlowRouter.route('/contact', {
   action: function() {
     BlazeLayout.render("main", {
       nav: 'appNav', 
-      content: "contact"
+      content: "contact",
+      footer: "appFooter"
     });
   }
 });
-// cmsCollections
+publicFlowRouter.route('/subscribe-remove/:id', {
+  name: 'subscribe-remove',
+  action: function() {
+    BlazeLayout.render("main", {
+      nav: 'appNav', 
+      content: "subscribeRemove",
+      footer: "appFooter"
+    });
+  }
+});
+// user-details
+adminPrivateFlowRouter.route('/cms/user-details/:id', {
+  name: 'admin-user-details',
+  action: function() {
+    BlazeLayout.render("main", {
+      nav: 'appNav', 
+      content: '',
+      contentCms: 'userDetailsCms'
+    });
+  }
+});
+// autoCmsCollections
 adminPrivateFlowRouter.route('/cms/:collection/:function', {
   name: 'admin',
   action: function() {
@@ -143,6 +183,17 @@ adminPrivateFlowRouter.route('/cms/:collection/:function/:id', {
       nav: 'appNav', 
       content: '',
       contentCms: 'autoCms'
+    });
+  }
+});
+// backup
+adminPrivateFlowRouter.route('/cms/backup', {
+  name: 'admin-backup',
+  action: function() {
+    BlazeLayout.render("main", {
+      nav: 'appNav', 
+      content: '',
+      contentCms: 'backupCms'
     });
   }
 });

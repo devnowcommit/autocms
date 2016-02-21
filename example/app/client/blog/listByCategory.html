@@ -1,0 +1,22 @@
+<template name="blogByCategory">
+	<div class="container">
+		<div class="col-md-3">
+			{{>blogCategories }}
+		</div>
+		<div class="col-md-9">
+			{{#each items }}
+				<article col-md-12>
+					<img src="{{picture }}" class="img-responsive">
+					<h2>{{title }}</h2>
+					
+					<strong>{{ likeAmount }}</strong> Likes
+
+					<p>{{description }}</p>
+					<p><strong>Author: </strong>{{createdBy }}</p> 
+					<a href="/blog/{{_id }}/{{slug}}">Read more</a>
+				</article>
+				<hr>
+			{{/each }}	
+		</div>
+	</div>
+</template>

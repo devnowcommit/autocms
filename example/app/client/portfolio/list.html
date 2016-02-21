@@ -1,12 +1,12 @@
 <template name="portfolios">
 	<div class="container">
-		<h1>Portfolios</h1>
-	  <div class="col-md-3">
-			{{>portfolioCategories }}
+		<div class="col-md-3">
+			<h3>Portfolios</h3>
+	  	{{>portfolioCategories }}
 		</div>
 		<div class="col-md-9">
 			{{#each items }}
-				<article class="col-md-4">
+				<article class="col-md-4 {{category}}">
 					<img src="{{ image1 }}" width="100">
 					<img src="{{ image2 }}" width="100">
 					<img src="{{ image3 }}" width="100">
@@ -18,9 +18,12 @@
 	</div>
 </template>
 <template name="portfolioCategories">
-	<ul>
+	<ul class="list-unstyled">
 	{{#each categories }}
-		<li>{{ title }}</li>
+		<li><a href="#" data-category="{{_id}}">{{ title }}</a></li>
 	{{/each }}	
+		<hr>
+		<li><a href="#" data-category="all" class="hidden">SHOW ALL</a></li>
 	</ul>
+
 </template>

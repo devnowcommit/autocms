@@ -1,6 +1,5 @@
 <template name="blog">
 	<div class="container">
-		<h1>Blogs</h1>
 		<div class="col-md-3">
 			{{>blogCategories }}
 		</div>
@@ -9,19 +8,63 @@
 				<article col-md-12>
 					<img src="{{picture }}" class="img-responsive">
 					<h2>{{title }}</h2>
+					
+					<strong>{{ likeAmount }} </strong> Likes
+
 					<p>{{description }}</p>
 					<p><strong>Author: </strong>{{createdBy }}</p> 
-					<a href="/blog/{{_id }}">Read more</a>
+					<a href="/blog/{{_id }}/{{slug}}">Read more</a>
 				</article>
 				<hr>
 			{{/each }}	
+			{{#if loading}}
+		    <p>Loading...</p>
+		  {{else}}
+		    {{#if hasMore}}
+		      <p><button class="btn btn-default load-more">More</button></p>
+		    {{else}}
+		      <p><button class="btn btn-default hide-more">Hide</button></p>
+		    {{/if}}
+		  {{/if}}  
 		</div>
 	</div>
 </template>
 <template name="blogCategories">
-<ul>
-{{#each categories }}
-	<li>{{title }}</li>
-{{/each }}	
-</ul>
+
+	{{>blogSearch}}
+	
+	<h3>Categories</h3>
+	<ul class="list-unstyled">
+	{{#each categories }}
+		<li><a href="/blog-category/{{_id }}/{{slug}}">{{title }}</a></li>
+	{{/each }}	
+	{{#if all}}
+		<hr>
+		<li><a href="/blog">ALL CATEGORIES</a></li>
+	{{/if}}
+	</ul>
+</template>
+<template name="blogSearch">
+	<h3>Search in blogs</h3>
+	<div class="input-group">
+	  {{> EasySearch.Input index=blogsIndex attributes=searchAttributes}}
+		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+	</div>
+  
+	{{#EasySearch.IfInputEmpty index=blogsIndex }}
+		<small>Example: Second post</small>
+  {{else}}
+
+  	{{#EasySearch.IfNoResults index=blogsIndex }}
+	    <small>No results found</small>
+		{{/EasySearch.IfNoResults }}
+		
+    <ul class="list-unstyled">
+	    {{#EasySearch.Each index=blogsIndex }}
+	      <li><a href="/blog/{{_id}}/{{slug}}">{{title}}</a></li>
+	    {{/EasySearch.Each}}
+	  </ul>
+	  
+
+  {{/EasySearch.IfInputEmpty}}
 </template>

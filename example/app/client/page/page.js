@@ -26,8 +26,23 @@ Template.pageItem.helpers({
 	}
 }); 
 Template.pageList.helpers({
-  'items' : function() {
+  'items': function() {
     return pages.find();
+  },
+  'isVisible': function() {
+    if (FlowRouter.getParam("id") != this._id) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  'slug': function() {
+    return slug(this.title);
+  }
+});
+Template.pageList.events({
+  'click a': function() {
+    $('ul.nav.navbar-nav li').removeClass('active');
   }
 });
 /* Edit button */

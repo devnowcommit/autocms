@@ -19,9 +19,12 @@
 	</div>
 </template>
 <template name="pageList">
-	<ul>
+	<h3>Other Pages</h3>
+	<ul class="list-unstyled">
 	{{#each items }}
-		<li><a href="/page/{{_id}}">{{ title }}</a></li>
+		{{#if isVisible }}
+		<li><a href="/page/{{_id}}/{{slug}}">{{ title }}</a></li>
+		{{/if}}
 	{{/each }}	
 	</ul>
 </template>

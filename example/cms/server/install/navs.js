@@ -12,116 +12,116 @@ Meteor.startup(function () {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "settings/item/M3Mv2K9YkzbsY9fbE",
-        "target" : "",
-        "text" : "Settings"
+        "text" : "Settings",
+        "sort" : 199
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "navs/list",
-        "target" : "",
-        "text" : "Navigations"
+        "text" : "Navigations",
+        "sort" : 198
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "profiles/list",
-        "target" : "",
-        "text" : "User Profiles"
+        "text" : "User Profiles",
+        "sort" : 197
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "pages/list",
-        "target" : "",
-        "text" : "Pages"
+        "text" : "Pages",
+        "sort" : 170
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "blogcategories/list",
-        "target" : "",
-        "text" : "Blog Categories"
+        "text" : "Blog Categories",
+        "sort" : 189
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "blogs/list",
-        "target" : "",
-        "text" : "Blogs"
+        "text" : "Blogs",
+        "sort" : 188
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "comments/list",
-        "target" : "",
-        "text" : "Comments"
-      },
-      {
-        "prefix" : "cms",
-        "type" : "internal",
-        "href" : "slides/list",
-        "target" : "",
-        "text" : "Slides"
+        "text" : "Comments",
+        "sort" : 187
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "portfoliocategories/list",
-        "target" : "",
-        "text" : "Portfolio Categories"
+        "text" : "Portfolio Categories",
+        "sort" : 169
       },
       {
         "prefix" : "cms",
         "type" : "internal",
         "href" : "portfolios/list",
-        "target" : "",
-        "text" : "Portfolios"
+        "text" : "Portfolios",
+        "sort" : 168
       },
       {
         "prefix" : "cms",
         "type" : "internal",
-        "href" : "productcategories/list",
-        "target" : "",
-        "text" : "Product Categories"
+        "href" : "slides/list",
+        "text" : "Slides",
+        "sort" : 109
       },
       {
         "prefix" : "cms",
         "type" : "internal",
-        "href" : "products/list",
-        "target" : "",
-        "text" : "Products"
+        "href" : "newsletter/list",
+        "text" : "Newsletter List",
+        "sort" : 100
+      },
+      {
+        "_id" : "mQ3FiESGBhkhFCM6o",
+        "prefix" : "cms",
+        "type" : "internal",
+        "href" : "backup",
+        "text" : "Backup/Restore",
+        "sort" : 99
       },
       // APP
       {
         "prefix" : "",
         "type" : "internal",
         "href" : "blog",
-        "target" : "",
-        "text" : "Blog"
+        "text" : "Blog",
+        "sort" : 4
       },
       {
         "prefix" : "",
         "type" : "internal",
         "href" : "our-portfolio",
-        "target" : "",
-        "text" : "Our Portfolio"
+        "text" : "Our Portfolio",
+        "sort" : 3
       },
       {
         "prefix" : "",
         "type" : "internal",
-        "href" : "products",
-        "target" : "",
-        "text" : "Products"
+        "href" : "page/GKYA7q5C9H5u9sgGM/about-us",
+        "text" : "About Us",
+        "sort" : 2
       },
       {
-        "prefix" : "",
+        "_id" : "psT6nxaDi8td5E5et",
         "type" : "internal",
-        "href" : "page/GKYA7q5C9H5u9sgGM",
-        "target" : "",
-        "text" : "About Us"
+        "href" : "contact",
+        "text" : "Contact",
+        "sort" : 1
       }
-      
     ];
 
     for(var i = 0; i < data.length; i++){

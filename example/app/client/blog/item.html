@@ -4,11 +4,16 @@
   {{/if}}
 
   <div class="container">
-	  <div class="col-md-8">
+	  <div class="col-md-8 blog-item">
 			{{#with item }}
 				<img src="{{picture }}" class="img-responsive">
 				
 				<h1>{{ title }} / {{ category }}</h1>
+
+				{{#if currentUser}}
+					{{>blogItemLike }}
+				{{/if}}
+
 				<h3>{{ description }}</h3>
 				<div>{{{ content }}}</div>
 
@@ -16,23 +21,34 @@
 
 				<p><strong>{{ createdBy }}</strong></p>
 			{{/with }}
+
 			{{>blogItemComments }}
 		</div>
 		<div class="col-md-3">
-			{{>blogItemCategories }}
+			{{>blogCategories }}
 		</div>
 	</div>
 </template>
-<template name="blogItemCategories">
-	<h2>Categories</h2>
-	<ul>
-		{{#each categories }}
-			<li>{{ title }}</li>
-		{{/each }}
-	</ul>
+
+<template name="blogItemLike">
+
+	<div class="btn-group" role="group" aria-label="...">
+	  
+	  {{#if isLiked }}
+		<button type="button" class="btn like-down"><i class="fa fa-thumbs-down"></i></button>
+		{{else}}
+		<button type="button" class="btn btn-default like-up"><i class="fa fa-thumbs-up"></i></button>
+		{{/if}}
+
+	  <button type="button" class="btn btn-default disabled">{{ likeAmount }}</button>
+	</div>
+
 </template>
+
 <template name="blogItemComments">
 	<h3>Comments</h3>
+	
+	{{#if currentUser}}
 	<form class="form-horizontal form-bordered new-comment">
 		<div class="form-group col-md-12">
 			<textarea class="form-control" name="comment"></textarea>
@@ -41,12 +57,25 @@
 			<button type="submit" class="btn">Submit</button>
 		</div>
 	</form>
-	<ul class="col-md-12">
+	{{/if}}
+
+	<ul class="list-unstyled col-md-12">
 		{{#each comments }}
 			<li>{{ createdBy }} <small>{{ createdAt }}</small><p>{{ comment }}</p></li>
 		{{/each }}
 	</ul>
+
+	{{#if loading}}
+    <p>Loading...</p>
+  {{else}}
+    {{#if hasMore}}
+      <p><button class="btn btn-default load-more">More</button></p>
+    {{else}}
+      <p><button class="btn btn-default hide-more">Hide</button></p>
+    {{/if}}
+  {{/if}}  
 </template>
+
 <template name="blogEdit">
 	<ul id="cms-item-edit">
 		<li><a href="{{ host}}/cms/blogs/insert" class="btn btn-success"><i class="fa fa-plus"></i> New</a></li>

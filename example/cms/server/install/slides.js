@@ -9,10 +9,14 @@ Meteor.startup(function () {
     var data = [
       // CMS
       {
-        "title" : "Caption of the first slide"
+        "title" : "Use these for login",
+        "image" : "ukPeH5M65Xh2nPNDu",
+        "description" : "email: admin@admin.com | password: password"
       },
       {
-        "title" : "Caption of the second slide",      
+        "title" : "Our first blog post",
+        "image" : "cak9u8pcTfH6ZvMjo",
+        "description" : "This is the first post of blog"
       }
     ];
 

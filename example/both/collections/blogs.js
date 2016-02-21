@@ -1,5 +1,20 @@
 //First of all create Mongo collections
 blogs = new Mongo.Collection('blogs');
+
+// Search index 
+blogsIndex = new EasySearch.Index({
+  collection: blogs,
+  fields: ['description'],
+  defaultSearchOptions: {
+    limit: 10
+  },
+  engine: new EasySearch.Minimongo()
+});
+
+blogs.sorted = function(limit) {
+  return blogs.find({}, {sort: {createdAt: -1}, limit: limit});
+};
+
 // Attach schema for autoForm
 blogs.attachSchema(new SimpleSchema({
   title: {
@@ -82,6 +97,15 @@ blogs.attachSchema(new SimpleSchema({
       }
     }
   },
+  like: {
+    type: Number,
+    autoform: {
+      type: "hidden",
+      label: false
+    },
+    min: 0,
+    optional: true
+  },
   // hide createdBy column
   createdBy: {
     type: String,
@@ -90,7 +114,11 @@ blogs.attachSchema(new SimpleSchema({
         label: false
     },
     autoValue: function () { 
-      return this.userId;
+      if (this.isInsert) {
+          return this.userId;
+      } else {
+          this.unset();  // Prevent user from supplying their own value
+      }
     },
     optional: true
   },

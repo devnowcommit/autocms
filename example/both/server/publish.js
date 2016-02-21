@@ -1,6 +1,9 @@
 Meteor.publish('blogCategories', function(){
 	return blogcategories.find()
 });
+Meteor.publish('blogLikes', function(){
+	return bloglikes.find()
+});
 Meteor.publish('blogs', function(){
 	return blogs.find()
 });
@@ -39,7 +42,6 @@ Meteor.publish('settings', function(){
 Meteor.publish('slides', function(){
 	return slides.find()
 });
-Meteor.publish('userList', function (){ 
-  return Meteor.users.find();
+Meteor.publish('newsletter', function(){
+	return newsletter.find()
 });
-
