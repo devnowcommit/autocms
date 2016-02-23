@@ -163,9 +163,12 @@ portfolios.autoCms = {
       type: 'image',
       width: 60
     },
-    category: function(data){
-      result = portfoliocategories.findOne(data);
-      return result.title;
+    category: {
+      label: 'Category',
+      data: function(data){
+        result = portfoliocategories.findOne(data);
+        return result.title;
+      }
     }
   }
 }

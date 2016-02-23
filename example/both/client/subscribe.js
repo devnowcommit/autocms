@@ -1,7 +1,7 @@
 Meteor.subscribe("blogCategories");
 Meteor.subscribe("blogLikes");
 //Meteor.subscribe("blogs");		// subscribeWithPagination in app/blog/list.js
-//Meteor.subscribe("comments"); // subscribeWithPagination in app/blog/item.js
+//Meteor.subscribe("comments"); // subscribeWithPagination in app/blog/itemComments.js
 Meteor.subscribe("files");
 Meteor.subscribe("images");
 Meteor.subscribe("navs");

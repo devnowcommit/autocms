@@ -20,7 +20,7 @@
 </template>
 <template name="pageList">
 	<h3>Other Pages</h3>
-	<ul class="list-unstyled">
+	<ul class="nav nav-list">
 	{{#each items }}
 		{{#if isVisible }}
 		<li><a href="/page/{{_id}}/{{slug}}">{{ title }}</a></li>

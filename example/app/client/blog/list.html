@@ -1,7 +1,7 @@
 <template name="blog">
 	<div class="container">
 		<div class="col-md-3">
-			{{>blogCategories }}
+				{{>blogCategories }}
 		</div>
 		<div class="col-md-9">
 			{{#each items }}
@@ -30,25 +30,25 @@
 	</div>
 </template>
 <template name="blogCategories">
-
-	{{>blogSearch}}
-	
-	<h3>Categories</h3>
-	<ul class="list-unstyled">
-	{{#each categories }}
-		<li><a href="/blog-category/{{_id }}/{{slug}}">{{title }}</a></li>
-	{{/each }}	
-	{{#if all}}
-		<hr>
-		<li><a href="/blog">ALL CATEGORIES</a></li>
-	{{/if}}
-	</ul>
+	<aside class="sidebar">
+		{{>blogSearch}}
+		
+		<h3>Categories</h3>
+		<ul class="nav nav-list">
+		{{#each categories }}
+			<li><a href="/blog-category/{{_id }}/{{slug}}">{{title }}</a></li>
+		{{/each }}	
+		{{#if all}}
+			<hr class="short">
+			<li><a href="/blog">ALL CATEGORIES</a></li>
+		{{/if}}
+		</ul>
+	</aside>
 </template>
 <template name="blogSearch">
 	<h3>Search in blogs</h3>
-	<div class="input-group">
+	<div class="input-group search">
 	  {{> EasySearch.Input index=blogsIndex attributes=searchAttributes}}
-		<span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
 	</div>
   
 	{{#EasySearch.IfInputEmpty index=blogsIndex }}
@@ -59,7 +59,7 @@
 	    <small>No results found</small>
 		{{/EasySearch.IfNoResults }}
 		
-    <ul class="list-unstyled">
+    <ul class="nav nav-list">
 	    {{#EasySearch.Each index=blogsIndex }}
 	      <li><a href="/blog/{{_id}}/{{slug}}">{{title}}</a></li>
 	    {{/EasySearch.Each}}

@@ -1,8 +1,12 @@
 //First of all create Mongo collections
 comments = new Mongo.Collection('comments');
 
-comments.sorted = function(limit, blogId) {
-  return comments.find({blog: blogId}, {sort: {createdAt: -1}, limit: limit});
+comments.sorted = function(limit, blogId, commentId) {
+
+  if (commentId == 0)
+    return comments.find({blog: blogId}, {sort: {createdAt: -1}, limit: limit});
+  else 
+    return comments.find({parent: commentId}, {sort: {createdAt: 1}, limit: limit});
 };
 
 // Attach schema for autoForm
@@ -25,6 +29,24 @@ comments.attachSchema(new SimpleSchema({
       }
     }
   },
+  parent:
+  {
+    type: String,
+    autoform: {
+        type: "hidden",
+        label: false
+    },
+    optional: true
+  },
+  reported:
+  {
+    type: Number,
+    autoform: {
+        type: "hidden",
+        label: false
+    },
+    optional: true
+  },
   // hide createdBy column
   createdBy: {
     type: String,
@@ -33,7 +55,11 @@ comments.attachSchema(new SimpleSchema({
         label: false
     },
     autoValue: function () { 
-      return this.userId;
+      if (this.isInsert) {
+          return this.userId;
+      } else {
+          this.unset();  // Prevent user from supplying their own value
+      }
     },
     optional: true
   },
@@ -86,25 +112,38 @@ comments.autoCms = {
     comment: {
 
     },
-    createdBy: function(data) {
-      author = profiles.find({userId: data},{limit:1}).fetch()[0];
-    
-      if (!_.isUndefined(author))
-        return '<a href="'+location.origin+'/cms/profiles/item/'+data+'" title="Click here to edit profile of the user" target="_self">'+ author.profile.name+' '+author.profile.surname +'</a>';
-      else
-        return 'Unknown author';
-    },
-    createdAt: function(data) {
-      time = new Date(data);
-      d = time.getDate();
-      m = time.getMonth() + 1;
-      y = time.getFullYear();
+    reported: {
 
-      return d+'.'+m+'.'+y;
     },
-    blog: function(data){
-      blog = blogs.findOne(data);
-      return '<a href="'+location.origin+'/cms/blogs/item/'+data+'" title="Click here to edit blog" target="_self">'+ blog.title +'</a>';
+    createdBy: {
+      label: 'Author',
+      data: function(data) {
+        console.log(data);
+        author = profiles.find({userId: data},{limit:1}).fetch()[0];
+      
+        if (!_.isUndefined(author))
+          return '<a href="'+location.origin+'/cms/profiles/item/'+author._id+'" title="Click here to edit profile of the user">'+ author.profile.name+' '+author.profile.surname +'</a>';
+        else
+          return 'Unknown author';
+      }
+    },
+    createdAt: {
+      label: 'Date',
+      data: function(data) {
+        time = new Date(data);
+        d = time.getDate();
+        m = time.getMonth() + 1;
+        y = time.getFullYear();
+
+        return d+'.'+m+'.'+y;
+      }
+    },
+    blog: {
+      label: 'Blog',
+      data: function(data){
+        blog = blogs.findOne(data);
+        return '<a href="'+location.origin+'/cms/blogs/item/'+data+'" title="Click here to edit blog">'+ blog.title +'</a>';
+      }
     }
   }
 }

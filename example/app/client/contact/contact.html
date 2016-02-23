@@ -1,8 +1,8 @@
 <template name="contact">
 	<div class="container">
-		<h1>Contact us</h1>
 		<div class="col-md-6">
-			<form id="contactForm" action="php/contact-form.php" method="POST" class="form-horizontal form-bordered">
+			<h1>Contact us</h1>
+			<form>
 				<div class="row">
 					<div class="form-group">
 						<div class="col-md-6">
@@ -24,14 +24,18 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="form-group col-md-12">
-						<label>Message *</label>
-						<textarea maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" name="message" id="message" required></textarea>
+					<div class="form-group">
+						<div class="col-md-12">
+							<label>Message *</label>
+							<textarea maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" name="message" id="message" required></textarea>
+						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="form-group col-md-12">
-						<input type="submit" value="Send Message" class="btn btn-primary btn-lg" data-loading-text="Loading...">
+					<div class="form-group">
+						<div class="col-md-12">
+							<input type="submit" value="Send Message" class="btn btn-primary btn-lg" data-loading-text="Loading...">
+						</div>
 					</div>
 				</div>
 			</form>

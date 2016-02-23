@@ -18,11 +18,11 @@
 	</div>
 </template>
 <template name="portfolioCategories">
-	<ul class="list-unstyled">
+	<ul class="nav nav-list">
 	{{#each categories }}
 		<li><a href="#" data-category="{{_id}}">{{ title }}</a></li>
 	{{/each }}	
-		<hr>
+		<hr class="short">
 		<li><a href="#" data-category="all" class="hidden">SHOW ALL</a></li>
 	</ul>
 

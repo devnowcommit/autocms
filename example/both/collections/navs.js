@@ -126,7 +126,7 @@ navs.autoCms = {
 
     },
     target: {
-      edit: true
+    
     },
     text: {
       

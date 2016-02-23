@@ -45,37 +45,6 @@
 
 </template>
 
-<template name="blogItemComments">
-	<h3>Comments</h3>
-	
-	{{#if currentUser}}
-	<form class="form-horizontal form-bordered new-comment">
-		<div class="form-group col-md-12">
-			<textarea class="form-control" name="comment"></textarea>
-		</div>
-		<div class="form-group col-md-12 text-right">
-			<button type="submit" class="btn">Submit</button>
-		</div>
-	</form>
-	{{/if}}
-
-	<ul class="list-unstyled col-md-12">
-		{{#each comments }}
-			<li>{{ createdBy }} <small>{{ createdAt }}</small><p>{{ comment }}</p></li>
-		{{/each }}
-	</ul>
-
-	{{#if loading}}
-    <p>Loading...</p>
-  {{else}}
-    {{#if hasMore}}
-      <p><button class="btn btn-default load-more">More</button></p>
-    {{else}}
-      <p><button class="btn btn-default hide-more">Hide</button></p>
-    {{/if}}
-  {{/if}}  
-</template>
-
 <template name="blogEdit">
 	<ul id="cms-item-edit">
 		<li><a href="{{ host}}/cms/blogs/insert" class="btn btn-success"><i class="fa fa-plus"></i> New</a></li>

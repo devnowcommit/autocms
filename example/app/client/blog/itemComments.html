@@ -1,0 +1,104 @@
+<template name="blogItemComments">
+	<h3 class="text-primary"><i class="fa fa-comments"></i> Comments ({{hasData}})</h3>
+	
+	{{#if currentUser}}
+	<form class="form-horizontal new-comment">
+		<div class="form-group">
+			<textarea class="form-control" name="comment"></textarea>
+		</div>
+		<div class="form-group text-right">
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	</form>
+	{{/if}}
+
+	<div class="post-block post-comments clearfix">
+		<ul class="comments">
+			{{#each comments }}
+				{{#if isParent}}
+					<li>
+						<div class="comment">
+							<div class="img-thumbnail">
+
+							
+								{{#if createdByAvatar}}
+									<img class="avatar" alt="{{ createdBy }}" src="{{createdByAvatar}}">
+								{{else}}
+									<img class="avatar" alt="{{ createdBy }}" src="/images/avatar.jpg">
+								{{/if}}
+							</div>
+							<div class="comment-block">
+								<div class="comment-arrow"></div>
+								<span class="comment-by">
+									<strong>{{ createdBy }}</strong>
+									<span class="pull-right">
+										<a href="#" title="Reply"><i class="fa fa-reply info" data-id="{{_id}}"></i></a>
+										<a href="#" title="Report"><i class="fa fa-ban" data-id="{{_id}}"></i></a> 
+										{{#if canDelete}}
+											<a href="#" title="Delete"><i class="fa fa-trash danger" data-id="{{_id}}"></i></a>
+										{{/if}}
+									</span>
+								</span>
+								<p>{{ comment }}</p>
+								<span class="date pull-right">{{ createdAt }}</span>
+							</div>
+						</div>
+						<div class="col-md-12 reply-wrapper reply-wrapper-{{_id}}"></div>
+
+						<ul class="comments reply">
+
+							{{#each childComments}}
+							<li>
+								<div class="comment">
+									<div class="img-thumbnail">
+										{{#if createdByAvatar}}
+											<img class="avatar" alt="{{ createdBy }}" src="{{createdByAvatar}}">
+										{{else}}
+											<img class="avatar" alt="{{ createdBy }}" src="/images/avatar.jpg">
+										{{/if}}
+									</div>
+									<div class="comment-block">
+										<div class="comment-arrow"></div>
+										<span class="comment-by">
+											<strong>{{ createdBy }}</strong>
+											<span class="pull-right">
+												<a href="#" title="Report"><i class="fa fa-ban" data-id="{{_id}}"></i></a> 
+												{{#if canDelete}}
+													<a href="#" title="Delete"><i class="fa fa-trash danger" data-id="{{_id}}"></i></a>
+												{{/if}}
+											</span>
+										</span>
+										<p>{{ comment }}</p>
+										<span class="date pull-right">{{ createdAt }}</span>
+									</div>
+								</div>
+								<!-- /.comment -->
+							</li>
+							{{/each}}
+							
+						</ul>
+
+
+
+					</li>
+				{{/if}}
+			{{/each }}
+		</ul>
+		<!-- /.comments -->
+
+		{{#if hasData }}
+			{{#if loading}}
+		    <p>Loading...</p>
+		  {{else}}
+		    {{#if hasMore}}
+		      <p><button class="btn btn-default load-more">More</button></p>
+		    {{else}}
+		      <p><button class="btn btn-default hide-more">Hide</button></p>
+		    {{/if}}
+		  {{/if}}  
+		{{/if}}
+
+	</div>
+	<!-- /.post-comments -->
+
+</template>

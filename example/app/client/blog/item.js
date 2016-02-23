@@ -81,68 +81,9 @@ Template.blogItemLike.events({
 			blogs.update(FlowRouter.getParam("id"), {$inc: {like: -15}} );
 		else
 			blogs.update(FlowRouter.getParam("id"), {$inc: {like: -1}} );	
-	},
+	}
 });
 
-var subscriptionComments = Meteor.subscribeWithPagination('comments', 2);
-
-Template.blogItemComments.helpers({
-	'comments': function() {
-		return comments.sorted(subscriptionComments.loaded(), FlowRouter.getParam("id"));
-	},
-	'comment': function() {
-		return this.comment;
-	},
-	'createdBy': function() {
-		author = profiles.find({userId: this.createdBy},{limit:1}).fetch()[0];
-		
-		if (!_.isUndefined(author))
-			return author.profile.name+' '+author.profile.surname;
-		else
-			return 'Unknown author';
-	},
-	'createdAt': function() {
-		return formatDate('d.m.Y', new Date(this.createdAt));
-	},	
-	'loading': function() {
-    return !subscriptionComments.ready();
-  },
-  'hasMore': function() {
-    return comments.sorted(subscriptionComments.loaded(), FlowRouter.getParam("id")).count() == subscriptionComments.limit();
-  }
-});
-/* Events */
-Template.blogItemComments.events({
-  'submit .new-comment': function (event) {
-    // Prevent default browser form submit
-    event.preventDefault();
-
-    // Get value from form element
-    var comment = event.target.comment.value;
-    var time = new Date().getTime();
-
-    // Insert a task into the collection
-    comments.insert({
-      comment: comment,
-      blog: FlowRouter.getParam("id"),
-      createdBy: Meteor.userId(),
-      createdAt: time
-    });
-
-    // Clear form
-    event.target.comment.value = "";
-  },
-  'click .load-more': function (event) {
-    event.preventDefault();
-
-    subscriptionComments.loadNextPage();
-  },
-  'click .hide-more': function (event) {
-    event.preventDefault();
-
-    subscriptionComments.reset();
-  }
-});
 /* Edit button */
 Template.blogEdit.helpers({
 	'host' : function() {
