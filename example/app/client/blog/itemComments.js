@@ -35,10 +35,17 @@ Template.blogItemComments.helpers({
 	createdByAvatar: function() {
 		var author = profiles.find({userId: this.createdBy},{limit:1}).fetch()[0];
 		
-		if (!_.isUndefined(author.profile.picture))
-			return location.origin+'/cfs/files/images/'+ author.profile.picture;
-		else
+		if (!_.isUndefined(author)) {
+			if (!_.isUndefined(author.profile.picture)) {
+				return location.origin+'/cfs/files/images/'+ author.profile.picture;
+			
+			} else {
+				return false;
+			}
+		
+		} else {
 			return false;
+		}
 	},
 	'createdAt': function() {
 		return formatDate('d.m.Y H:s', new Date(this.createdAt));

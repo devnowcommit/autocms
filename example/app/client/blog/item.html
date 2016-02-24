@@ -25,24 +25,24 @@
 			{{>blogItemComments }}
 		</div>
 		<div class="col-md-3">
-			{{>blogCategories }}
+			<aside class="sidebar">
+				{{>blogCategories }}
+
+				{{>blogTrends}}
+			</aside>
 		</div>
 	</div>
 </template>
 
 <template name="blogItemLike">
-
-	<div class="btn-group" role="group" aria-label="...">
-	  
+	<div class="btn-group" role="group" aria-label="...">	  
 	  {{#if isLiked }}
 		<button type="button" class="btn like-down"><i class="fa fa-thumbs-down"></i></button>
 		{{else}}
 		<button type="button" class="btn btn-default like-up"><i class="fa fa-thumbs-up"></i></button>
 		{{/if}}
-
 	  <button type="button" class="btn btn-default disabled">{{ likeAmount }}</button>
 	</div>
-
 </template>
 
 <template name="blogEdit">

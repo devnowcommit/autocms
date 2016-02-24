@@ -21,6 +21,9 @@ Template.blog.helpers({
 	'likeAmount': function () {
 	  return this.like;
 	},
+	'commentAmount': function () {
+		return comments.find({blog: this._id}).count();
+	},
 	'picture': function () {
 		return location.origin+'/cfs/files/images/'+ this.picture;
 	},
@@ -75,6 +78,31 @@ Template.blogCategories.helpers({
 		}
 	}
 }); 
+Template.blogTrends.helpers({
+	'items': function() {
+		return blogs.find({},{sort: {like: -1}, limit:3});
+	},
+	'title': function() {
+	  return this.title;
+	},
+	'picture': function () {
+		return location.origin+'/cfs/files/images/'+ this.picture;
+	},
+	'createdAt': function() {
+		return formatDate('d.m.Y', new Date(this.createdAt));
+	},
+	'slug': function() {
+		return slug(this.title);
+	},
+	'all': function() {
+		if (!_.isUndefined(FlowRouter.getParam("id"))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+});
+
 Template.blogSearch.helpers({
 	searchAttributes: function () {
     return { 

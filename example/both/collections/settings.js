@@ -113,6 +113,18 @@ settings.attachSchema(new SimpleSchema({
     max: 260,
     optional: true
   },
+  'contact.location': {
+    type: String,
+    autoform: {
+      type: 'map',
+      afFieldInput: {
+        zoom: 8,
+        geolocation: true,
+        searchBox: true,
+        autolocate: true
+      }
+    }
+  },
   'contact.phone.$.number': {
     type: String,
     label: "Number",
