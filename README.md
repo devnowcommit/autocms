@@ -19,8 +19,14 @@ You can find an example in repository which covers some features of autoCms. The
 	<li>Seo module</li>
 </ul>
 <p><a href="http://menka-beta2.meteor.com/">Click here to see working demo</a></p>
+Homepage
 ![Screenshot Backups](/example/public/browser/homepage.jpg "Backups Screenshot")
+Blog
 ![Screenshot Backups](/example/public/browser/blogitem.jpg "Backups Screenshot")
+Blog management
+![Screenshot Backups](/example/public/browser/cms-blog.jpg "Backups Screenshot")
+Settings
+![Screenshot Backups](/example/public/browser/cms-settings.jpg "Backups Screenshot")
 
 <h4>Watch it</h4>
 <p><a href="https://www.youtube.com/embed/uo1ju2qzL90">Click here to watch what you can do with the package</a></p>
