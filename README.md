@@ -18,7 +18,6 @@ You can find an example in repository which covers some features of autoCms. The
 	<li>Settings module, admin can change favicon, logo, footer or informations on contact page including location</li>
 	<li>Seo module</li>
 </ul>
-<p><a href="http://menka-beta2.meteor.com/">Click here to see working demo</a></p>
 Homepage
 ![Screenshot Backups](/example/public/browser/homepage.jpg "Backups Screenshot")
 Blog
