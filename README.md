@@ -21,6 +21,7 @@ You can find an example in repository which covers some features of autoCms. The
 </ul>
 Homepage
 ![Screenshot Backups](/example/public/browser/homepage.jpg "Backups Screenshot")
+<img src="https://github.com/guncebektas/autocms/blob/master/example/public/browser/homepage.jpg?raw=true" alt="Screenshot of homepage">
 Blog
 ![Screenshot Backups](/example/public/browser/blogitem.jpg "Backups Screenshot")
 Blog management
