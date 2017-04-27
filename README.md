@@ -20,14 +20,13 @@ You can find an example in repository which covers some features of autoCms. The
 	<li>Seo module</li>
 </ul>
 Homepage
-![Screenshot Backups](/example/public/browser/homepage.jpg "Backups Screenshot")
 <img src="https://github.com/guncebektas/autocms/blob/master/example/public/browser/homepage.jpg?raw=true" alt="Screenshot of homepage">
 Blog
-![Screenshot Backups](/example/public/browser/blogitem.jpg "Backups Screenshot")
+<img src="https://github.com/guncebektas/autocms/blob/master/example/public/browser/blogitem.jpg?raw=true" alt="Screenshot of a blog item">
 Blog management
-![Screenshot Backups](/example/public/browser/cms-blog.jpg "Backups Screenshot")
+<img src="https://github.com/guncebektas/autocms/blob/master/example/public/browser/cms-blog.jpg?raw=true" alt="Screenshot of blog"> 
 Settings
-![Screenshot Backups](/example/public/browser/cms-settings.jpg "Backups Screenshot")
+<img src="https://github.com/guncebektas/autocms/blob/master/example/public/browser/cms-settings.jpg?raw=true" alt="Settings"> 
 
 <h4>Watch it</h4>
 <p><a href="https://www.youtube.com/embed/uo1ju2qzL90">Click here to watch what you can do with the package</a></p>
