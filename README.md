@@ -2,9 +2,10 @@
 A simple solution to manage any kind of contents. You can easly list your data, update, delete or insert with this package. This package is heavly depended on autoForm. Thus, learning basics of autoForm could be helpful to understand autoCms. 
 
 <h4>Installation</h4>
-```js
+
+<code>
 meteor add guncebektas:autocms
-```
+</code>
 
 <h4>In example</h4>
 You can find an example in repository which covers some features of autoCms. The example;
