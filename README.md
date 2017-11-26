@@ -10,6 +10,11 @@ It is a plug and play admin dashboard for Meteor.js with multi language support.
 
 Install and configure it as shown below. You will be able to list your data in a table, update data, delete or insert easly.
 
+## Installation
+```js
+meteor add guncebektas:autocms
+```
+
 Configure it
 ```js
 //First of all create Mongo collections
