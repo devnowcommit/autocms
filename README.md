@@ -6,9 +6,9 @@ Welcome to AutoCms
 [![Build Status](https://api.travis-ci.org/cult-of-coders/redis-oplog.svg?branch=master)](https://travis-ci.org/cult-of-coders/redis-oplog)
 
 ## AutoCms
-A plug and play admin dashboard for Meteor.js. 
+It is a plug and play admin dashboard for Meteor.js. 
 
-You can easly list your data in a table, update, delete or insert.
+Install and configure it as shown below. You will be able to list your data in a table, update data, delete or insert easly.
 
 ## Installation
 ```js
@@ -98,7 +98,6 @@ if (Meteor.isServer) {
 ## Watch it
 <p><a href="https://www.youtube.com/embed/uo1ju2qzL90">Click here to watch what you can do with the package</a></p>
 ## Example
-<h4>In example</h4>
 You can find an example in repository which covers some features of AutoCms. The example;
 <ul>
   <li>Navigation module, to manage navbar</li>
@@ -113,4 +112,4 @@ You can find an example in repository which covers some features of AutoCms. The
 <br/>
 <p><a href="https://github.com/guncebektas/autocms/tree/master/example">Jump into codes of the example</a></p>
 <br/>
-<p><a href="https://trello.com/b/qUE3cSUd/autocms">Join discussiion on trello</a></p>
+<p><a href="https://trello.com/b/qUE3cSUd/autocms">Join discussion on Trello</a></p>
