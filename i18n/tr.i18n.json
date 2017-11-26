@@ -1,0 +1,26 @@
+{
+  "Number": "Nu",
+  "Actions": "İşlemler",
+  
+  "Success": "Başarılı",
+  "Warning": "Uyarı",
+  "Error": "Hata",
+  "No": "Hayır",
+  "Yes": "Evet",
+  "Ok": "Tamam",
+  "OK": "Tamam",
+  "Confirm": "Onayla",
+
+  "Edit": "Düzenle",
+  "Update": "Güncelle",
+  "Save": "Kaydet",
+  "Delete": "Sil",
+  "Extra": "Ekstra",
+  
+  "File": "Dosya",
+  "Upload an image": "Bir resim yükleyin",
+
+  "The action has been completed successfully": "İşleminiz başarıyla tamamlanmıştır",
+  "An error occured, please try again": "Bir hata oluştu, lütfen tekrar deneyin",
+  "You can not undo this action, are you sure to continue": "Bu işlemin geri dönüşü yoktur, devam etmek istediğinize emin misiniz"
+}

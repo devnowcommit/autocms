@@ -1,0 +1,12 @@
+<template name="filePreview">
+  <label>{{_ 'File'}}: <a href="{{file.url}}">{{file.original.name}}</a></label>
+  <br/>
+  <a href="{{file.url}}"><img src="{{file.url}}" width="200" height="200"></a>
+</template>
+
+<template name="fileButtonSelect">
+  <button type="button" class="js-af-select-file"> {{_ 'Upload an image'}}</button>
+</template>
+<template name="fileButtonRemove">
+  <a class="js-af-remove-file"><i class="fa fa-times"></i> {{_ 'Delete'}}</a>
+</template>

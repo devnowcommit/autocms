@@ -1,0 +1,26 @@
+{
+  "Number": "No",
+  "Actions": "Actions",
+
+  "Success": "Success",
+  "Warning": "Warning",
+  "Error": "Error",
+  "No": "No",
+  "Yes": "Yes",
+  "Ok": "Ok",
+  "OK": "OK",
+  "Confirm": "Confirm",
+
+  "Edit": "Edit",
+  "Update": "Update",
+  "Save": "Save",
+  "Delete": "Delete",
+  "Extra": "Extra",
+
+  "File": "File",
+  "Upload an image": "Upload an image",
+
+  "The action has been completed successfully": "The action has been completed successfully",
+  "An error occured, please try again": "An error occured, please try again",
+  "You can not undo this action, are you sure to continue": "You can not undo this action, are you sure to continue"
+}
