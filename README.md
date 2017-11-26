@@ -6,7 +6,7 @@ Welcome to AutoCms
 [![Build Status](https://api.travis-ci.org/cult-of-coders/redis-oplog.svg?branch=master)](https://travis-ci.org/cult-of-coders/redis-oplog)
 
 ## AutoCms
-It is a plug and play admin dashboard for Meteor.js. 
+It is a plug and play admin dashboard for Meteor.js with multi language support.
 
 Install and configure it as shown below. You will be able to list your data in a table, update data, delete or insert easly.
 
