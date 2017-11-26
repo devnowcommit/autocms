@@ -1,44 +1,116 @@
-<h1>autoCms for Meteor.js</h1>
-<<<<<<< Updated upstream
-A simple solution to manage any kind of contents. You can easly list your data, update, delete or insert with this package. This package is heavly depended on autoForm. Thus, learning basics of autoForm could be helpful to understand autoCms. 
+Welcome to AutoCms
+======================
 
-<h4>Installation</h4>
+### LICENSE: MIT
 
-<code>
-meteor add guncebektas:autocms
-</code>
+[![Build Status](https://api.travis-ci.org/cult-of-coders/redis-oplog.svg?branch=master)](https://travis-ci.org/cult-of-coders/redis-oplog)
 
-<h4>In example</h4>
-You can find an example in repository which covers some features of autoCms. The example;
-<ul>
-	<li>Navigation module, to manage navbar</li>
-	<li>Blog module, including comment and like system</li>
-	<li>Dynamic page module, it's like blog but only articles</li>
-	<li>Portfolio module, to show references</li>
-	<li>Slides module, to manage carousel at homepage</li>
-	<li>Newsletter list, users can subscribe or unsubscribe from the list</li>
-	<li>Settings module, admin can change favicon, logo, footer or informations on contact page including location</li>
-	<li>Seo module</li>
-</ul>
-Homepage
-<img src="https://github.com/guncebektas/autocms/blob/master/example/public/browser/homepage.jpg?raw=true" alt="Screenshot of homepage">
-Blog
-<img src="https://github.com/guncebektas/autocms/blob/master/example/public/browser/blogitem.jpg?raw=true" alt="Screenshot of a blog item">
-Blog management
-<img src="https://github.com/guncebektas/autocms/blob/master/example/public/browser/cms-blog.jpg?raw=true" alt="Screenshot of blog"> 
-Settings
-<img src="https://github.com/guncebektas/autocms/blob/master/example/public/browser/cms-settings.jpg?raw=true" alt="Settings"> 
+## AutoCms
+A plug and play admin dashboard for Meteor.js. 
 
-=======
-A simple solution to manage contents. You can easly list your data in a table, update, delete or insert.
+You can easly list your data in a table, update, delete or insert.
+
+## Installation
 ```js
 meteor add guncebektas:autocms
 ```
->>>>>>> Stashed changes
-<h4>Watch it</h4>
+
+Configure it
+```js
+//First of all create Mongo collections
+newsletter = new Mongo.Collection('newsletter');
+
+// Attach schema for autoForm
+newsletter.attachSchema(new SimpleSchema({
+  email:
+  {
+    type: String,
+    label: "Email",
+    max: 160
+  },
+  createdAt: {
+    type: Number,
+    autoform: {
+        type: "hidden",
+        label: false
+    },
+    autoValue: function () { 
+      return new Date().getTime();
+    }
+  }
+}));
+// Define rules for autoCms
+newsletter.autoCms = {
+  wrapper: {
+    type: 'table',
+    class: 'table table-hover'
+  },
+  title: 'Newsletter',
+  buttons: {
+    edit: {
+      label: '<i class="fa fa-pencil-square-o" alt="Edit"></i> Edit',
+      class: 'btn btn-xs btn-default',
+      auth: function() {    // default false
+        return false; 
+      }
+    },  
+    delete: {
+      label: '<i class="fa fa-trash" alt="Delete"></i> Delete',
+      class: 'btn btn-xs btn-danger',
+      auth: function() {    // default false
+        return true; 
+      }
+    },
+    showNavButtons: true,    // default true
+    navButtonInsert: {
+      label: '<i class="fa fa-plus"></i>',
+      class: 'btn btn-default'
+    },
+    navButtonList: {
+      label: '<i class="fa fa-list"></i>',
+      class: 'btn btn-default'
+    },
+    showActionButtons: true  // default true
+  },
+  showNo: true,  // default true
+  columns: {
+    newsletter: {
+
+    }
+  }
+}
+
+if (Meteor.isServer) {
+  newsletter.allow({
+    insert: function () {
+      return true;
+    },
+    update: function () {
+      return true;
+    },
+    remove: function () {
+      return true;
+    }
+  });
+}
+```
+
+## Watch it
 <p><a href="https://www.youtube.com/embed/uo1ju2qzL90">Click here to watch what you can do with the package</a></p>
-<h4>Example</h4>
-<p><a href="http://menka-beta2.meteor.com/">A live example of a blog with authentication and seo options</a></p>
+## Example
+<h4>In example</h4>
+You can find an example in repository which covers some features of AutoCms. The example;
+<ul>
+  <li>Navigation module, to manage navbar</li>
+  <li>Blog module, including comment and like system</li>
+  <li>Dynamic page module, it's like blog but only articles</li>
+  <li>Portfolio module, to show references</li>
+  <li>Slides module, to manage carousel at homepage</li>
+  <li>Newsletter list, users can subscribe or unsubscribe from the list</li>
+  <li>Settings module, admin can change favicon, logo, footer or informations on contact page including location</li>
+  <li>Seo module</li>
+</ul>
+<br/>
 <p><a href="https://github.com/guncebektas/autocms/tree/master/example">Jump into codes of the example</a></p>
 <br/>
 <p><a href="https://trello.com/b/qUE3cSUd/autocms">Join discussiion on trello</a></p>
