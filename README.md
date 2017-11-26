@@ -95,10 +95,9 @@ if (Meteor.isServer) {
 }
 ```
 
-## Watch it
-<p><a href="https://www.youtube.com/embed/uo1ju2qzL90">Click here to watch what you can do with the package</a></p>
 ## Example
-You can find an example in repository which covers some features of AutoCms. The example;
+<p><a href="https://www.youtube.com/embed/uo1ju2qzL90">Click here to watch what you can do with the package</a></p>
+<p>You can find an example in repository which covers some features of AutoCms. In the example;</p>
 <ul>
   <li>Navigation module, to manage navbar</li>
   <li>Blog module, including comment and like system</li>
